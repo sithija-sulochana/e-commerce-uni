@@ -13,20 +13,25 @@ body {
 
 .hero {
 
-    margin: 5px;
-    margin-top: 40px;
+
+    background-image: url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8');
+    background-size: cover;
+    margin-right: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 60px 4%;
     gap: 40px;
-    background-color: whitesmoke;
+    background-color: rgb(125, 124, 143);
 
 
-}
+}   
 
 .hero-content h1 {
-    font-size: 48px;
+    font-size: 55px;
     font-weight: bold;
 
 }
@@ -64,6 +69,14 @@ body {
     border: none;
     border-radius: 50px;
     cursor: pointer;
+}
+.search-btn:hover {
+    background-color: #0056b3;
+
+    transition: background-color 0.3s ease-out;
+    
+
+    
 }
 
 .hero-tags {
@@ -114,9 +127,7 @@ body {
 .search-container input {
     border: none;
     outline: none;
-
     flex-grow: 1;
-
     font-size: 16px;
     background: transparent;
 }
@@ -137,38 +148,181 @@ body {
     box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.5);
     border-color: #60a5fa;
 }
+.hero-images {
+    flex: 1;
+    height: 400px;
+    background-image: url('../assets/images/hero-image.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.hero-tags {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.hero-images {
+    flex: 1;
+    height: 400px;
+    background-image: url('../assets/images/hero-image.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+.hero-images {
+    position: relative;
+    flex: 1;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-image {
+    position: absolute;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    transition: transform 0.5s ease, z-index 0.3s;
+    object-fit: cover;
+}
+
+
+
+
+
+/* Hover effect to make it interactive */
+.hero-image:hover {
+    transform: scale(1.05) rotate(0deg);
+    z-index: 10;
+    cursor: pointer;
+}
+
+/* 1. Global Color & Font Fixes */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Fixed typo: sans-serif */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa; 
+}
+
+/* 2. Hero Section Alignment */
+.hero {
+    margin-top: 60px; /* Space for Nav Bar */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px 8%;
+    gap: 40px;
+    
+    /* Background Styles: Using a clean gradient instead of a busy image 
+       makes your 'floating' device images stand out much better. */
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    color: white; /* Make text white for readability */
+    min-height: 500px;
+    overflow: hidden; /* Keeps floating elements from causing scrollbars */
+}
+
+/* 3. Text and Highlight Colors */
+.hero-content h1 {
+    font-size: 55px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.higilight {
+    color: #60a5fa; /* A brighter, modern tech blue */
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    color: #cbd5e1; /* Soft light grey text */
+    max-width: 500px;
+}
+
+/* 4. Search Container Colors */
+.search-container {
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    padding: 8px 8px 8px 25px;
+    margin-top: 40px;
+    max-width: 550px;
+}
+
+.search-container input {
+    color: white;
+}
+
+.search-container input::placeholder {
+    color: #94a3b8;
+}
+
+.search-btn {
+    background-color: #3b82f6;
+    transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+    background-color: #2563eb;
+    transform: scale(1.05);
+}
+
+/* 5. Tag Colors */
+.tag {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #f1f5f9;
+    transition: all 0.3s ease;
+}
+
+.tag:hover {
+    background-color: #3b82f6;
+    border-color: #3b82f6;
+}
+
+
+
+
 
 /* Tablet and Mobile adjustments */
 @media (max-width: 992px) {
     .hero {
-        flex-direction: column; /* Stacks text and image vertically */
+        flex-direction: column; 
         text-align: center;
         padding: 40px 5%;
     }
 
     .hero-content h1 {
-        font-size: 36px; /* Slightly smaller title */
+        font-size: 45px;
     }
 
     .search-container {
-        margin: 30px auto 0 auto; /* Centers the search bar */
+        margin: 30px auto 0 auto; 
     }
 
     .hero-tags {
-        justify-content: center; /* Centers tags */
-        flex-wrap: wrap; /* Allows tags to drop to next line if needed */
+        justify-content: center;
+        flex-wrap: wrap; 
     }
 
     .hero-images {
         width: 100%;
-        height: 300px; /* Reduces height on smaller screens */
+        height: 300px; 
     }
 }
 
 /* Small Mobile adjustments */
 @media (max-width: 480px) {
     .hero-content h1 {
-        font-size: 28px;
+        font-size: 35px;
     }
 
     .search-container {
