@@ -8,14 +8,13 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-seri;
+    /* Fixed typo: sans-serif */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa3e; 
 }
 
 .hero {
-
-
-    background-image: url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8');
-    background-size: cover;
+ 
     margin-right: 0;
     background-position: center;
     background-repeat: no-repeat;
@@ -28,14 +27,33 @@ body {
     background-color: rgb(125, 124, 143);
 
 
-}   
+}  
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(59, 130, 246, 0.3);
+    filter: blur(120px);
+    top: 50px;
+    left: 60%;
+    z-index: 0;
+}
+
+.hero-left {
+    position: relative;
+    z-index: 1;
+} 
 
 .hero-content h1 {
     font-size: 55px;
     font-weight: bold;
 
 }
-
+#changing-text {
+    display: inline-block;
+    transition: opacity 0.5s ease-in-out;
+}
 .higilight {
     color: #007BFF;
 
@@ -71,7 +89,7 @@ body {
     cursor: pointer;
 }
 .search-btn:hover {
-    background-color: #0056b3;
+    background-color: #99bce2;
 
     transition: background-color 0.3s ease-out;
     
@@ -192,24 +210,14 @@ body {
 
 
 
-
-
-/* Hover effect to make it interactive */
 .hero-image:hover {
     transform: scale(1.05) rotate(0deg);
     z-index: 10;
     cursor: pointer;
 }
 
-/* 1. Global Color & Font Fixes */
-body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    /* Fixed typo: sans-serif */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa; 
-}
+
+
 
 /* 2. Hero Section Alignment */
 .hero {
@@ -219,13 +227,10 @@ body {
     align-items: center;
     padding: 80px 8%;
     gap: 40px;
-    
-    /* Background Styles: Using a clean gradient instead of a busy image 
-       makes your 'floating' device images stand out much better. */
     background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-    color: white; /* Make text white for readability */
+    color: white; 
     min-height: 500px;
-    overflow: hidden; /* Keeps floating elements from causing scrollbars */
+    overflow: hidden; 
 }
 
 /* 3. Text and Highlight Colors */
@@ -237,18 +242,18 @@ body {
 }
 
 .higilight {
-    color: #60a5fa; /* A brighter, modern tech blue */
+    color: #60a5fa;
 }
 
 .hero-content p {
     font-size: 1.1rem;
-    color: #cbd5e1; /* Soft light grey text */
+    color: #cbd5e1; 
     max-width: 500px;
 }
 
-/* 4. Search Container Colors */
+
 .search-container {
-    background: rgba(255, 255, 255, 0.1); /* Semi-transparent */
+    background: rgba(255, 255, 255, 0.1); 
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 50px;
@@ -287,12 +292,35 @@ body {
     background-color: #3b82f6;
     border-color: #3b82f6;
 }
+.cta-btn {
+            display: flex;
+            /* Enables flexbox */
+            align-items: center;
+            /* Vertically centers text and arrow */
+            gap: 10px;
+            /* Adds space between the text and the arrow */
+
+            /* Your existing styles */
+            margin-top: 35px;
+            padding: 10px 20px;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .cta-btn:hover {
+            background-color: #5e78b1;
+            transform: translateY(-3px);
+        }
 
 
 
 
 
-/* Tablet and Mobile adjustments */
+/* Responsive Design Adjustments */
+
 @media (max-width: 992px) {
     .hero {
         flex-direction: column; 
@@ -317,6 +345,17 @@ body {
         width: 100%;
         height: 300px; 
     }
+    .btn-shop {
+        display: flex;
+        justify-content: center; /* Ensures the button container centers its content */
+        width: 100%;
+    }
+
+    .cta-btn {
+        margin-top: 25px; /* Slightly more space for the centered layout */
+        padding: 12px 28px;
+        font-size: 16px;
+    }
 }
 
 /* Small Mobile adjustments */
@@ -337,5 +376,17 @@ body {
 
     .hero-images {
         height: 200px;
+    }
+    .cta-btn {
+        width: 100%;           /* Full width looks better on mobile */
+        max-width: 300px;      /* Optional: prevents it from getting TOO wide */
+        justify-content: center; 
+        font-size: 15px;
+        padding: 14px 20px;    /* Taller touch target for fingers */
+    }
+
+    .cta-btn img {
+        width: 16px;           /* Slightly smaller icon for small screens */
+        height: 16px;
     }
 }
