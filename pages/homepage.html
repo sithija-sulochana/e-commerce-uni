@@ -5,153 +5,204 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechHub</title>
+
     <link rel="stylesheet" href="/styles/homepage.css">
     <script src="/scripts/homepage.js" defer></script>
-    <style>
 
-    </style>
 </head>
 
 <body>
-    <header class="nav-bar">
-        <!-- Create a navigation bar -->
 
-    </header>
-    <section class="hero"
-        style="background-image: url('/assets/view-illuminated-neon-gaming-keyboard-setup-controller.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh;">
-        <div class="hero-left">
-            <div class="hero-content">
-                <h1>
-                    Next-Gen Tech,
-                    <span class="higilight"><br>
-                        <span id="changing-text">Laptops</span>
-                    </span>
-                </h1>
-                <p>Discover cutting-edge gadgets and devices <br> crafted for the modern tech future</p>
-            </div>
+<!-- NAVBAR -->
+<header class="navbar">
 
-            <div class="search-container">
-                <input type="text" placeholder="Search laptops, phones...">
-                <button class="search-btn">Search</button>
-            </div>
+    <div class="nav-container">
 
-            <div class="hero-tags">
-                <span class="tag">Free Shipping</span>
-                <span class="tag">30-Day Returns</span>
-                <span class="tag">Expert Support</span>
-            </div>
-
-            <div class="btn-shop">
-                <button class="cta-btn">
-                    Shop Now
-                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZhZmEiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1hcnJvdy1yaWdodC1pY29uIGx1Y2lkZS1hcnJvdy1yaWdodCI+PHBhdGggZD0iTTUgMTJoMTQiLz48cGF0aCBkPSJtMTIgNSA3IDctNyA3Ii8+PC9zdmc+"
-                        alt="arrow">
-                </button>
-            </div>
-
+        <!-- Logo -->
+        <div class="logo">
+            <img src="/assets/Icons/image-removebg-preview-main.png" alt="TechHub Logo">
+            <h2>TechHub</h2>
         </div>
 
-        <!-- <div class="hero-images">
-            <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8" alt="Laptop" class="hero-image laptop" width="50%">
-            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e" alt="Phone" class="hero-image phone" width="50%">
-            <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db" alt="xbox controller" class="hero-image xbox" width="50%">
+        <!-- Navigation -->
+        <nav class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Products</a>
+            <a href="#">About Us</a>
+            <a href="#">Contact Us</a>
+            <a href="#">Privacy Policy</a>
 
-            
-        </div> -->
-    </section>
+            <div class="cart-icon">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBzdHJva2U9Im5hdnkiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMiI+PHBhdGggZD0iTTIgMmgzbDMgMTNoMTJhMiAyIDAgMCAwIDEuOS0xLjVsMi0xMCIvPjxjaXJjbGUgY3g9IjkiIGN5PSIyMSIgcj0iMSIvPjxjaXJjbGUgY3g9IjE5IiBjeT0iMjEiIHI9IjEiLz48L3N2Zz4">
+                <span class="cart-count">1</span>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    </div>
+
+</header>
+
+
+
+
+<!-- HERO -->
+<section class="hero"
+    style="background-image: url('/assets/view-illuminated-neon-gaming-keyboard-setup-controller.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;">
+
+    <div class="hero-left">
+
+        <div class="hero-content">
+            <h1>
+                Next-Gen Tech,
+                <span class="highlight"><br>
+                    <span id="changing-text">Laptops</span>
+                </span>
+            </h1>
+
+            <p>
+                Discover cutting-edge gadgets and devices
+                crafted for the modern tech future
+            </p><br>
+        </div>
+
+        <div class="search-container">
+            <input type="text" placeholder="Search laptops, phones...">
+            <button class="search-btn">Search</button>
+        </div>
+
+        <div class="hero-tags">
+            <span class="tag">Free Shipping</span>
+            <span class="tag">30-Day Returns</span>
+            <span class="tag">Expert Support</span>
+        </div>
+
+        <div class="btn-shop">
+            <button class="cta-btn">Shop Now</button>
+        </div>
+
+    </div>
+
+</section>
+
     <section class="categories">
 
-        <h2 class="category-title">Categories</h2>
+    <h2 class="category-title">Categories</h2>
 
-        <div class="categories-list">
+    <div class="categories-list">
 
-            <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8" alt="Laptops">
-                <div class="overlay">
-                    <h3>Laptops</h3>
-                </div>
-            </div>
-
-            <div class="category-card">
-                <img src="/assets/5925.jpg" alt="Accessories">
-                <div class="overlay">
-                    <h3>Desktops</h3>
-                </div>
-            </div>
-
-            <div class="category-card">
-                <img src="/assets/image.png" alt="Phones">
-                <div class="overlay">
-                    <h3>Phones</h3>
-                </div>
-            </div>
-
-           
-
-        </div>
-
-    </section>
-
-    <section class="products">
-
-        <div class="container">
-            <h1 class="section-title">Premium Tech Products</h1>
-
-            <div class="cards-grid" id = "product-container">
-                
-                <!-- Product cards will be dynamically inserted here by JavaScript -->
-
-              
+        <div class="category-card">
+            <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8" alt="Laptops">
+            <div class="overlay">
+                <h3>Laptops</h3>
             </div>
         </div>
 
-    </section>
+        <div class="category-card">
+            <img src="/assets/5925.jpg" alt="Accessories">
+            <div class="overlay">
+                <h3>Desktops</h3>
+            </div>
+        </div>
+
+        <div class="category-card">
+            <img src="/assets/image.png" alt="Phones">
+            <div class="overlay">
+                <h3>Phones</h3>
+            </div>
+        </div>
+
+     
+
+        
+
+    </div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+<section class="products">
+    <div class="container">
+        <h1 class="section-title">Premium Tech Products</h1>
+
+        <div class="cards-grid" id="product-container">
+            <!-- JS inserts products -->
+        </div>
+    </div>
+</section>
+
+
+<!-- PROMO BANNERS -->
 <section class="promo-banners">
-        <div class="section-header">
-            <h1>Promotions & Offers</h1>
-            <p>Discover exclusive deals on the latest tech products</p><br>
-        </div>
 
-        <div class="banner-container">
-            <a href="#" class="banner-card">
-                <img src="https://media.emaxme.com/i/emax/100000355733_3" alt="Laptop Promo">
-                <div class="banner-overlay">
-                  
-                    <h3>Powerful Gaming Laptops</h3>
-                    <p>Unleash Ultimate Performance</p>
-                    <div class="banner-cta">Shop Now</div>
-                </div>
-            </a>
+    <div class="section-header">
+        <h1>Promotions & Offers</h1>
+        <p>Discover exclusive deals on the latest tech products</p><br>
+    </div>
 
-            <a href="#" class="banner-card">
-                <img src="https://www.apple.com/v/iphone-17-pro/d/images/overview/welcome/hero__bdntboqignj6_xlarge.jpg" alt="iPhone Promo">
-                <div class="banner-overlay">
-                   
-                    <h3>iPhone 17 Pro</h3>
-                    <p>Experience Innovation</p>
-                    <div class="banner-cta">Explore</div>
-                </div>
-            </a>
+    <div class="banner-container">
 
-            <a href="#" class="banner-card">
-                <img src="https://www.gizmochina.com/wp-content/uploads/2025/02/ASUS-India-2025-Laptops-Launch-1024x585-1.jpg" alt="ASUS Promo">
-                <div class="banner-overlay">
-                    
-                    <h3>ASUS New Lineup</h3>
-                    <p>Next Level Productivity</p>
-                    <div class="banner-cta">Discover</div>
-                </div>
-            </a>
-        </div>
-    </section>
+        <a href="#" class="banner-card">
+            <img src="https://media.emaxme.com/i/emax/100000355733_3">
+            <div class="banner-overlay">
+                <h3>Powerful Gaming Laptops</h3>
+                <p>Unleash Ultimate Performance</p>
+            </div>
+        </a>
 
-    <footer class="footer">
+        <a href="#" class="banner-card">
+            <img src="https://www.apple.com/v/iphone-17-pro/d/images/overview/welcome/hero__bdntboqignj6_xlarge.jpg">
+            <div class="banner-overlay">
+                <h3>iPhone 17 Pro</h3>
+                <p>Experience Innovation</p>
+            </div>
+        </a>
 
-        <!-- create a footer with contact information and social media links -->
+        <a href="#" class="banner-card">
+            <img src="https://www.gizmochina.com/wp-content/uploads/2025/02/ASUS-India-2025-Laptops-Launch-1024x585-1.jpg">
+            <div class="banner-overlay">
+                <h3>ASUS New Lineup</h3>
+                <p>Next Level Productivity</p>
+            </div>
+        </a>
 
-        </div>
-    
-    </footer>
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p>© 2026 TechHub. All rights reserved.</p>
+</footer>
+
+
+<!-- PAGE SCRIPTS -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const changingText = document.getElementById("changing-text");
+    const techTerms = ["Laptops", "Phones", "Desktops", "Gadgets"];
+
+    let index = 0;
+
+    setInterval(() => {
+        index = (index + 1) % techTerms.length;
+        changingText.textContent = techTerms[index];
+    }, 3000);
+
+});
+
+function toggleMenu() {
+    document.querySelector(".nav-links").classList.toggle("active");
+}
+</script>
+
 </body>
-
 </html>
