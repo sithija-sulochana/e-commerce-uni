@@ -13,178 +13,199 @@
 
 <body>
 
-<!-- NAVBAR -->
-<header class="navbar">
+    <!-- NAVBAR -->
+    <header class="navbar">
 
-    <div class="nav-container">
+        <div class="nav-container">
 
-        <!-- Logo -->
-        <div class="logo">
-            <img src="/assets/Icons/image-removebg-preview-main.png" alt="TechHub Logo">
-            <h2>TechHub</h2>
+            <!-- Logo -->
+            <div class="logo">
+                <img src="/assets/Icons/image-removebg-preview-main.png" alt="TechHub Logo">
+                <h2>TechHub</h2>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="nav-links">
+                <a href="#">Home</a>
+                <div class="dropdown">
+                    <a href="#">Products <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-chevron-down">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </a>
+
+                    <!-- TODO: Add the links to navigate paticular page -->
+                    
+                    <div class="dropdown-content">
+                        <a href="/pages/productDisplayPage.html">Laptop</a>
+                        <a href="#">Desktop</a>
+                        <a href="#">Phones</a>
+                    </div>
+                </div>
+                <a href="#">About Us</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Privacy Policy</a>
+
+                <div class="cart-icon">
+                    <img
+                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBzdHJva2U9Im5hdnkiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMiI+PHBhdGggZD0iTTIgMmgzbDMgMTNoMTJhMiAyIDAgMCAwIDEuOS0xLjVsMi0xMCIvPjxjaXJjbGUgY3g9IjkiIGN5PSIyMSIgcj0iMSIvPjxjaXJjbGUgY3g9IjE5IiBjeT0iMjEiIHI9IjEiLz48L3N2Zz4">
+                    <span class="cart-count">1</span>
+                </div>
+            </nav>
+
+            <!-- Mobile Menu -->
+            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
         </div>
 
-        <!-- Navigation -->
-        <nav class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">Products</a>
-            <a href="#">About Us</a>
-            <a href="#">Contact Us</a>
-            <a href="#">Privacy Policy</a>
-
-            <div class="cart-icon">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBzdHJva2U9Im5hdnkiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMiI+PHBhdGggZD0iTTIgMmgzbDMgMTNoMTJhMiAyIDAgMCAwIDEuOS0xLjVsMi0xMCIvPjxjaXJjbGUgY3g9IjkiIGN5PSIyMSIgcj0iMSIvPjxjaXJjbGUgY3g9IjE5IiBjeT0iMjEiIHI9IjEiLz48L3N2Zz4">
-                <span class="cart-count">1</span>
-            </div>
-        </nav>
-
-        <!-- Mobile Menu -->
-        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
-    </div>
-
-</header>
+    </header>
 
 
 
 
-<!-- HERO -->
-<section class="hero"
-    style="background-image: url('/assets/view-illuminated-neon-gaming-keyboard-setup-controller.jpg');
+    <!-- HERO -->
+    <section class="hero" style="background-image: url('/assets/view-illuminated-neon-gaming-keyboard-setup-controller.jpg');
     background-size: cover;
     background-position: center;
     height: 100vh;">
 
-    <div class="hero-left">
+        <div class="hero-left">
 
-        <div class="hero-content">
-            <h1>
-                Next-Gen Tech,
-                <span class="highlight"><br>
-                    <span id="changing-text">Laptops</span>
-                </span>
-            </h1>
+            <div class="hero-content">
+                <h1>
+                    Next-Gen Tech,
+                    <span class="highlight"><br>
+                        <span id="changing-text">Laptops</span>
+                    </span>
+                </h1>
 
-            <p>
-                Discover cutting-edge gadgets and devices
-                crafted for the modern tech future
-            </p><br>
+                <p>
+                    Discover cutting-edge gadgets and devices
+                    crafted for the modern tech future
+                </p><br>
+            </div>
+
+            <div class="search-container">
+                <input type="text" placeholder="Search laptops, phones...">
+                <button class="search-btn">Search</button>
+            </div>
+
+            <div class="hero-tags">
+                <span class="tag">Free Shipping</span>
+                <span class="tag">30-Day Returns</span>
+                <span class="tag">Expert Support</span>
+            </div>
+
+            <div class="btn-shop">
+                <button class="cta-btn">Shop Now</button>
+            </div>
+
         </div>
 
-        <div class="search-container">
-            <input type="text" placeholder="Search laptops, phones...">
-            <button class="search-btn">Search</button>
-        </div>
-
-        <div class="hero-tags">
-            <span class="tag">Free Shipping</span>
-            <span class="tag">30-Day Returns</span>
-            <span class="tag">Expert Support</span>
-        </div>
-
-        <div class="btn-shop">
-            <button class="cta-btn">Shop Now</button>
-        </div>
-
-    </div>
-
-</section>
+    </section>
 
     <section class="categories">
 
-    <h2 class="category-title">Categories</h2>
+        <h2 class="category-title">Categories</h2>
 
-    <div class="categories-list">
 
-        <div class="category-card">
-            <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8" alt="Laptops">
-            <div class="overlay">
-                <h3>Laptops</h3>
-            </div>
+        <!-- TODO: Add links to navigate to the particular website -->
+        <div class="categories-list">
+
+            <a class="category-card" href="#">
+                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8" alt="Laptops">
+                <div class="overlay">
+                    <h3>Laptops</h3>
+                </div>
+            </a>
+
+            <a class="category-card" href="#">
+                <img src="/assets/5925.jpg" alt="Accessories">
+                <div class="overlay">
+                    <h3>Desktops</h3>
+                </div>
+            </a>
+
+            <a class="category-card" href="#">
+                <img src="/assets/image.png" alt="Phones">
+                <div class="overlay">
+                    <h3>Phones</h3>
+                </div>
+            </a>
+
+
+
+
         </div>
 
-        <div class="category-card">
-            <img src="/assets/5925.jpg" alt="Accessories">
-            <div class="overlay">
-                <h3>Desktops</h3>
+    </section>
+
+
+    <!-- PRODUCTS -->
+    <section class="products">
+        <div class="container">
+            <h1 class="section-title">Premium Tech Products</h1>
+
+            <div class="cards-grid" id="product-container">
+                <!-- JS inserts products -->
             </div>
         </div>
+    </section>
 
-        <div class="category-card">
-            <img src="/assets/image.png" alt="Phones">
-            <div class="overlay">
-                <h3>Phones</h3>
-            </div>
+
+    <!-- PROMO BANNERS -->
+    <section class="promo-banners">
+
+        <div class="section-header">
+            <h1>Promotions & Offers</h1>
+            <p>Discover exclusive deals on the latest tech products</p><br>
         </div>
 
-     
+        <div class="banner-container">
 
-        
+            <!-- TODO: Add links to navigate to the particular page based on the products -->
 
-    </div>
+            <a href="#" class="banner-card">
+                <img src="https://media.emaxme.com/i/emax/100000355733_3">
+                <div class="banner-overlay">
+                    <h3>Powerful Gaming Laptops</h3>
+                    <p>Unleash Ultimate Performance</p>
+                </div>
+            </a>
 
-</section>
+            <a href="#" class="banner-card">
+                <img
+                    src="https://www.apple.com/v/iphone-17-pro/d/images/overview/welcome/hero__bdntboqignj6_xlarge.jpg">
+                <div class="banner-overlay">
+                    <h3>iPhone 17 Pro</h3>
+                    <p>Experience Innovation</p>
+                </div>
+            </a>
 
+            <a href="#" class="banner-card">
+                <img
+                    src="https://www.gizmochina.com/wp-content/uploads/2025/02/ASUS-India-2025-Laptops-Launch-1024x585-1.jpg">
+                <div class="banner-overlay">
+                    <h3>ASUS New Lineup</h3>
+                    <p>Next Level Productivity</p>
+                </div>
+            </a>
 
-<!-- PRODUCTS -->
-<section class="products">
-    <div class="container">
-        <h1 class="section-title">Premium Tech Products</h1>
-
-        <div class="cards-grid" id="product-container">
-            <!-- JS inserts products -->
         </div>
-    </div>
-</section>
+
+    </section>
 
 
-<!-- PROMO BANNERS -->
-<section class="promo-banners">
-
-    <div class="section-header">
-        <h1>Promotions & Offers</h1>
-        <p>Discover exclusive deals on the latest tech products</p><br>
-    </div>
-
-    <div class="banner-container">
-
-        <a href="#" class="banner-card">
-            <img src="https://media.emaxme.com/i/emax/100000355733_3">
-            <div class="banner-overlay">
-                <h3>Powerful Gaming Laptops</h3>
-                <p>Unleash Ultimate Performance</p>
-            </div>
-        </a>
-
-        <a href="#" class="banner-card">
-            <img src="https://www.apple.com/v/iphone-17-pro/d/images/overview/welcome/hero__bdntboqignj6_xlarge.jpg">
-            <div class="banner-overlay">
-                <h3>iPhone 17 Pro</h3>
-                <p>Experience Innovation</p>
-            </div>
-        </a>
-
-        <a href="#" class="banner-card">
-            <img src="https://www.gizmochina.com/wp-content/uploads/2025/02/ASUS-India-2025-Laptops-Launch-1024x585-1.jpg">
-            <div class="banner-overlay">
-                <h3>ASUS New Lineup</h3>
-                <p>Next Level Productivity</p>
-            </div>
-        </a>
-
-    </div>
-
-</section>
-
-
-<!-- FOOTER -->
- <footer class="footer">
+    <!-- FOOTER -->
+    <footer class="footer">
         <div class="footer-container">
 
             <!-- Column 1: About -->
             <div class="footer-column">
                 <h3 class="footer-title">About TechHub</h3>
-                <p class="footer-text">Leading provider of cutting-edge technology and innovative gadgets for modern tech enthusiasts.</p>
+                <p class="footer-text">Leading provider of cutting-edge technology and innovative gadgets for modern
+                    tech enthusiasts.</p>
                 <div class="social-links">
                     <a href="#" class="social-icon" title="Facebook">f</a>
                     <a href="#" class="social-icon" title="Twitter">𝕏</a>
@@ -201,7 +222,7 @@
                     <li><a href="#products">Products</a></li>
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#privacy">Privacy Policy</a></li>
-                    
+
                 </ul>
             </div>
 
@@ -251,4 +272,5 @@
 
 
 </body>
+
 </html>

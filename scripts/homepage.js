@@ -92,6 +92,7 @@ container.innerHTML = productHTML;
 
 
 
+// Change the text every second
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -110,5 +111,8 @@ document.addEventListener("DOMContentLoaded", () => {
 function toggleMenu() {
     document.querySelector(".nav-links").classList.toggle("active");
 }
+
+
+//
 
 
