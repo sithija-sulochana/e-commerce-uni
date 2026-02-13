@@ -178,31 +178,76 @@
 
 
 <!-- FOOTER -->
-<footer class="footer">
-    <p>© 2026 TechHub. All rights reserved.</p>
-</footer>
+ <footer class="footer">
+        <div class="footer-container">
+
+            <!-- Column 1: About -->
+            <div class="footer-column">
+                <h3 class="footer-title">About TechHub</h3>
+                <p class="footer-text">Leading provider of cutting-edge technology and innovative gadgets for modern tech enthusiasts.</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon" title="Facebook">f</a>
+                    <a href="#" class="social-icon" title="Twitter">𝕏</a>
+                    <a href="#" class="social-icon" title="LinkedIn">in</a>
+                    <a href="#" class="social-icon" title="Instagram">📷</a>
+                </div>
+            </div>
+
+            <!-- Column 2: Quick Links -->
+            <div class="footer-column">
+                <h3 class="footer-title">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Support -->
+            <div class="footer-column">
+                <h3 class="footer-title">Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#shipping">Shipping Info</a></li>
+                    <li><a href="#returns">Returns & Refunds</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Newsletter -->
+            <div class="footer-column">
+                <h3 class="footer-title">Newsletter</h3>
+                <p class="footer-text">Subscribe for exclusive deals and tech updates.</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" class="subscribe-btn">Subscribe</button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; 2026 TechHub. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#privacy">Privacy Policy</a>
+                    <span class="separator">|</span>
+                    <a href="#terms">Terms of Service</a>
+                    <span class="separator">|</span>
+                    <a href="#cookies">Cookie Settings</a>
+                </div>
+            </div>
+        </div>
+
+    </footer>
 
 
-<!-- PAGE SCRIPTS -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
 
-    const changingText = document.getElementById("changing-text");
-    const techTerms = ["Laptops", "Phones", "Desktops", "Gadgets"];
 
-    let index = 0;
 
-    setInterval(() => {
-        index = (index + 1) % techTerms.length;
-        changingText.textContent = techTerms[index];
-    }, 3000);
 
-});
-
-function toggleMenu() {
-    document.querySelector(".nav-links").classList.toggle("active");
-}
-</script>
 
 </body>
 </html>

@@ -89,3 +89,26 @@ products.forEach(product => {
 
 // Update the DOM only once
 container.innerHTML = productHTML;
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const changingText = document.getElementById("changing-text");
+    const techTerms = ["Laptops", "Phones", "Desktops", "Gadgets"];
+
+    let index = 0;
+
+    setInterval(() => {
+        index = (index + 1) % techTerms.length;
+        changingText.textContent = techTerms[index];
+    }, 1000);
+
+});
+
+function toggleMenu() {
+    document.querySelector(".nav-links").classList.toggle("active");
+}
+
+
