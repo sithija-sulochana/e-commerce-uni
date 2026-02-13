@@ -97,7 +97,7 @@ container.innerHTML = productHTML;
 document.addEventListener("DOMContentLoaded", () => {
 
     const changingText = document.getElementById("changing-text");
-    const techTerms = ["Laptops", "Phones", "Desktops", "Gadgets"];
+    const techTerms = ["Laptops", "Phones", "Desktops"];
 
     let index = 0;
 
