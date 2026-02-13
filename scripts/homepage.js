@@ -32,15 +32,15 @@ const specs = [
     { id: 3, productId: 1, specName: "Battery", specValue: "95% Health" },
 
     // --- MacBook Specs ---
-    { id: 4, productId: 4, specName: "Display", specValue: "14.2 inch Liquid Retina" },
-    { id: 5, productId: 4, specName: "Processor", specValue: "Apple M3 Chip" },
-    { id: 6, productId: 4, specName: "RAM", specValue: "16GB Unified" },
-    { id: 7, productId: 4, specName: "Storage", specValue: "512GB SSD" },
+    { id: 4, productId: 2, specName: "Display", specValue: "14.2 inch Liquid Retina" },
+    { id: 5, productId: 2, specName: "Processor", specValue: "Apple M3 Chip" },
+    { id: 6, productId: 2, specName: "RAM", specValue: "16GB Unified" },
+    { id: 7, productId: 2, specName: "Storage", specValue: "512GB SSD" },
 
     // --- Desktop PC Specs ---
-    { id: 8, productId: 5, specName: "Processor", specValue: "Intel i9-14900K" },
-    { id: 9, productId: 5, specName: "GPU", specValue: "NVIDIA RTX 4080" },
-    { id: 10, productId: 5, specName: "Cooling", specValue: "Liquid Cooling" },
+    { id: 8, productId: 3, specName: "Processor", specValue: "Intel i9-14900K" },
+    { id: 9, productId: 3, specName: "GPU", specValue: "NVIDIA RTX 4080" },
+    { id: 10, productId: 3, specName: "Cooling", specValue: "Liquid Cooling" },
     { id: 11, productId: 5, specName: "PSU", specValue: "850W Gold" }
 ];
 
