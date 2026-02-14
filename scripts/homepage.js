@@ -61,7 +61,7 @@ products.forEach(product => {
         .join("");
     productHTML += `
     <div class="card">
-      <button class="wishlist-btn">♡</button>
+
 
       <div class="card-image-wrapper">
         <img src="${product.image}" alt="${product.name}">

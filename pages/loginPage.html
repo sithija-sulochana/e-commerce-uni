@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | TechHub</title>
+    <link rel="stylesheet" href="/styles/registrationPage.css">
+</head>
+<body>
+     <div class="container">
+        <!-- Left Side - Image Banner -->
+        <div class="banner">
+            <div class="banner-content">
+               
+                <h1 >Welcome to TechHub!</h1>
+                <p>Explore the latest tech products and services</p>
+            </div>
+        </div>
+
+        <!-- Right Side - Registration Form -->
+        <div class="form-section">
+            <div class="form-wrapper">
+                <h2>Login to TechHub</h2>
+                <p class="subtitle">Enter your credentials to access your account</p>
+
+                <form id="registerForm" novalidate>
+                   
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                        <span class="error-msg"></span>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Minimum 8 characters" required>
+                        <span class="error-msg"></span>
+                    </div>
+
+                  
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="submit-btn">Log in</button>
+                </form>
+
+                <!-- Login Link -->
+                <p class="login-link">Don't have an account? <a href="/pages/registrationPage.html">Sign Up</a></p>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
