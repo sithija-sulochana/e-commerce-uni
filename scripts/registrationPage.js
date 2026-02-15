@@ -1,60 +1,88 @@
-document.getElementById('registerForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+document.addEventListener('DOMContentLoaded', function() {
 
-    // Get form inputs
-    const fullname = document.getElementById('fullname');
-    const email = document.getElementById('email');
-    const password = document.getElementById('password');
-    const confirm = document.getElementById('confirm');
-    const terms = document.getElementById('terms');
+   // Set user credentials to the console (for testing purposes)
+ 
+  
+    
+    // --- Change the authentication buttons once finished the registration ---
+    const urlParams = new URLSearchParams(window.location.search);
+    const userState = urlParams.get('loggedin');
 
-    // Reset error messages
-    clearErrors();
-
-    // Validation flags
-    let isValid = true;
-
-    // Validate Full Name
-    if (fullname.value.trim().length < 3) {
-        showError(fullname, 'Name must be at least 3 characters');
-        isValid = false;
+    if (userState === 'true') {
+        const authButtons = document.querySelector('.auth-buttons');
+        if (authButtons) {
+            authButtons.innerHTML = `
+                <a href="/pages/profile.html" class="profile-btn" style="margin-right: 15px; font-weight: bold; color: #333; text-decoration: none;">Profile</a>
+                <a href="/pages/homepage.html" class="logout-btn" style="background-color: #e74c3c; color: white; padding: 8px 16px; border-radius: 10px; text-decoration: none; font-weight: bold;">Logout</a>
+            `;
+        }
     }
 
-    // Validate Email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email.value)) {
-        showError(email, 'Please enter a valid email address');
-        isValid = false;
+    // --- Validation Logic for Registration Form ---
+    const registrationForm = document.getElementById('registerForm');
+    
+    // This "if" check prevents the "Cannot read properties of null" error
+    if (registrationForm) {
+        registrationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const fullname = document.getElementById('fullname');
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
+            const confirm = document.getElementById('confirm');
+            const terms = document.getElementById('terms');
+
+            clearErrors();
+            let isValid = true;
+
+            // Validation
+            if (fullname.value.trim().length < 3) {
+                showError(fullname, 'Name must be at least 3 characters');
+                isValid = false;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value)) {
+                showError(email, 'Please enter a valid email address');
+                isValid = false;
+            }
+
+            if (password.value.length < 8) {
+                showError(password, 'Password must be at least 8 characters');
+                isValid = false;
+            }
+
+            if (password.value !== confirm.value) {
+                showError(confirm, 'Passwords do not match');
+                isValid = false;
+            }
+
+            if (!terms.checked) {
+                showError(terms, 'You must agree to the terms');
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert('Account created successfully!');
+                // Redirect to homepage with the login flag
+                window.location.href = `/pages/homepage.html?loggedin=true&fullname=${encodeURIComponent(fullname.value)}&email=${encodeURIComponent(email.value)}`;
+
+              
+            }
+
+       
+            
+        });
+        
     }
 
-    // Validate Password
-    if (password.value.length < 8) {
-        showError(password, 'Password must be at least 8 characters');
-        isValid = false;
-    }
+  
 
-    // Validate Confirm Password
-    if (password.value !== confirm.value) {
-        showError(confirm, 'Passwords do not match');
-        isValid = false;
-    }
 
-    // Validate Terms
-    if (!terms.checked) {
-        showError(terms, 'You must agree to the terms');
-        isValid = false;
-    }
-
-    // Submit if valid
-    if (isValid) {
-        console.log('[v0] Registration form submitted successfully');
-        alert('Account created successfully!');
-        // You can send data to server here
-        this.reset();
-    }
+   
 });
 
-// Show error message
+// Helper function to Show error messages
 function showError(input, message) {
     const errorMsg = input.parentElement.querySelector('.error-msg');
     if (errorMsg) {
@@ -63,17 +91,25 @@ function showError(input, message) {
     }
 }
 
-// Clear all error messages
+// Helper functions to Clear all error messages
 function clearErrors() {
     document.querySelectorAll('.error-msg').forEach(msg => msg.textContent = '');
-    document.querySelectorAll('input[type="text"], input[type="email"], input[type="password"]').forEach(input => {
-        input.style.borderColor = '#ddd';
+    document.querySelectorAll('input').forEach(input => {
+        if(input.type !== 'checkbox') input.style.borderColor = '#ddd';
     });
 }
 
-// Real-time validation on input
-document.querySelectorAll('#registerForm input[type="text"], #registerForm input[type="email"], #registerForm input[type="password"]').forEach(input => {
-    input.addEventListener('blur', function() {
-        clearErrors();
-    });
+document.addEventListener("DOMContentLoaded", function () {
+
+    const params = new URLSearchParams(window.location.search);
+
+    const fullname = params.get("fullname");
+    const email = params.get("email");
+
+    if (fullname && email) {
+       console.log("User Full Name:", fullname);
+       console.log("User Email:", email);
+    } else {
+
+    }
 });
