@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Dashboard | TechHub</title>
+    <script src="/scripts/profile.js"></script>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #0ea5e9;
+            --danger: #dc2626;
+            --bg: #f3f4f6;
+            --card: #ffffff;
+            --text: #111827;
+            --muted: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+        }
+
+        /* MAIN LAYOUT */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            background: var(--card);
+            padding: 40px 25px;
+            box-shadow: 2px 0 15px rgba(0, 0, 0, .05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sidebar img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .sidebar h2 {
+            margin-bottom: 5px;
+            color: var(--text);
+        }
+
+        .sidebar p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .sidebar button {
+            width: 100%;
+            padding: 11px;
+            margin-bottom: 12px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .edit {
+            background: var(--primary);
+            color: white
+        }
+
+        .home {
+            background: var(--secondary);
+            color: white
+        }
+
+        .logout {
+            background: var(--danger);
+            color: white
+        }
+
+        .sidebar button:hover {
+            opacity: .85;
+        }
+
+        /* MAIN CONTENT */
+        .main {
+            padding: 50px;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .06);
+            margin-bottom: 30px;
+        }
+
+        /* PROFILE DETAILS */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .details label {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .details input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            background: #f9fafb;
+        }
+
+        /* ORDER TABLE */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 14px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background: #f9fafb;
+            color: var(--muted);
+        }
+
+        tr {
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .borrowed {
+            background: #fde68a;
+            color: #92400e;
+        }
+
+        .returned {
+            background: #bbf7d0;
+            color: #065f46;
+        }
+
+        .profile-img-wrapper {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            margin-bottom: 15px;
+        }
+
+        .profile-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary);
+        }
+
+        /* Camera Button */
+        .camera-icon {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 35px;
+            height: 35px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .2);
+            transition: .3s;
+        }
+
+        .camera-icon img {
+            size: 15px;
+            filter: blur();
+
+        }
+
+        .camera-icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* RESPONSIVE */
+        @media(max-width:900px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .main {
+                padding: 25px;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <div class="profile-img-wrapper">
+                <img id="profileImage" src="/assets/Gemini_Generated_Image_r1l37yr1l37yr1l3.png" alt="User">
+
+                <label for="imageUpload" class="camera-icon">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXNxdWFyZS1wZW4taWNvbiBsdWNpZGUtc3F1YXJlLXBlbiI+PHBhdGggZD0iTTEyIDNINWEyIDIgMCAwIDAtMiAydjE0YTIgMiAwIDAgMCAyIDJoMTRhMiAyIDAgMCAwIDItMnYtNyIvPjxwYXRoIGQ9Ik0xOC4zNzUgMi42MjVhMSAxIDAgMCAxIDMgM2wtOS4wMTMgOS4wMTRhMiAyIDAgMCAxLS44NTMuNTA1bC0yLjg3My44NGEuNS41IDAgMCAxLS42Mi0uNjJsLjg0LTIuODczYTIgMiAwIDAgMSAuNTA2LS44NTJ6Ii8+PC9zdmc+"
+                        alt="Upload">
+                </label>
+
+                <input type="file" id="imageUpload" accept="image/*" hidden>
+            </div>
+            <div class="greeting">
+            <h2 id="greeting-name">Hey </h2>
+            <p id="user-email">sithi@email.com</p>
+            </div>
+            
+
+            <button class="edit" onclick="toggleEdit()">Edit Profile</button>
+            <button class="home" onclick="goHome()">Go to Homepage</button>
+            <button class="logout" onclick="logout()">Logout</button>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="main">
+
+            <!-- PROFILE DETAILS -->
+            <div class="card details">
+
+
+                <h3 style="margin-bottom:20px;">Profile Information</h3>
+
+                <div class="details-grid">
+                    <div>
+                        <label>Full Name</label>
+                        <input type="text"  disabled id="input-fullname">
+                    </div>
+
+                    <div>
+                        <label>Email Address</label>
+                        <input type="email"  disabled id="input-email">
+                    </div>
+
+                    <div>
+                        <label>Phone Number</label>
+                        <input type="text" value="+94 77 123 4567" disabled id="input-phone">
+                    </div>
+
+                    <div>
+                        <label>Member Since</label>
+                        <input type="date" value="January 2025" disabled >
+                    </div>
+                    <div id="card-details">
+
+                       
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- BORROWED ITEMS -->
+            <div class="card">
+                <h3 style="margin-bottom:20px;">Borrowed Items</h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Borrow Date</th>
+                            <th>Return Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Dell XPS 15 Laptop</td>
+                            <td>12 Feb 2026</td>
+                            <td>-</td>
+                            <td><span class="status borrowed">Borrowed</span></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+   
+
+</body>
+
+</html>

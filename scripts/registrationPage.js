@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const authButtons = document.querySelector('.auth-buttons');
         if (authButtons) {
             authButtons.innerHTML = `
-                <a href="/pages/profile.html" class="profile-btn" style="margin-right: 15px; font-weight: bold; color: #333; text-decoration: none;">Profile</a>
+                <a href="/pages/profile.html?loggedin=true&fullname=${encodeURIComponent(urlParams.get('fullname'))}&email=${encodeURIComponent(urlParams.get('email'))}&phone=${encodeURIComponent(urlParams.get('phone'))}" class="profile-btn" style="margin-right: 15px; font-weight: bold; color: #333; text-decoration: none;">Profile</a>
                 <a href="/pages/homepage.html" class="logout-btn" style="background-color: #e74c3c; color: white; padding: 8px 16px; border-radius: 10px; text-decoration: none; font-weight: bold;">Logout</a>
             `;
         }
@@ -29,7 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const fullname = document.getElementById('fullname');
             const email = document.getElementById('email');
             const password = document.getElementById('password');
-            const confirm = document.getElementById('confirm');
+         
+            const phone = document.getElementById('phone');
             const terms = document.getElementById('terms');
 
             clearErrors();
@@ -38,6 +39,11 @@ document.addEventListener('DOMContentLoaded', function() {
             // Validation
             if (fullname.value.trim().length < 3) {
                 showError(fullname, 'Name must be at least 3 characters');
+                isValid = false;
+            }
+
+            if(phone.value.trim().length<10){
+                showError(phone, 'Please enter a valid phone number');
                 isValid = false;
             }
 
@@ -52,10 +58,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 isValid = false;
             }
 
-            if (password.value !== confirm.value) {
-                showError(confirm, 'Passwords do not match');
-                isValid = false;
-            }
+            // if (password.value !== confirm.value) {
+            //     showError(confirm, 'Passwords do not match');
+            //     isValid = false;
+            // }
 
             if (!terms.checked) {
                 showError(terms, 'You must agree to the terms');
@@ -65,8 +71,11 @@ document.addEventListener('DOMContentLoaded', function() {
             if (isValid) {
                 alert('Account created successfully!');
                 // Redirect to homepage with the login flag
-                window.location.href = `/pages/homepage.html?loggedin=true&fullname=${encodeURIComponent(fullname.value)}&email=${encodeURIComponent(email.value)}`;
 
+                window.location.href = `/pages/homepage.html?loggedin=true&fullname=${encodeURIComponent(fullname.value)}&email=${encodeURIComponent(email.value)}&phone=${encodeURIComponent(phone.value)}`;
+               // window.location.href = `/pages/profile.html?loggedin=true&fullname=${encodeURIComponent(fullname.value)}&email=${encodeURIComponent(email.value)}`;
+
+              
               
             }
 
@@ -113,3 +122,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 });
+
