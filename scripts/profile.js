@@ -82,3 +82,4 @@ function logout() {
 
 
 //TODO: implement the logic for getting birthday details from the user
+//TODO: Implement the validation logic for the profile details in editing or chaning the current details

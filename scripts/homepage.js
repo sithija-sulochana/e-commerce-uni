@@ -64,7 +64,7 @@ products.forEach(product => {
 
 
       <div class="card-image-wrapper">
-        <img src="${product.image}" alt="${product.name}">
+        <img src="${product.image}" alt="${product.name}" >
       </div>
 
       <div class="card-content">

@@ -30,15 +30,15 @@
             <nav class="nav-links">
                 <a href="#">Home</a>
                 <div class="dropdown">
-                    <a href="#">Products <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="feather feather-chevron-down">
+                    <a href="#">Products <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </a>
 
                     <!-- TODO: Add the links to navigate paticular page -->
-                    
+
                     <div class="dropdown-content">
                         <a href="/pages/productDisplayPage.html">Laptop</a>
                         <a href="#">Desktop</a>
@@ -49,16 +49,16 @@
                 <a href="#">Contact Us</a>
                 <a href="#">Privacy Policy</a>
 
-               
+
 
                 <div class="auth-buttons">
                     <a href="/pages/login.html" class="login-btn">Login</a>
-                    <a href="/pages/registrationPage.html" class="signup-btn" >Register</a>
+                    <a href="/pages/registrationPage.html" class="signup-btn">Register</a>
                 </div>
 
-                 <div class="cart-icon">
-                    <img
-                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBzdHJva2U9Im5hdnkiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMiI+PHBhdGggZD0iTTIgMmgzbDMgMTNoMTJhMiAyIDAgMCAwIDEuOS0xLjVsMi0xMCIvPjxjaXJjbGUgY3g9IjkiIGN5PSIyMSIgcj0iMSIvPjxjaXJjbGUgY3g9IjE5IiBjeT0iMjEiIHI9IjEiLz48L3N2Zz4" width="10px">
+                <div class="cart-icon">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBzdHJva2U9Im5hdnkiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMiI+PHBhdGggZD0iTTIgMmgzbDMgMTNoMTJhMiAyIDAgMCAwIDEuOS0xLjVsMi0xMCIvPjxjaXJjbGUgY3g9IjkiIGN5PSIyMSIgcj0iMSIvPjxjaXJjbGUgY3g9IjE5IiBjeT0iMjEiIHI9IjEiLz48L3N2Zz4"
+                        width="10px">
                     <span class="cart-count">1</span>
                 </div>
 
@@ -67,8 +67,8 @@
                     <a href="/pages/login.html" class="logout-btn" style="background-color: rgb(184, 130, 130);">Logout</a>
                 </div> -->
 
-                
-                
+
+
             </nav>
 
             <!-- Mobile Menu -->
@@ -82,13 +82,15 @@
 
 
     <!-- HERO -->
-    <section class="hero" style="background-image: url('/assets/view-illuminated-neon-gaming-keyboard-setup-controller.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 100vh;">
+    <section class="hero">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="https://www.chamacomputers.lk/vid/vid_sample_2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <div class="hero-overlay"></div>
 
         <div class="hero-left">
-
             <div class="hero-content">
                 <h1>
                     Next-Gen Tech,
@@ -96,33 +98,34 @@
                         <span id="changing-text">Laptops</span>
                     </span>
                 </h1>
-
                 <p>
                     Discover cutting-edge gadgets and devices
-                    crafted for the modern tech future
-                </p><br>
+                    crafted for the modern tech future.
+                </p>
             </div>
 
             <div class="search-container">
-                <input type="text" placeholder="Search laptops, phones...">
-                <button class="search-btn">Search</button>
+                <input type="text" placeholder="Search laptops, phones..."
+                    style="padding: 10px; width: 60%; border-radius: 5px; border: none;">
+                <button class="search-btn"
+                    style="padding: 10px 20px; background: #00d4ff; border: none; cursor: pointer;">
+                    Search
+                </button>
             </div>
 
-            <div class="hero-tags">
-                <span class="tag">Free Shipping</span>
-                <span class="tag">30-Day Returns</span>
+            <div class="hero-tags" style="margin-top: 20px;">
+                <span class="tag">Free Shipping</span> |
+                <span class="tag">30-Day Returns</span> |
                 <span class="tag">Expert Support</span>
             </div>
 
-            <div class="btn-shop">
-                <button class="cta-btn">Shop Now</button>
-                
+            <div class="btn-shop" style="margin-top: 30px;">
+                <button class="cta-btn"
+                    style="padding: 15px 40px; font-size: 1.2rem; background: #fff; color: #000; border: none; border-radius: 50px; cursor: pointer;">
+                    Shop Now
+                </button>
             </div>
-
-            
-
         </div>
-
     </section>
 
     <section class="categories">
@@ -131,24 +134,24 @@
 
 
         <!-- TODO: Add links to navigate to the particular website -->
-        <div class="categories-list">
+        <div class="categories-list" > 
 
             <a class="category-card" href="#">
-                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8" alt="Laptops">
+                <img src="https://hoanghamobile.com/tin-tuc/wp-content/uploads/2025/01/laptop-gaming-asus-1.jpg" alt="Laptops">
                 <div class="overlay">
                     <h3>Laptops</h3>
                 </div>
             </a>
 
             <a class="category-card" href="#">
-                <img src="/assets/5925.jpg" alt="Accessories">
+                <img src="/assets/devices/5925.jpg" alt="Accessories">
                 <div class="overlay">
                     <h3>Desktops</h3>
                 </div>
             </a>
 
             <a class="category-card" href="#">
-                <img src="/assets/image.png" alt="Phones">
+                <img src="/assets/devices/samsungs25ultra.png" alt="Phones">
                 <div class="overlay">
                     <h3>Phones</h3>
                 </div>
