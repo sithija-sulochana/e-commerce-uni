@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | TechHub</title>
     <link rel="stylesheet" href="/styles/registrationPage.css">
+    <script src="/scripts/login.js"></script>
 </head>
 <body>
      <div class="container">
@@ -26,23 +27,25 @@
                 <form id="registerForm" novalidate>
                    
                     <!-- Email -->
-                    <div class="form-group">
+                    <div class="form-group" id="email-formg">
                         <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required >
+                        <p id="email-error" style="color: red; font-size: 10px;"></p>
                         <span class="error-msg"></span>
                     </div>
 
                     <!-- Password -->
-                    <div class="form-group">
+                    <div class="form-group" id="password-formg">
                         <label for="password">Password</label>
                         <input type="password" id="password" name="password" placeholder="Minimum 8 characters" required>
+                        <p id="password-error" style="color: red; font-size: 10px;"></p>
                         <span class="error-msg"></span>
                     </div>
 
                   
 
                     <!-- Submit Button -->
-                    <button type="submit" class="submit-btn">Log in</button>
+                    <button type="submit" class="submit-btn" onclick="logIn(event)">Log in</button>
                 </form>
 
                 <!-- Login Link -->
@@ -50,6 +53,7 @@
             </div>
         </div>
     </div>
+    
     
 </body>
 </html>

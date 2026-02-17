@@ -29,7 +29,7 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(245, 245, 254, 0.95);
+    background: rgba(184, 184, 214, 0.95);
 
     backdrop-filter: blur(20px);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -50,6 +50,7 @@ body {
     align-items: center;
     gap: 10px;
     cursor: pointer;
+
 }
 
 .logo img {
@@ -58,6 +59,8 @@ body {
 
 .logo h2 {
     color: navy;
+    font-weight: 700;
+
 }
 /* Auth Buttons */
 .auth-buttons button {
