@@ -1,0 +1,177 @@
+:root {
+    --primary-navy: #001f3f; /* Professional Navy Blue */
+    --accent-blue: #0074D9;
+    --bg-white: #ffffff;
+    --bg-alt: #f8fafc;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --radius: 12px;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-white);
+    color: var(--text-dark);
+}
+
+/* Header */
+.page-header {
+    background: var(--primary-navy);
+    padding: 60px 20px;
+    text-align: center;
+    color: white;
+}
+
+.page-header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+
+/* Layout */
+.shop-container {
+    max-width: 1400px;
+    margin: auto;
+    padding: 40px 20px;
+    display: grid;
+  grid-template-columns: repeat(3, 1fr);
+    column-gap: 30px; /* Space between cards side-by-side */
+    row-gap: 50px;    /* Extra space between rows for a cleaner look */
+}
+}
+
+/* Sidebar & Filters */
+.filters {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 25px;
+    border-radius: var(--radius);
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+}
+
+.filter-section { margin-bottom: 30px; }
+.filter-section h3 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; color: var(--text-dark); }
+
+/* Brand Boxes */
+.brand-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.brand-box {
+    border: 1px solid var(--border);
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.brand-box img { width: 30px; height: 30px; filter: grayscale(1); margin-bottom: 5px; }
+.brand-box:has(input:checked) { border-color: var(--primary-navy); background: #f0f4f8; }
+.brand-box:has(input:checked) img { filter: grayscale(0); }
+.brand-box input { display: none; }
+
+/* Chip Boxes */
+.chip-group { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip {
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    background: white;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.chip.active { background: var(--primary-navy); color: white; border-color: var(--primary-navy); }
+
+/* Product Cards */
+.card {
+    background: white;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, opacity 0.6s ease;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.card-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card.reveal { opacity: 1; transform: translateY(0); }
+.card:hover { transform: translateY(-8px); box-shadow: var(--shadow); }
+
+.card-image-wrapper {
+    background: var(--bg-alt);
+    border-radius: 8px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+.card-image-wrapper img { max-width: 80%; max-height: 80%; object-fit: contain; }
+
+.status-badge {
+    background: #e1ffec;
+    color: #065f46;
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+.product-title { font-size: 1.1rem; margin: 10px 0 5px; color: var(--text-dark); }
+.product-price { font-size: 1.3rem; font-weight: 800; color: var(--primary-navy); margin: 10px 0; }
+
+.btn-add-to-cart {
+    background: var(--primary-navy);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: auto;
+}
+.btn-add-to-cart:hover { background: #002d5c; transform: scale(1.02); }
+
+/* Responsive Filter Toggle */
+.mobile-filter-btn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: var(--primary-navy);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 768px) {
+    .shop-container { grid-template-columns: 1fr; }
+    .filters {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        height: 100vh;
+        z-index: 999;
+        transition: 0.4s;
+        width: 80%;
+    }
+    .filters.open { left: 0; }
+    .mobile-filter-btn { display: flex; align-items: center; gap: 8px; }
+}

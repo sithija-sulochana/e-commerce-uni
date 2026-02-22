@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Laptops | TechStore</title>
+    <link rel="stylesheet" href="/styles/productList.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+<header class="page-header">
+    <div class="header-content">
+        <h1>Laptops</h1>
+        <p>Discover our premium laptop collection</p>
+    </div>
+</header>
+
+<button class="mobile-filter-btn" id="filterToggle">
+    <i data-lucide="filter"></i> Filters
+</button>
+
+<div class="shop-container">
+    <aside class="filters" id="sidebar">
+        <div class="filter-section">
+            <h3>Brand</h3>
+            <div class="brand-grid">
+                <label class="brand-box">
+                    <input type="checkbox">
+                    <img src="/assets/brandsLogos/phones/apple.png" alt="Apple">
+                </label>
+                <label class="brand-box">
+                    <input type="checkbox">
+                    <img src="/assets/brandsLogos/laptopsComputer/Dell_Logo.svg-removebg-preview.png" alt="Dell">
+                </label>
+                <label class="brand-box">
+                    <input type="checkbox">
+                    <img src="/assets/brandsLogos/laptopsComputer/asus.png" alt="Asus">
+                </label>
+                <label class="brand-box">
+                    <input type="checkbox">
+                    <img src="/assets/brandsLogos/laptopsComputer/hp.png" alt="HP">
+                </label>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <h3>Screen Size</h3>
+            <div class="chip-group">
+                <button class="chip">13"</button>
+                <button class="chip active">14"</button>
+                <button class="chip">16"</button>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <h3>Refresh Rate</h3>
+            <div class="chip-group">
+                <button class="chip">60Hz</button>
+                <button class="chip active">120Hz</button>
+                <button class="chip">144Hz</button>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <h3>Price Range</h3>
+            <input type="range" min="500" max="5000" class="price-slider">
+            <div class="price-labels">
+                <span>$500</span>
+                <span>$5000</span>
+            </div>
+        </div>
+    </aside>
+
+    <main class="products-grid" id="productGrid">
+        </main>
+</div>
+
+<script src="/scripts/productList.js"></script>
+</body>
+</html>

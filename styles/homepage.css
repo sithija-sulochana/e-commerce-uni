@@ -9,6 +9,7 @@
     --radius: 20px;
     --shadow: 0 10px 40px rgba(0, 0, 0, .1);
     --transition: all .3s ease;
+   --font-stack: "Inter", "Poppins", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 * {
@@ -18,7 +19,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', sans-serif;
+    font-family: var(--font-stack);
     background: #f8f9fa;
     overflow-x: hidden;
 }
@@ -311,8 +312,11 @@ body {
     margin-top: 20%;
     font-size: clamp(36px, 5vw, 65px);
     font-weight: 800;
+    font-size: 75px;
     line-height: 1.1;
+    filter: opacity(5);
 }
+
 
 .highlight,
 .changing-text {
@@ -649,10 +653,29 @@ body {
     text-decoration: none;
     box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
     transition: var(--transition);
+
+    
+    
 }
+
+#main-banner {
+    grid-row: span 6;
+}
+.separate-banner-1 {
+    grid-column: span 2;
+}
+.separate-banner-2 {
+    grid-column: span 2;
+}
+
+
+
+
+
 
 .banner-card:hover {
     box-shadow: 0 20px 40px rgba(0, 0, 0, .15);
+    
 }
 
 .banner-card img {
@@ -677,15 +700,7 @@ body {
     font-size: 26px;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
 
 /* FOOTER */
 .footer {

@@ -3,97 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile | TechHub</title>
-    <link rel="stylesheet" href="/styles/navbar.css">
+    <title>Profile Page</title>
     <link rel="stylesheet" href="/styles/profile.css">
     <script src="/scripts/profile.js"></script>
+    <style>
+        
+    </style>
 </head>
-
-<style>
-
-</style>
 <body>
 
-
-    <div class="profile-container">
-        <div class="profile-wrapper">
-            <!-- Sidebar -->
-            <aside class="sidebar">
-                <img src="https://api.placeholder.com/120/120?text=User" alt="Profile" class="avatar">
-                <h2 id="sidebar-name">Sarah Johnson</h2>
-                <p id="email-temp"></p>
-                <button class="btn-primary">Edit Profile</button>
-              
-            </aside>
-
-            <!-- Main Content -->
-            <main class="main-content">
-                <!-- Profile Information -->
-                <div>
-                    <h3>Profile Information</h3>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Full Name</label>
-                            <input type="text" value="Sarah Johnson" disabled id="input-fullname">
-                        </div>
-                        <div class="form-group">
-                            <label>Email Address</label>
-                            <input type="email" value="sarah@techmail.com" disabled id="input-email">
-                        </div>
-                        <div class="form-group">
-                            <label>Phone Number</label>
-                            <input type="text" value="+1 (555) 123-4567" disabled id="input-phone"  >
-                        </div>
-                        <div class="form-group">
-                            <label>Member Since</label>
-                            <input type="text" value="January 15, 2024" disabled id="input-member">
-                        </div>
-                    </div>
+    <div class="container">
+        <div class="profile-header">
+            <div class="cover-photo-container">
+                <img src="https://images.unsplash.com/photo-1557821552-17105176677c?w=1200&h=400&fit=crop" class="cover-photo" alt="Cover">
+                <button class="edit-cover-btn"><img  class="fa-solid fa-camera" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNhbWVyYS1pY29uIGx1Y2lkZS1jYW1lcmEiPjxwYXRoIGQ9Ik0xMy45OTcgNGEyIDIgMCAwIDEgMS43NiAxLjA1bC40ODYuOUEyIDIgMCAwIDAgMTguMDAzIDdIMjBhMiAyIDAgMCAxIDIgMnY5YTIgMiAwIDAgMS0yIDJINGEyIDIgMCAwIDEtMi0yVjlhMiAyIDAgMCAxIDItMmgxLjk5N2EyIDIgMCAwIDAgMS43NTktMS4wNDhsLjQ4OS0uOTA0QTIgMiAwIDAgMSAxMC4wMDQgNHoiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjEzIiByPSIzIi8+PC9zdmc+"></img></button>
+            </div>
+            
+            <div class="profile-info-bar">
+                <div class="profile-pic-container">
+                    <img class="profile-pic" alt="User" id="profile-pic">
+                    <button class="edit-pic-btn"><img  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNhbWVyYS1pY29uIGx1Y2lkZS1jYW1lcmEiPjxwYXRoIGQ9Ik0xMy45OTcgNGEyIDIgMCAwIDEgMS43NiAxLjA1bC40ODYuOUEyIDIgMCAwIDAgMTguMDAzIDdIMjBhMiAyIDAgMCAxIDIgMnY5YTIgMiAwIDAgMS0yIDJINGEyIDIgMCAwIDEtMi0yVjlhMiAyIDAgMCAxIDItMmgxLjk5N2EyIDIgMCAwIDAgMS43NTktMS4wNDhsLjQ4OS0uOTA0QTIgMiAwIDAgMSAxMC4wMDQgNHoiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjEzIiByPSIzIi8+PC9zdmc+" class="fa-solid fa-camera" style="filter: invert(30)"></img></button>
                 </div>
-
-                <!-- Recent Orders -->
-                <div>
-                    <h3>Recent Orders</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Order ID</th>
-                                <th>Product</th>
-                                <th>Date</th>
-                                <th>Amount</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>#TH001245</td>
-                                <td>Wireless Headphones Pro</td>
-                                <td>Feb 10, 2025</td>
-                                <td>$149.99</td>
-                                <td><span class="status returned">Delivered</span></td>
-                            </tr>
-                            <tr>
-                                <td>#TH001243</td>
-                                <td>USB-C Hub 7-in-1</td>
-                                <td>Feb 05, 2025</td>
-                                <td>$79.99</td>
-                                <td><span class="status returned">Delivered</span></td>
-                            </tr>
-                            <tr>
-                                <td>#TH001240</td>
-                                <td>4K Webcam Ultra</td>
-                                <td>Jan 28, 2025</td>
-                                <td>$199.99</td>
-                                <td><span class="status borrowed">Shipped</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="user-details">
+                    <h1 id="display-name">John Doe</h1>
+                    <p id="display-email"><i class="fa-solid fa-envelope"></i> john.doe@example.com</p>
                 </div>
-
-                <!-- Wishlist -->
-                
-            </main>
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="edit-profile-btn"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMzAzMDMiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS11c2VyLXJvdW5kLXBlbi1pY29uIGx1Y2lkZS11c2VyLXJvdW5kLXBlbiI+PHBhdGggZD0iTTIgMjFhOCA4IDAgMCAxIDEwLjgyMS03LjQ4NyIvPjxwYXRoIGQ9Ik0yMS4zNzggMTYuNjI2YTEgMSAwIDAgMC0zLjAwNC0zLjAwNGwtNC4wMSA0LjAxMmEyIDIgMCAwIDAtLjUwNi44NTRsLS44MzcgMi44N2EuNS41IDAgMCAwIC42Mi42MmwyLjg3LS44MzdhMiAyIDAgMCAwIC44NTQtLjUwNnoiLz48Y2lyY2xlIGN4PSIxMCIgY3k9IjgiIHI9IjUiLz48L3N2Zz4=" class="fa-solid fa-pen" style="filter: invert(30);"></img> Edit Profile</button>
+                    <button class="btn btn-outline"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1zaGFyZTItaWNvbiBsdWNpZGUtc2hhcmUtMiI+PGNpcmNsZSBjeD0iMTgiIGN5PSI1IiByPSIzIi8+PGNpcmNsZSBjeD0iNiIgY3k9IjEyIiByPSIzIi8+PGNpcmNsZSBjeD0iMTgiIGN5PSIxOSIgcj0iMyIvPjxsaW5lIHgxPSI4LjU5IiB4Mj0iMTUuNDIiIHkxPSIxMy41MSIgeTI9IjE3LjQ5Ii8+PGxpbmUgeDE9IjE1LjQxIiB4Mj0iOC41OSIgeTE9IjYuNTEiIHkyPSIxMC40OSIvPjwvc3ZnPg==" class="fa-solid fa-share" style="filter: invert(30);"></img>Share</button>
+                </div>
+            </div>
         </div>
+
+        <div class="hidden-edit-details" id="edit-section">
+            <h2>Edit Profile Details</h2>
+            <form id="edit-form">
+                <div class="form-group"><label>Full Name</label><input type="text" id="name" value="John Doe"></div>
+                <div class="form-group"><label>Email Address</label><input type="email" id="email" value="john.doe@example.com"></div>
+                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="button" class="btn btn-outline" id="cancel-edit">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="content-grid">
+            <div class="card">
+    <h2><i class="fa-solid fa-star" style="color: #f59e0b;"></i> Loyalty Rewards</h2>
+    <p style="font-weight: 600; font-size: 1.1rem; color: #f59e0b;">Gold Status</p>
+    <p style="font-size: 0.9rem; color: var(--muted-color);">You have 1,250 points available for your next purchase.</p>
+</div>
+            <div class="card">
+                <h2><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1tYXAtcGlubmVkLWljb24gbHVjaWRlLW1hcC1waW5uZWQiPjxwYXRoIGQ9Ik0xOCA4YzAgMy42MTMtMy44NjkgNy40MjktNS4zOTMgOC43OTVhMSAxIDAgMCAxLTEuMjE0IDBDOS44NyAxNS40MjkgNiAxMS42MTMgNiA4YTYgNiAwIDAgMSAxMiAwIi8+PGNpcmNsZSBjeD0iMTIiIGN5PSI4IiByPSIyIi8+PHBhdGggZD0iTTguNzE0IDE0aC0zLjcxYTEgMSAwIDAgMC0uOTQ4LjY4M2wtMi4wMDQgNkExIDEgMCAwIDAgMyAyMmgxOGExIDEgMCAwIDAgLjk0OC0xLjMxNmwtMi02YTEgMSAwIDAgMC0uOTQ5LS42ODRoLTMuNzEyIi8+PC9zdmc+" class="fa-solid fa-location-dot" style="filter: invert(30);"></img> Location</h2>
+                <p style="font-weight: 600;">Colombo, Sri Lanka</p>
+            </div>
+        </div>
+
+        <section class="order-section">
+            <div class="order-header">
+                <h2>Order History</h2>
+                <input type="text" id="search-order" placeholder="Find your previous orders">
+                <p style="color: #64748b;">Manage your past and upcoming orders</p>
+            </div>
+            <div class="order-grid" id="orderGrid"></div>
+        </section>
     </div>
+
+    <script>
+        
+    </script>
 </body>
 </html>
