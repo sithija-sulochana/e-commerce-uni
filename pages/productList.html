@@ -1,81 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Laptops | TechStore</title>
-    <link rel="stylesheet" href="/styles/productList.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tech Store - Product List</title>
+	<link rel="stylesheet" href="/styles/productList.css">
 </head>
-<body>
 
-<header class="page-header">
-    <div class="header-content">
-        <h1>Laptops</h1>
-        <p>Discover our premium laptop collection</p>
-    </div>
-</header>
+<body style="margin-top: 70px;">
+    <script src="/scripts/components/navigation.js"></script>
+	<header class="page-header">
+		<h1>Premium Tech Products</h1>
+		<p>Discover latest laptops, phones, and computers with top value</p>
+	</header>
 
-<button class="mobile-filter-btn" id="filterToggle">
-    <i data-lucide="filter"></i> Filters
-</button>
+	<main class="container">
+		<aside class="sidebar">
+			<div class="sidebar-header">
+				<h3>Filters</h3>
+				<button id="clearFiltersBtn" class="clear-btn" type="button">Clear all</button>
+			</div>
 
-<div class="shop-container">
-    <aside class="filters" id="sidebar">
-        <div class="filter-section">
-            <h3>Brand</h3>
-            <div class="brand-grid">
-                <label class="brand-box">
-                    <input type="checkbox">
-                    <img src="/assets/brandsLogos/phones/apple.png" alt="Apple">
-                </label>
-                <label class="brand-box">
-                    <input type="checkbox">
-                    <img src="/assets/brandsLogos/laptopsComputer/Dell_Logo.svg-removebg-preview.png" alt="Dell">
-                </label>
-                <label class="brand-box">
-                    <input type="checkbox">
-                    <img src="/assets/brandsLogos/laptopsComputer/asus.png" alt="Asus">
-                </label>
-                <label class="brand-box">
-                    <input type="checkbox">
-                    <img src="/assets/brandsLogos/laptopsComputer/hp.png" alt="HP">
-                </label>
+			<div class="filter-section">
+				<h4>Category</h4>
+				<div id="categoryFilters" class="filter-group"></div>
+			</div>
+
+			<div class="filter-section">
+				<h4>Price range</h4>
+				<div id="priceFilters" class="filter-group"></div>
+			</div>
+
+			<div class="filter-section">
+                <h4>Brand</h4>
+                <div id="brandFilters" class="filter-group"></div>
+                
             </div>
-        </div>
+		</aside>
 
-        <div class="filter-section">
-            <h3>Screen Size</h3>
-            <div class="chip-group">
-                <button class="chip">13"</button>
-                <button class="chip active">14"</button>
-                <button class="chip">16"</button>
-            </div>
-        </div>
+		<section class="products-section">
+			<div class="products-header">
+				<div>
+					<h2>All Products</h2>
+					<p id="resultsCount" class="results-count"></p>
+				</div>
 
-        <div class="filter-section">
-            <h3>Refresh Rate</h3>
-            <div class="chip-group">
-                <button class="chip">60Hz</button>
-                <button class="chip active">120Hz</button>
-                <button class="chip">144Hz</button>
-            </div>
-        </div>
+				<label class="sort-label" for="sortSelect">
+					Sort by
+					<select id="sortSelect">
+						<option value="newest">Newest</option>
+						<option value="price-low">Price: Low to High</option>
+						<option value="price-high">Price: High to Low</option>
+						<option value="name-az">Name: A-Z</option>
+					</select>
+            
+				</label>
+			</div>
 
-        <div class="filter-section">
-            <h3>Price Range</h3>
-            <input type="range" min="500" max="5000" class="price-slider">
-            <div class="price-labels">
-                <span>$500</span>
-                <span>$5000</span>
-            </div>
-        </div>
-    </aside>
+			<div class="products-grid" id="productsGrid"></div>
+		</section>
+	</main>
 
-    <main class="products-grid" id="productGrid">
-        </main>
-</div>
+    <script src="/scripts/components/footer.js"></script>
 
-<script src="/scripts/productList.js"></script>
+	<script src="/scripts/productList.js"></script>
+
 </body>
 </html>

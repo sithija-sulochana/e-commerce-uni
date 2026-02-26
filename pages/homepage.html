@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechHub - Premium Technology Products</title>
     <link rel="stylesheet" href="/styles/homepage.css">
+    <script src="/scripts/homepage.js"></script>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <script src="/scripts/registrationPage.js"></script>
@@ -15,22 +16,18 @@
 
 <body>
 
-    <!-- ==================== NAVBAR ==================== -->
+    <!--  NAVBAR  -->
     <header class="navbar">
         <div class="nav-container">
             <div class="logo">🚀 TechHub</div>
             
             <div class="nav-center">
                 <nav class="nav-links">
-                    <a href="#home">Home</a>
+                    <a href="/pages/homepage.html">Home</a>
                     
                     <div class="dropdown">
                         <a href="#products">Products ▾</a>
-                        <div class="dropdown-content">
-                            <a href="#laptops">Laptops</a>
-                            <a href="#desktops">Desktops</a>
-                            <a href="#phones">Phones</a>
-                        </div>
+                       
                     </div>
 
                     <a href="#about">About</a>
@@ -39,7 +36,7 @@
 
                 <div class="btn-auth">
                     <button class="btn-login" ><a href="/pages/loginPage.html" style="text-decoration: none;">Login</a></button>
-                    <button class="btn-register"><a href="/pages/registrationPage.html" style="text-decoration: none;">Register</a></button>
+                    <button class="btn-register"><a href="/pages/registrationPage.html" style="text-decoration: none; color: white;">Register</a></button>
                 </div>
             </div>
 
@@ -47,7 +44,7 @@
         </div>
     </header>
 
-    <!-- ==================== HERO SECTION ==================== -->
+    <!--  HERO SECTION  -->
     <section class="hero" id="home" >
         <video autoplay muted loop playsinline class="hero-video" >
             <source src="https://www.chamacomputers.lk/vid/vid_sample_2.mp4" type="video/mp4"  style="width: 100vh; height: 100vh; object-fit: cover;">
@@ -64,18 +61,18 @@
                 <button class="search-btn">Search</button>
             </div>
 
-            <!-- center the button and add a small gap between the button and the text -->
-            <div style="display: flex; justify-content: center; margin-top: 20px;">
-                 <button class="cta-btn"> Shop Now <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWFycm93LXJpZ2h0LWljb24gbHVjaWRlLWFycm93LXJpZ2h0Ij48cGF0aCBkPSJNNSAxMmgxNCIvPjxwYXRoIGQ9Im0xMiA1IDcgNy03IDciLz48L3N2Zz4=" alt="" style="filter: invert(3);"> </button>
+            
+          
+                 <button class="cta-btn" style="padding: 14px 36px; display: inline-flex; gap: 5px; align-items: center;"> <a href="/pages/productList.html" style="text-decoration: none; color: white; ">Shop Now</a> <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWFycm93LXJpZ2h0LWljb24gbHVjaWRlLWFycm93LXJpZ2h0Ij48cGF0aCBkPSJNNSAxMmgxNCIvPjxwYXRoIGQ9Im0xMiA1IDcgNy03IDciLz48L3N2Zz4=" alt="" style="filter: invert(3);"> </button>
                  
 
-            </div>
+          
            
            
         </div>
     </section>
 
-    <!-- ==================== CATEGORIES SECTION ==================== -->
+    <!-- CATEGORIES SECTION -->
     <section id="categories">
         <h2 class="section-title">Popular Categories</h2>
         <div class="categories-grid">
@@ -94,7 +91,7 @@
             </div>
 
             <div class="category-card">
-                <img src="https://www.apple.com/v/iphone-17-pro/d/images/overview/welcome/hero__bdntboqignj6_xlarge.jpg" alt="Phones">
+                <img src="https://www.apple.com/v/iphone-17-pro/d/images/overview/welcome/hero__bdntboqignj6_xlarge.jpg" alt="Phones" >
                 <div class="category-overlay">
                     <h3>Phones</h3>
                 </div>
@@ -102,13 +99,13 @@
         </div>
     </section>
 
-    <!-- ==================== PRODUCTS SECTION ==================== -->
+    <!--  PRODUCTS SECTION  -->
     <section id="products">
         <h2 class="section-title">Premium Products</h2>
         <div class="products-grid" id="product-container"></div>
     </section>
 
-    <!-- ==================== PROMOTIONS SECTION ==================== -->
+    <!-- PROMOTIONS SECTION -->
     <section id="promotions">
         <h2 class="section-title">Exclusive Promotions</h2>
         <div class="promo-grid">
@@ -130,7 +127,7 @@
         </div>
     </section>
 
-    <!-- ==================== FOOTER ==================== -->
+    <!--  FOOTER  -->
     <footer class="footer">
         <div class="footer-content">
             <div>
@@ -140,8 +137,8 @@
 
             <div>
                 <h3>Quick Links</h3>
-                <a href="#home">Home</a>
-                <a href="#products">Products</a>
+                <a href="/pages/homepage.html">Home</a>
+                <a href="/pages/productList.html">Products</a>
                 <a href="#categories">Categories</a>
                 <a href="#promotions">Promotions</a>
             </div>
@@ -168,133 +165,7 @@
     </footer>
 
     <script>
-        // ==================== NAVIGATION TOGGLE ====================
-        function toggleMenu() {
-            const navCenter = document.querySelector('.nav-center');
-            navCenter.classList.toggle('active');
-        }
-
-        // Close menu when clicking on links
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.querySelector('.nav-center').classList.remove('active');
-            });
-        });
-
-        // ==================== PRODUCTS DATA ====================
-        const products = [
-            {
-                id: 1,
-                name: "iPhone 15 Pro Max",
-                category: "Phone",
-                description: "6.7-inch Super Retina XDR display with ProMotion and Titanium build.",
-                price: "LKR 285,000",
-                image: "https://images.unsplash.com/photo-1592286927505-1def25115558?w=400&h=400&fit=crop"
-            },
-            {
-                id: 2,
-                name: "MacBook Pro 14\" M3",
-                category: "Laptop",
-                description: "The most advanced chips ever built for a personal computer.",
-                price: "LKR 450,000",
-                image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=400&fit=crop"
-            },
-            {
-                id: 3,
-                name: "ASUS ROG Strix G16",
-                category: "Computer",
-                description: "High-performance gaming desktop replacement with liquid cooling.",
-                price: "LKR 380,000",
-                image: "https://images.unsplash.com/photo-1588872657840-790ff3bde08c?w=400&h=400&fit=crop"
-            }
-        ];
-
-        const specs = [
-            { id: 1, productId: 1, specName: "Display", specValue: "6.7 inch OLED" },
-            { id: 2, productId: 1, specName: "Camera", specValue: "48MP Main" },
-            { id: 3, productId: 1, specName: "Battery", specValue: "95% Health" },
-
-            { id: 4, productId: 2, specName: "Display", specValue: "14.2 inch Liquid Retina" },
-            { id: 5, productId: 2, specName: "Processor", specValue: "Apple M3 Chip" },
-            { id: 6, productId: 2, specName: "RAM", specValue: "16GB Unified" },
-
-            { id: 8, productId: 3, specName: "Processor", specValue: "Intel i9-14900K" },
-            { id: 9, productId: 3, specName: "GPU", specValue: "NVIDIA RTX 4080" },
-            { id: 10, productId: 3, specName: "Cooling", specValue: "Liquid Cooling" }
-        ];
-
-        // ==================== RENDER PRODUCTS ====================
-        function renderProducts() {
-            const container = document.getElementById('product-container');
-            let productHTML = '';
-
-            products.forEach(product => {
-                const productSpecs = specs
-                    .filter(spec => 
-                        spec.productId === product.id &&
-                        ["Display", "Processor", "Camera"].includes(spec.specName)
-                    )
-                    .map(spec => `<div class="spec-item">${spec.specValue}</div>`)
-                    .join('');
-
-                productHTML += `
-                    <div class="product-card">
-                        <div class="product-image-wrapper">
-                            <img src="${product.image}" alt="${product.name}">
-                        </div>
-                        <div class="product-content">
-                            <div class="product-category">${product.category}</div>
-                            <h3 class="product-title">${product.name}</h3>
-                            <p class="product-description">${product.description}</p>
-                            <div class="specs">
-                                ${productSpecs}
-                            </div>
-                            <div class="product-footer">
-                                <span class="product-price">${product.price}</span>
-                                <button class="btn-add-to-cart">Add to Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-
-            container.innerHTML = productHTML;
-        }
-
-        // ==================== CHANGING TEXT IN HERO ====================
-        document.addEventListener('DOMContentLoaded', () => {
-            renderProducts();
-
-            // Add smooth scroll for buttons
-            document.querySelectorAll('.cta-btn, .btn-add-to-cart').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    if (this.classList.contains('cta-btn')) {
-                        document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
-            });
-
-            // Add dropdown toggle for mobile
-            document.querySelectorAll('.dropdown').forEach(dropdown => {
-                const link = dropdown.querySelector('a');
-                link.addEventListener('click', (e) => {
-                    if (window.innerWidth <= 768) {
-                        e.preventDefault();
-                        dropdown.classList.toggle('active');
-                    }
-                });
-            });
-        });
-
-        // ==================== SCROLL ANIMATIONS ====================
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
-            } else {
-                navbar.style.boxShadow = 'var(--shadow-sm)';
-            }
-        });
+       
     </script>
 
 </body>
