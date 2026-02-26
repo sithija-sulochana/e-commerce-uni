@@ -3,17 +3,30 @@ document.addEventListener('DOMContentLoaded', function() {
    // Set user credentials to the console (for testing purposes)
  
   
+   // id="logoutBtn" class="btn btn-logout"
     
     // --- Change the authentication buttons once finished the registration ---
     const urlParams = new URLSearchParams(window.location.search);
     const userState = urlParams.get('loggedin');
 
     if (userState === 'true') {
-        const authButtons = document.querySelector('.auth-buttons');
+        const authButtons = document.querySelector('.btn-auth');
         if (authButtons) {
             authButtons.innerHTML = `
-                <a href="/pages/profile.html?loggedin=true&fullname=${encodeURIComponent(urlParams.get('fullname'))}&email=${encodeURIComponent(urlParams.get('email'))}&phone=${encodeURIComponent(urlParams.get('phone'))}" class="profile-btn" style="margin-right: 15px; font-weight: bold; color: #333; text-decoration: none;">Profile</a>
-                <a href="/pages/homepage.html" class="logout-btn" style="background-color: #e74c3c; color: white; padding: 8px 16px; border-radius: 10px; text-decoration: none; font-weight: bold;">Logout</a>
+                <a href="/pages/profile.html" 
+   class="profile-btn" 
+   style="display: inline-flex; align-items: center; gap: 6px; margin-right: 15px; font-weight: 600; color: #333; text-decoration: none; padding: 8px 14px; border-radius: 10px; background: #f1f1f1;">
+    <i class="fas fa-user"></i>
+    Profile
+</a>
+
+
+<a href="/pages/homepage.html" 
+   id="logoutLink" 
+   style="display: inline-flex; align-items: center; gap: 6px; background-color: #e74c3c; color: white; padding: 8px 16px; border-radius: 10px; text-decoration: none; font-weight: 600;">
+    <i class="fas fa-sign-out-alt"></i>
+    Logout
+</a>
             `;
         }
     }

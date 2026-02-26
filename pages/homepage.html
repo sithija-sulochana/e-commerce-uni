@@ -1,301 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechHub</title>
-    <link rel="icon" type="image/png" href="/assets/Gemini_Generated_Image_r1l37yr1l37yr1l3.png">
-
+    <title>TechHub - Premium Technology Products</title>
     <link rel="stylesheet" href="/styles/homepage.css">
-    <script src="/scripts/homepage.js" defer></script>
-    <script src="/scripts/registrationPage.js" defer></script>
-
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <script src="/scripts/registrationPage.js"></script>
+    <style>
+   
+    </style>
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
+    <!-- ==================== NAVBAR ==================== -->
     <header class="navbar">
-
         <div class="nav-container">
+            <div class="logo">🚀 TechHub</div>
+            
+            <div class="nav-center">
+                <nav class="nav-links">
+                    <a href="#home">Home</a>
+                    
+                    <div class="dropdown">
+                        <a href="#products">Products ▾</a>
+                        <div class="dropdown-content">
+                            <a href="#laptops">Laptops</a>
+                            <a href="#desktops">Desktops</a>
+                            <a href="#phones">Phones</a>
+                        </div>
+                    </div>
 
-            <!-- Logo -->
-            <div class="logo">
-                <img src="/assets/Icons/image-removebg-preview-main.png" alt="TechHub Logo">
-                <h2>TechHub</h2>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+
+                <div class="btn-auth">
+                    <button class="btn-login" ><a href="/pages/loginPage.html" style="text-decoration: none;">Login</a></button>
+                    <button class="btn-register"><a href="/pages/registrationPage.html" style="text-decoration: none;">Register</a></button>
+                </div>
             </div>
 
-            <!-- Navigation -->
-            <nav class="nav-links">
-                <a href="#">Home</a>
-                <div class="dropdown">
-                    <a href="#">Products <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </a>
-
-                    <!-- TODO: Add the links to navigate paticular page -->
-
-                    <div class="dropdown-content">
-                        <a href="/pages/productDisplayPage.html">Laptop</a>
-                        <a href="#">Desktop</a>
-                        <a href="#">Phones</a>
-                    </div>
-                </div>
-                <a href="#">About Us</a>
-                <a href="#">Contact Us</a>
-                <a href="#">Privacy Policy</a>
-
-
-
-                <div class="auth-buttons">
-                    <a href="/pages/loginPage.html" class="login-btn">Login</a>
-                    <a href="/pages/registrationPage.html" class="signup-btn">Register</a>
-                </div>
-
-                <div class="cart-icon">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBzdHJva2U9Im5hdnkiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMiI+PHBhdGggZD0iTTIgMmgzbDMgMTNoMTJhMiAyIDAgMCAwIDEuOS0xLjVsMi0xMCIvPjxjaXJjbGUgY3g9IjkiIGN5PSIyMSIgcj0iMSIvPjxjaXJjbGUgY3g9IjE5IiBjeT0iMjEiIHI9IjEiLz48L3N2Zz4"
-                        width="10px">
-                    <span class="cart-count">1</span>
-                </div>
-
-                <!-- <div class="after-register">
-                    <a href="/pages/profile.html" class="profile-btn">Profile</a>
-                    <a href="/pages/login.html" class="logout-btn" style="background-color: rgb(184, 130, 130);">Logout</a>
-                </div> -->
-
-
-
-            </nav>
-
-            <!-- Mobile Menu -->
-            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
         </div>
-
     </header>
 
-
-
-
-    <!-- HERO -->
-    <section class="hero">
-        <video autoplay muted loop playsinline class="hero-video">
-            <source src="https://www.chamacomputers.lk/vid/vid_sample_2.mp4" type="video/mp4">
-            Your browser does not support the video tag.
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero" id="home" >
+        <video autoplay muted loop playsinline class="hero-video" >
+            <source src="https://www.chamacomputers.lk/vid/vid_sample_2.mp4" type="video/mp4"  style="width: 100vh; height: 100vh; object-fit: cover;">
+             Your browser does not support the video tag.
         </video>
-
         <div class="hero-overlay"></div>
 
-        <div class="hero-left">
-            <div class="hero-content">
-                <h1>
-                    Next-Gen Tech,
-                    <span class="highlight"><br>
-                        <span id="changing-text">Laptops</span>
-                    </span>
-                </h1>
-                <p>
-                    Discover cutting-edge gadgets and devices
-                    crafted for the modern tech future.
-                </p>
-            </div>
+        <div class="hero-content">
+            <h1>Next-Gen Tech <span class="highlight">Devices</span></h1>
+            <p>Discover cutting-edge gadgets crafted for modern innovators</p>
 
             <div class="search-container">
-                <input type="text" placeholder="Search laptops, phones..."
-                    style="padding: 10px; width: 60%; border-radius: 5px; border: none;">
-                <button class="search-btn"
-                    style="padding: 10px 20px; background: #00d4ff; border: none; cursor: pointer;">
-                    Search
-                </button>
+                <input type="text" placeholder="Search laptops, phones, desktops...">
+                <button class="search-btn">Search</button>
             </div>
 
-            <div class="hero-tags" style="margin-top: 20px;">
-                <span class="tag">Free Shipping</span> |
-                <span class="tag">30-Day Returns</span> |
-                <span class="tag">Expert Support</span>
-            </div>
+            <!-- center the button and add a small gap between the button and the text -->
+            <div style="display: flex; justify-content: center; margin-top: 20px;">
+                 <button class="cta-btn"> Shop Now <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWFycm93LXJpZ2h0LWljb24gbHVjaWRlLWFycm93LXJpZ2h0Ij48cGF0aCBkPSJNNSAxMmgxNCIvPjxwYXRoIGQ9Im0xMiA1IDcgNy03IDciLz48L3N2Zz4=" alt="" style="filter: invert(3);"> </button>
+                 
 
-            <div class="btn-shop" style="margin-top: 30px;">
-                <button class="cta-btn"
-                    style="padding: 15px 40px; font-size: 1.2rem; background: #fff; color: #000; border: none; border-radius: 50px; cursor: pointer;">
-                    Shop Now
-                </button>
             </div>
+           
+           
         </div>
     </section>
 
-    <section class="categories">
-
-        <h2 class="category-title">Categories</h2>
-
-
-        <!-- TODO: Add links to navigate to the particular website -->
-        <div class="categories-list" > 
-
-            <a class="category-card" href="#">
+    <!-- ==================== CATEGORIES SECTION ==================== -->
+    <section id="categories">
+        <h2 class="section-title">Popular Categories</h2>
+        <div class="categories-grid">
+            <div class="category-card">
                 <img src="https://hoanghamobile.com/tin-tuc/wp-content/uploads/2025/01/laptop-gaming-asus-1.jpg" alt="Laptops">
-                <div class="overlay">
+                <div class="category-overlay">
                     <h3>Laptops</h3>
                 </div>
-            </a>
+            </div>
 
-            <a class="category-card" href="#">
-                <img src="/assets/devices/5925.jpg" alt="Accessories">
-                <div class="overlay">
+            <div class="category-card">
+                <img src="https://www.gizmochina.com/wp-content/uploads/2025/02/ASUS-India-2025-Laptops-Launch-1024x585-1.jpg" alt="Desktops">
+                <div class="category-overlay">
                     <h3>Desktops</h3>
                 </div>
-            </a>
+            </div>
 
-            <a class="category-card" href="#">
-                <img src="/assets/devices/samsungs25ultra.png" alt="Phones">
-                <div class="overlay">
+            <div class="category-card">
+                <img src="https://www.apple.com/v/iphone-17-pro/d/images/overview/welcome/hero__bdntboqignj6_xlarge.jpg" alt="Phones">
+                <div class="category-overlay">
                     <h3>Phones</h3>
                 </div>
-            </a>
-
-
-
-
-        </div>
-
-    </section>
-
-
-    <!-- PRODUCTS -->
-    <section class="products">
-        <div class="container">
-            <h1 class="section-title">Premium Tech Products</h1>
-
-            <div class="cards-grid" id="product-container">
-                <!-- JS inserts products -->
             </div>
         </div>
     </section>
 
+    <!-- ==================== PRODUCTS SECTION ==================== -->
+    <section id="products">
+        <h2 class="section-title">Premium Products</h2>
+        <div class="products-grid" id="product-container"></div>
+    </section>
 
-    <!-- PROMO BANNERS -->
-    <section class="promo-banners">
-
-        <div class="section-header">
-            <h1>Promotions & Offers</h1>
-            <p>Discover exclusive deals on the latest tech products</p><br>
-        </div>
-
-        <div class="banner-container">
-
-            <!-- TODO: Add links to navigate to the particular page based on the products -->
-
-            <a href="#" class="banner-card" id="main-banner">
-                <img src="https://media.emaxme.com/i/emax/100000355733_3">
-                <div class="banner-overlay">
-                    <h3>Powerful Gaming Laptops</h3>
-                    <p>Unleash Ultimate Performance</p>
+    <!-- ==================== PROMOTIONS SECTION ==================== -->
+    <section id="promotions">
+        <h2 class="section-title">Exclusive Promotions</h2>
+        <div class="promo-grid">
+            <div class="promo-card">
+                <img src="https://media.emaxme.com/i/emax/100000355733_3" alt="Gaming Laptops">
+                <div class="promo-overlay">
+                    <h3>Gaming Laptops</h3>
+                    <p>Unleash Performance | Limited Time Offer</p>
                 </div>
-            </a>
+            </div>
 
-            <a href="#" class="banner-card separate-banner-1" >
-                <img
-                    src="https://www.apple.com/v/iphone-17-pro/d/images/overview/welcome/hero__bdntboqignj6_xlarge.jpg">
-                <div class="banner-overlay">
+            <div class="promo-card">
+                <img src="https://www.apple.com/v/iphone-17-pro/d/images/overview/welcome/hero__bdntboqignj6_xlarge.jpg" alt="iPhone 17 Pro">
+                <div class="promo-overlay">
                     <h3>iPhone 17 Pro</h3>
-                    <p>Experience Innovation</p>
+                    <p>Experience Innovation | Up to 20% Off</p>
                 </div>
-            </a>
-
-            <a href="#" class="banner-card separate-banner-1">
-                <img
-                    src="https://www.gizmochina.com/wp-content/uploads/2025/02/ASUS-India-2025-Laptops-Launch-1024x585-1.jpg">
-                <div class="banner-overlay">
-                    <h3>ASUS New Lineup</h3>
-                    <p>Next Level Productivity</p>
-                </div>
-            </a>
-
-            
-
+            </div>
         </div>
-
     </section>
 
-
-    <!-- FOOTER -->
+    <!-- ==================== FOOTER ==================== -->
     <footer class="footer">
-        <div class="footer-container">
-
-            <!-- Column 1: About -->
-            <div class="footer-column">
-                <h3 class="footer-title">About TechHub</h3>
-                <p class="footer-text">Leading provider of cutting-edge technology and innovative gadgets for modern
-                    tech enthusiasts.</p>
-                <div class="social-links">
-                    <a href="#" class="social-icon" title="Facebook">f</a>
-                    <a href="#" class="social-icon" title="Twitter">𝕏</a>
-                    <a href="#" class="social-icon" title="LinkedIn">in</a>
-                    <a href="#" class="social-icon" title="Instagram">📷</a>
-                </div>
+        <div class="footer-content">
+            <div>
+                <h3>🚀 TechHub</h3>
+                <p>Your trusted destination for premium technology products. We deliver innovation and excellence.</p>
             </div>
 
-            <!-- Column 2: Quick Links -->
-            <div class="footer-column">
-                <h3 class="footer-title">Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#products">Products</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#privacy">Privacy Policy</a></li>
-
-                </ul>
+            <div>
+                <h3>Quick Links</h3>
+                <a href="#home">Home</a>
+                <a href="#products">Products</a>
+                <a href="#categories">Categories</a>
+                <a href="#promotions">Promotions</a>
             </div>
 
-            <!-- Column 3: Support -->
-            <div class="footer-column">
-                <h3 class="footer-title">Support</h3>
-                <ul class="footer-links">
-                    <li><a href="#contact">Contact Us</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#shipping">Shipping Info</a></li>
-                    <li><a href="#returns">Returns & Refunds</a></li>
-                </ul>
+            <div>
+                <h3>Support</h3>
+                <a href="#">FAQ</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Shipping Info</a>
+                <a href="#">Returns & Exchange</a>
             </div>
 
-            <!-- Column 4: Newsletter -->
-            <div class="footer-column">
-                <h3 class="footer-title">Newsletter</h3>
-                <p class="footer-text">Subscribe for exclusive deals and tech updates.</p>
-                <form class="newsletter-form" id="newsletterForm">
-                    <input type="email" placeholder="Enter your email" required>
-                    <button type="submit" class="subscribe-btn">Subscribe</button>
-                </form>
+            <div>
+                <h3>Newsletter</h3>
+                <p>Subscribe to get exclusive offers and updates</p>
+                <input type="email" class="newsletter-input" placeholder="Enter your email">
+                <button class="btn-subscribe">Subscribe</button>
             </div>
-
         </div>
 
-        <!-- Footer Bottom -->
         <div class="footer-bottom">
-            <div class="footer-bottom-content">
-                <p>&copy; 2026 TechHub. All rights reserved.</p>
-                <div class="footer-legal">
-                    <a href="#privacy">Privacy Policy</a>
-                    <span class="separator">|</span>
-                    <a href="#terms">Terms of Service</a>
-                    <span class="separator">|</span>
-                    <a href="#cookies">Cookie Settings</a>
-                </div>
-            </div>
+            © 2026 TechHub. All rights reserved. | Privacy Policy | Terms of Service
         </div>
-
     </footer>
 
+    <script>
+        // ==================== NAVIGATION TOGGLE ====================
+        function toggleMenu() {
+            const navCenter = document.querySelector('.nav-center');
+            navCenter.classList.toggle('active');
+        }
 
+        // Close menu when clicking on links
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-center').classList.remove('active');
+            });
+        });
 
+        // ==================== PRODUCTS DATA ====================
+        const products = [
+            {
+                id: 1,
+                name: "iPhone 15 Pro Max",
+                category: "Phone",
+                description: "6.7-inch Super Retina XDR display with ProMotion and Titanium build.",
+                price: "LKR 285,000",
+                image: "https://images.unsplash.com/photo-1592286927505-1def25115558?w=400&h=400&fit=crop"
+            },
+            {
+                id: 2,
+                name: "MacBook Pro 14\" M3",
+                category: "Laptop",
+                description: "The most advanced chips ever built for a personal computer.",
+                price: "LKR 450,000",
+                image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=400&fit=crop"
+            },
+            {
+                id: 3,
+                name: "ASUS ROG Strix G16",
+                category: "Computer",
+                description: "High-performance gaming desktop replacement with liquid cooling.",
+                price: "LKR 380,000",
+                image: "https://images.unsplash.com/photo-1588872657840-790ff3bde08c?w=400&h=400&fit=crop"
+            }
+        ];
 
+        const specs = [
+            { id: 1, productId: 1, specName: "Display", specValue: "6.7 inch OLED" },
+            { id: 2, productId: 1, specName: "Camera", specValue: "48MP Main" },
+            { id: 3, productId: 1, specName: "Battery", specValue: "95% Health" },
 
+            { id: 4, productId: 2, specName: "Display", specValue: "14.2 inch Liquid Retina" },
+            { id: 5, productId: 2, specName: "Processor", specValue: "Apple M3 Chip" },
+            { id: 6, productId: 2, specName: "RAM", specValue: "16GB Unified" },
 
+            { id: 8, productId: 3, specName: "Processor", specValue: "Intel i9-14900K" },
+            { id: 9, productId: 3, specName: "GPU", specValue: "NVIDIA RTX 4080" },
+            { id: 10, productId: 3, specName: "Cooling", specValue: "Liquid Cooling" }
+        ];
+
+        // ==================== RENDER PRODUCTS ====================
+        function renderProducts() {
+            const container = document.getElementById('product-container');
+            let productHTML = '';
+
+            products.forEach(product => {
+                const productSpecs = specs
+                    .filter(spec => 
+                        spec.productId === product.id &&
+                        ["Display", "Processor", "Camera"].includes(spec.specName)
+                    )
+                    .map(spec => `<div class="spec-item">${spec.specValue}</div>`)
+                    .join('');
+
+                productHTML += `
+                    <div class="product-card">
+                        <div class="product-image-wrapper">
+                            <img src="${product.image}" alt="${product.name}">
+                        </div>
+                        <div class="product-content">
+                            <div class="product-category">${product.category}</div>
+                            <h3 class="product-title">${product.name}</h3>
+                            <p class="product-description">${product.description}</p>
+                            <div class="specs">
+                                ${productSpecs}
+                            </div>
+                            <div class="product-footer">
+                                <span class="product-price">${product.price}</span>
+                                <button class="btn-add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = productHTML;
+        }
+
+        // ==================== CHANGING TEXT IN HERO ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+
+            // Add smooth scroll for buttons
+            document.querySelectorAll('.cta-btn, .btn-add-to-cart').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (this.classList.contains('cta-btn')) {
+                        document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // Add dropdown toggle for mobile
+            document.querySelectorAll('.dropdown').forEach(dropdown => {
+                const link = dropdown.querySelector('a');
+                link.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        dropdown.classList.toggle('active');
+                    }
+                });
+            });
+        });
+
+        // ==================== SCROLL ANIMATIONS ====================
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
+            } else {
+                navbar.style.boxShadow = 'var(--shadow-sm)';
+            }
+        });
+    </script>
 
 </body>
-
 </html>
