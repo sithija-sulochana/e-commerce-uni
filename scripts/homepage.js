@@ -18,7 +18,7 @@
                 name: "iPhone 15 Pro Max",
                 category: "Phone",
                 description: "6.7-inch Super Retina XDR display with ProMotion and Titanium build.",
-                price: "LKR 285,000",
+                price: "Rs.285,000",
                 image: "https://images.unsplash.com/photo-1592286927505-1def25115558?w=400&h=400&fit=crop"
             },
             {
@@ -26,7 +26,7 @@
                 name: "MacBook Pro 14\" M3",
                 category: "Laptop",
                 description: "The most advanced chips ever built for a personal computer.",
-                price: "LKR 450,000",
+                price: "Rs.450,000",
                 image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=400&fit=crop"
             },
             {
@@ -34,7 +34,7 @@
                 name: "ASUS ROG Strix G16",
                 category: "Computer",
                 description: "High-performance gaming desktop replacement with liquid cooling.",
-                price: "LKR 380,000",
+                price: "Rs.380,000",
                 image: "https://images.unsplash.com/photo-1588872657840-790ff3bde08c?w=400&h=400&fit=crop"
             }
         ];
@@ -96,13 +96,13 @@
             renderProducts();
 
             // Add smooth scroll for buttons
-            document.querySelectorAll('.cta-btn, .btn-add-to-cart').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    if (this.classList.contains('cta-btn')) {
-                        document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
-            });
+            // document.querySelectorAll('.cta-btn, .btn-add-to-cart').forEach(btn => {
+            //     btn.addEventListener('click', function() {
+            //         if (this.classList.contains('cta-btn')) {
+            //             document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+            //         }
+            //     });
+            // });
 
             // Add dropdown toggle for mobile
             document.querySelectorAll('.dropdown').forEach(dropdown => {

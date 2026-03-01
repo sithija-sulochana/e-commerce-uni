@@ -52,7 +52,7 @@ const navbarTemplate = `
                     <a href="/pages/productList.html">Products ▾</a>
                    
                 </div>
-                <a href="/pages/aboutPage.html">About</a>
+                <a href="/pages/AboutPage.html">About</a>
                 <a href="/pages/contactPage.html">Contact</a>
             </nav>
             <div class="btn-auth">
@@ -64,6 +64,8 @@ const navbarTemplate = `
     </div>
 </header>
 `;
+
+
 
 // Inject into the top of the body
 document.body.insertAdjacentHTML('afterbegin', navbarTemplate);

@@ -146,8 +146,10 @@
             font-weight: 700;
         }
 
-        .payment-methods {
+        .payment-method {
             display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
             gap: 16px;
             margin-top: 24px;
         }

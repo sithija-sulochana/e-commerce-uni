@@ -1,4 +1,4 @@
-// ** Get user details from URL parameters and populate the profile page
+
 document.addEventListener("DOMContentLoaded", function () {
     const params = new URLSearchParams(window.location.search);
 
@@ -138,8 +138,16 @@ const toggleEdit = () => {
 
 }
 
+// fetch user details from URL parameters and populate the profile page
+// const params = new URLSearchParams(window.location.search);
+// const fullname = params.get("fullname");
+// const email = params.get("email");
+// const phone = params.get("phone");
 
 
+// document.getElementById('display-name').textContent = fullname || "John Doe";
+// document.getElementById('display-email').innerHTML = `<i class="fa-solid fa-envelope"></i> ${email || "No email provided"}`;
+// document.getElementById('display-phone').innerHTML = `<i class="fa-solid fa-phone"></i> ${phone || "No phone number provided"}`;
 
 
 window.onload = init;

@@ -2,7 +2,7 @@ let cartCount = 0;
 const productsItems = {
   id: 1,
   name: "ASUS TUF A16 FA607M Ryzen 7 RTX 4050",
-  price: 1299.99,
+  price: 389000,
   reviews: 248,
   category: "Gaming Laptop",
   brand: "ASUS",
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         </p>
 
         <div class="price-section">
-          <span class="price" id="productPrice">$${productsItems.price.toFixed(2)}</span>
+          <span class="price" id="productPrice">Rs.${productsItems.price.toLocaleString()}</span>
           <span class="discount">Save 15% Today</span>
         </div>
 

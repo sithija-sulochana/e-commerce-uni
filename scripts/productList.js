@@ -3,7 +3,7 @@ const products = [
         id: 8,
         name: 'MacBook Pro 14"',
         category: 'Laptop',
-        price: 1999,
+        price: 599000,
         brand: 'Apple',
         description: 'Powerful M3 chip and all-day battery life.',
         specs: ['16GB RAM', '512GB SSD'],
@@ -13,7 +13,7 @@ const products = [
         id: 7,
         name: 'Dell XPS 13',
         category: 'Laptop',
-        price: 1299,
+        price: 389000,
         brand: 'Dell',
         description: 'Slim premium ultrabook for daily productivity.',
         specs: ['8GB RAM', '256GB SSD'],
@@ -23,7 +23,7 @@ const products = [
         id: 6,
         name: 'ASUS TUF Gaming PC',
         category: 'Computer',
-        price: 1499,
+        price: 449000,
         brand: 'ASUS',
         description: 'High performance gaming desktop with RTX graphics.',
         specs: ['32GB RAM', '1TB SSD'],
@@ -33,7 +33,7 @@ const products = [
         id: 5,
         name: 'Galaxy S24',
         category: 'Phone',
-        price: 999,
+        price: 299000,
         brand: 'Samsung',
         description: 'Flagship Android phone with pro-level camera.',
         specs: ['120Hz', '5G'],
@@ -43,7 +43,7 @@ const products = [
         id: 4,
         name: 'iPhone 15 Pro',
         category: 'Phone',
-        price: 1199,
+        price: 359000,
         brand: 'Apple',
         description: 'Titanium design and lightning-fast performance.',
         specs: ['A17 Pro', '256GB'],
@@ -53,7 +53,7 @@ const products = [
         id: 3,
         name: 'HP Pavilion Desktop',
         category: 'Computer',
-        price: 849,
+        price: 254000,
         brand: 'HP',
         description: 'Reliable home and office desktop setup.',
         specs: ['16GB RAM', '512GB SSD'],
@@ -63,10 +63,10 @@ const products = [
 ];
 
 const priceRanges = [
-    { label: 'Under $500', min: 0, max: 500 },
-    { label: '$500 - $1000', min: 500, max: 1000 },
-    { label: '$1000 - $1500', min: 1000, max: 1500 },
-    { label: 'Over $1500', min: 1500, max: Infinity }
+    { label: 'Under Rs.150,000', min: 0, max: 150000 },
+    { label: 'Rs.150,000 - Rs.300,000', min: 150000, max: 300000 },
+    { label: 'Rs.300,000 - Rs.450,000', min: 300000, max: 450000 },
+    { label: 'Over Rs.450,000', min: 450000, max: Infinity }
 ];
 
 const brandImages = [
@@ -141,6 +141,7 @@ function applyFilters() {
     const selectedCategories = getSelectedValues('#categoryFilters input:checked');
     const selectedPriceIndexes = getSelectedValues('#priceFilters input:checked').map(Number);
     const selectedPriceRanges = selectedPriceIndexes.map((index) => priceRanges[index]);
+
     const selectedBrands = [...document.querySelectorAll('#brandFilters .brand-logo.active')]
     .map(button => button.dataset.brand);
 
@@ -164,6 +165,7 @@ function filterByBrand(brand) {
     console.log('Filtered by brand:', brand, filteredProducts);
     applySorting();
 }
+
 
 function applySorting() {
     const sortType = sortSelectEl.value;
@@ -189,7 +191,10 @@ function renderProducts() {
     }
 
     productsGridEl.innerHTML = filteredProducts.map((product) => `
+
+    <a href="/pages/productDetailPage.html?productId=${product.id}" class="product-card" style="text-decoration:none;color:inherit;">
             <article class="product-card">
+            
                 <div class="product-image-wrapper">
                     <img src="${product.image}" alt="${product.name}">
                 </div>
@@ -204,11 +209,12 @@ function renderProducts() {
                     </div>
 
                     <div class="product-footer">
-                        <span class="product-price">$${product.price.toLocaleString()}</span>
+                        <span class="product-price">Rs.${product.price.toLocaleString()}</span>
                         <button class="btn-add" type="button" data-product-name="${product.name}">Add to Cart</button>
                     </div>
                 </div>
             </article>
+    </a>
         `).join('');
 }
 
@@ -252,4 +258,28 @@ document.addEventListener('DOMContentLoaded', () => {
     initFilters();
     attachEvents();
     applySorting();
+});
+
+
+// When clicking on a particular product, show the related filters and sorting options, and hide them when navigating away from the product list page. This can be achieved by checking the current URL and conditionally rendering the filters and sorting elements based on whether the user is on the product list page or not.
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    categoryFiltersEl.addEventListener('click', function (e) {
+        const productContainer = document.getElementById('product-container');
+        const filterSidebar = document.getElementById('filterSidebar');
+        if (e.target.tagName === 'Laptop'.toLocaleLowerCase()) {
+            // If the user clicks on the "Laptop" category, show the filters and sorting options
+            filterSidebar.innerHTML = `
+            <div class="filter-section">
+				<h4>Category</h4>
+				<div id="categoryFilters" class="filter-group"></div>
+			</div>
+            `;
+           
+
+        }
+});
+
+
 });

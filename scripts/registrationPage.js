@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
             authButtons.innerHTML = `
                 <a href="/pages/profile.html" 
    class="profile-btn" 
-   style="display: inline-flex; align-items: center; gap: 6px; margin-right: 15px; font-weight: 600; color: #333; text-decoration: none; padding: 8px 14px; border-radius: 10px; background: #f1f1f1;">
+   style="display: inline-flex; align-items: center; gap: 6px; margin-right: 15px; font-weight: 600; color: #333; text-decoration: none; padding: 8px 14px; border-radius: 10px; ">
     <i class="fas fa-user"></i>
-    Profile
+    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXVzZXItcm91bmQtaWNvbiBsdWNpZGUtdXNlci1yb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSI4IiByPSI1Ii8+PHBhdGggZD0iTTIwIDIxYTggOCAwIDAgMC0xNiAwIi8+PC9zdmc+"/>
 </a>
 
 
