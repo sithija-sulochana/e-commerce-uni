@@ -346,3 +346,27 @@ function addToCart(id, name, image, price, category = 'Product') {
     // Redirect to cart page
     window.location.href = '/pages/ViewCartPage.html';
 }
+
+
+
+// search product and display product 
+
+function searchProducts() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+
+    if (!input) {
+        filteredProducts = [...products];
+        renderProducts();
+        return;
+    }
+
+    filteredProducts = products.filter(product => {
+        return product.name.toLowerCase().includes(input) ||
+               product.category.toLowerCase().includes(input) ||
+               product.brand.toLowerCase().includes(input);
+    });
+
+    renderProducts();
+}
+
+document.getElementById('searchInput').addEventListener('input', searchProducts);

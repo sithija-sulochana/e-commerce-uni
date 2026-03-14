@@ -94,16 +94,20 @@ function setupOrderHistory() {
     if (searchInput) {
         searchInput.addEventListener('input', () => {
             const query = searchInput.value.toLowerCase().trim();
+
+            if (!query) {
+                renderOrders(orderHistory, orderGrid);
+                return;
+            }
+
             const filtered = orderHistory.filter((order) => {
-                const itemNames = (order.items || [])
+                const productNames = (order.items || [])
                     .map((item) => (item.name || '').toLowerCase())
                     .join(' ');
 
-                return (
-                    String(order.id).toLowerCase().includes(query) ||
-                    String(order.status).toLowerCase().includes(query) ||
-                    itemNames.includes(query)
-                );
+                const orderDate = String(order.date || '').toLowerCase();
+
+                return productNames.includes(query) || orderDate.includes(query);
             });
 
             renderOrders(filtered, orderGrid);
@@ -170,8 +174,10 @@ function renderOrders(orders, container) {
             .slice(0, 2)
             .map((item) => item.name)
             .filter(Boolean)
-            .join(', ');
+            .join('<br/> ');
 
+
+            console.log(order.items.slice(0,2).map((item) => item.name))
             // function to get color based on status of order
         function ColorPicker() {
 
@@ -185,7 +191,7 @@ function renderOrders(orders, container) {
 
 
         return `
-            <div class="order-card" style="animation-delay:${index * 60}ms">
+            <div class="order-card" style="animation-delay:${index * 60}ms; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; background: #ffffff; box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);">
                 <img src = ${order.items[0]?.image || 'https://via.placeholder.com/150'} alt="Product Image" class="order-image" style="object-fit: cover; border-radius: 8px; width: 100%; height: 150px;">
                 <h4 class="order-id" style="background: linear-gradient(to right, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem; font-size: 1.1rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 0.5rem;">Order #${order.id}</h4>
                 <div class="order-details" style="font-size: 0.9rem; color: #475569; display: flex; flex-direction: column; gap: 6px;">
@@ -193,7 +199,7 @@ function renderOrders(orders, container) {
                 <p class="order-line"><strong>Items:</strong> ${order.itemCount}</p>
                 <p class="order-line"><strong>Total:</strong> Rs.${order.totalPrice.toLocaleString()}</p>
                 <p class="order-line"><strong>Status:</strong> <span class="status-pill" style="background: ${ColorPicker() || '#e2e8f0'}; color: ${colorForStatus[0][order.status] ? '#ffffff' : '#475569'};">${capitalize(order.status)}</span></p>
-                <p class="order-products" style="margin: 0;color: #475569;background: #f8fafc; padding: 0.5rem; border-radius: 6px;"><strong>Products:</strong> ${itemPreview || 'View order for details'}</p>
+                <p class="order-products" style="margin: 0; color: #334155; background: linear-gradient(135deg, #f8fafc, #eef2ff); padding: 0.65rem 0.75rem; border-radius: 10px; border: 1px solid #e2e8f0; border-left: 4px solid #6366f1; font-size: 0.86rem; line-height: 1.45; box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06); margin-top: 0.5rem;"><strong style="color: #1e293b; font-weight: 700;">Products:</strong><br/> ${itemPreview || 'View order for details'}</p>
                </div>
                 </div>
         `;
