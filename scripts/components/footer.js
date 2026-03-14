@@ -125,7 +125,7 @@ const footerTemplate = `
         <div>
             <h3>Support</h3>
             <a href="/pages/faq.html">FAQ</a>
-            <a href="/pages/contact.html">Contact Us</a>
+            <a href="/pages/ContactPage.html">Contact Us</a>
             <a href="/pages/shipping.html">Shipping Info</a>
             <a href="/pages/returns.html">Returns & Exchange</a>
         </div>
@@ -142,7 +142,7 @@ const footerTemplate = `
 
     <div class="footer-bottom">
         &copy; 2026 TechHub. All rights reserved. | 
-        <a href="#" style="display:inline; margin:0;">Privacy Policy</a> | 
+        <a href="/pages/PrivacyPolicy.html" style="display:inline; margin:0;">Privacy Policy</a> | 
         <a href="#" style="display:inline; margin:0;">Terms of Service</a>
     </div>
 </footer>

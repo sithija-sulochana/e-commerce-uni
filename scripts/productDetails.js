@@ -19,7 +19,8 @@ const productsItems = {
     keyboard: "RGB Backlit",
     battery: "48Wh",
     weight: "2.3 kg",
-    operatingSystem: "Windows 11 Home"
+    operatingSystem: "Windows 11 Home",
+    
 
   }
 };
@@ -59,7 +60,7 @@ document.addEventListener("DOMContentLoaded",()=>{
           <span class="discount">Save 15% Today</span>
         </div>
 
-        <h3 style="margin:16px 0 8px;font-size:0.95rem;color:var(--text)">Key Features</h3>
+        <h3 class="features-heading">Key Features</h3>
         <ul class="features">
            
             <li> ${productsItems.specs.operatingSystem} </li>
@@ -70,10 +71,10 @@ document.addEventListener("DOMContentLoaded",()=>{
 
         <div class="buy-section">
           <div class="qty-group">
-            <label for="qty" style="font-weight:600;color:var(--text)">Qty:</label>
+            <label for="qty" class="qty-label">Qty:</label>
             <input type="number" id="qty" class="qty-input" min="1" max="10" value="1" />
           </div>
-          <button class="btn btn-primary" id="addToCartBtn">Add to Cart</button>
+          <button class="btn btn-primary" id="addToCartBtn" onclick="addToCart()">Add to Cart</button>
           <button class="btn btn-secondary" id="wishlistBtn">❤ Wishlist</button>
         </div>
       </div>
@@ -82,6 +83,7 @@ document.addEventListener("DOMContentLoaded",()=>{
          `;
    }
 })
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -105,10 +107,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 function addToCart(){
-    const qty=parseInt(document.getElementById('qty').value);
-    cartCount+=qty;document.getElementById('cartBadge').textContent=cartCount;
-    const msg=`Added ${qty} item(s) to cart!`;alert(msg);
-    console.log(`[v0] Cart updated: ${cartCount} items`);
+    const qty = parseInt(document.getElementById('qty').value);
+    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    console.log("Current cart items before adding:", cartItems);
+    
+    const existingItem = cartItems.find(item => item.id === productsItems.id);
+    
+    if (existingItem) {
+        existingItem.quantity += qty;
+        
+    } else {
+        cartItems.push({
+            id: productsItems.id,
+            name: productsItems.name,
+            image: productsItems.image,
+            price: productsItems.price,
+            category: productsItems.category,
+            quantity: qty,
+            discount: 15,
+        });
+
+    }
+
+
+    
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    cartCount += qty;
+
+    alert(`Added ${qty} item(s) to cart!`);
+    window.location.href = '/pages/ViewCartPage.html';
 }
 function selectPayment(method){
     alert(`Selected payment method: ${method.replace('-',' ').toUpperCase()}`);
@@ -123,3 +150,5 @@ document.addEventListener('DOMContentLoaded',()=>{console.log("[v0] Product Deta
 });
 
 // Add details specification table by using the mapped objects
+
+

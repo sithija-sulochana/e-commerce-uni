@@ -1,163 +1,217 @@
+document.addEventListener('DOMContentLoaded', () => {
+    initializeProfile();
+    setupEditActions();
+    setupOrderHistory();
+});
 
-document.addEventListener("DOMContentLoaded", function () {
-    const params = new URLSearchParams(window.location.search);
+function initializeProfile() {
+    const user = JSON.parse(localStorage.getItem('user')) || {};
+    const fullname = user.fullname || 'John Doe';
+    const email = user.email || 'john.doe@example.com';
 
-    const fullname = params.get("fullname");
-    const email = params.get("email");
-    const phone = params.get("phone");
-    const isLoggedIn = params.get("loggedin") === "true";
-
-    // Update Header Display
     const displayName = document.getElementById('display-name');
     const displayEmail = document.getElementById('display-email');
-
-    if (fullname && displayName) {
-        displayName.textContent = fullname;
-    }
-    if (email && displayEmail) {
-        displayEmail.innerHTML = `<i class="fa-solid fa-envelope"></i> ${email}`;
-    }
-
-    // Populate Form Input Fields (if logged in)
-    if (isLoggedIn) {
-        if (fullname) document.getElementById('name').value = fullname;
-        if (email) document.getElementById('email').value = email;
-       
-    }
-
-    // Initialize Profile Pic if needed
     const profilePic = document.getElementById('profile-pic');
-    if (profilePic && fullname) {
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+
+    if (displayName) displayName.textContent = fullname;
+    if (displayEmail) displayEmail.innerHTML = `<i class="fa-solid fa-envelope"></i> ${email}`;
+
+    if (nameInput) nameInput.value = fullname;
+    if (emailInput) emailInput.value = email;
+
+    if (profilePic) {
         profilePic.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(fullname)}&background=2563eb&color=fff`;
     }
+}
 
-    // Set up standard button listeners
+function setupEditActions() {
     const editBtn = document.getElementById('edit-profile-btn');
+    const cancelBtn = document.getElementById('cancel-edit');
+    const form = document.getElementById('edit-form');
+
     if (editBtn) {
         editBtn.addEventListener('click', toggleEditSection);
     }
 
-    setupImageUpload();
-});
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', toggleEditSection);
+    }
 
-// ** Image upload logic for the new profile-pic ID
-function setupImageUpload() {
-    const uploadInput = document.getElementById('upload-profile'); // Add this ID to your camera button input
+    if (form) {
+        form.addEventListener('submit', handleProfileSave);
+    }
+}
+
+function toggleEditSection() {
+    const editSection = document.getElementById('edit-section');
+    if (!editSection) return;
+
+    const isActive = editSection.classList.toggle('edit-section-active');
+    if (isActive) {
+        editSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+}
+
+function handleProfileSave(event) {
+    event.preventDefault();
+
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+
+    const fullname = nameInput ? nameInput.value.trim() : '';
+    const email = emailInput ? emailInput.value.trim() : '';
+
+    const user = JSON.parse(localStorage.getItem('user')) || {};
+    user.fullname = fullname;
+    user.email = email;
+    localStorage.setItem('user', JSON.stringify(user));
+
+    const displayName = document.getElementById('display-name');
+    const displayEmail = document.getElementById('display-email');
     const profilePic = document.getElementById('profile-pic');
 
-    if (uploadInput && profilePic) {
-        uploadInput.addEventListener('change', function () {
-            const file = this.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => profilePic.src = e.target.result;
-                reader.readAsDataURL(file);
-            }
+    if (displayName) displayName.textContent = fullname || 'John Doe';
+    if (displayEmail) displayEmail.innerHTML = `<i class="fa-solid fa-envelope"></i> ${email || 'john.doe@example.com'}`;
+
+    if (profilePic) {
+        profilePic.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(fullname || 'John Doe')}&background=2563eb&color=fff`;
+    }
+
+    toggleEditSection();
+}
+
+function setupOrderHistory() {
+    const orderGrid = document.getElementById('orderGrid');
+    const searchInput = document.getElementById('search-order');
+
+    if (!orderGrid) return;
+
+    const orderHistory = getOrderHistoryFromStorage();
+    renderOrders(orderHistory, orderGrid);
+
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase().trim();
+            const filtered = orderHistory.filter((order) => {
+                const itemNames = (order.items || [])
+                    .map((item) => (item.name || '').toLowerCase())
+                    .join(' ');
+
+                return (
+                    String(order.id).toLowerCase().includes(query) ||
+                    String(order.status).toLowerCase().includes(query) ||
+                    itemNames.includes(query)
+                );
+            });
+
+            renderOrders(filtered, orderGrid);
         });
     }
 }
 
-// ** Logic to show/hide the edit section
-function toggleEditSection() {
-    const editSection = document.getElementById('edit-section');
-    if (editSection) {
-        const isActive = editSection.classList.toggle('edit-section-active');
-        if (isActive) {
-            editSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
+function getOrderHistoryFromStorage() {
+    const summary = JSON.parse(localStorage.getItem('cardSummery'));
+
+    if (!summary) return [];
+
+    const rawOrders = Array.isArray(summary) ? summary : [summary];
+
+    return rawOrders.map((order) => {
+        const orderId = order.id || Date.now();
+        const status = order.status || 'pending';
+        const items = Array.isArray(order.items) ? order.items : [];
+        const itemCount = items.reduce((count, item) => count + (item.quantity || 0), 0);
+        const totalPrice = Number(order.totalPrice || 0);
+
+        return {
+            id: orderId,
+            status,
+            items,
+            itemCount,
+            totalPrice,
+            date: formatOrderDate(orderId)
+        };
+    }).sort((a, b) => Number(b.id) - Number(a.id));
+}
+
+function formatOrderDate(orderId) {
+    const timestamp = Number(orderId);
+    if (Number.isNaN(timestamp)) return 'N/A';
+
+    const date = new Date(timestamp);
+    if (Number.isNaN(date.getTime())) return 'N/A';
+
+    return date.toLocaleDateString();
+}
+
+function renderOrders(orders, container) {
+    if (!orders.length) {
+        container.innerHTML = `
+            <div class="order-card order-empty reveal">
+                <h4>No order history found</h4>
+                <p>Complete checkout to store your cart summary and view it here.</p>
+            </div>
+        `;
+        return;
     }
-}
 
-// ** Redirect/Save logic
-function saveProfile() {
-    const fullname = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
+    const colorForStatus = [{
+        pending: '#fbbf24',
+        processing: '#3b82f6',
+        shipped: '#14b8a6',
+        delivered: '#22c55e',
+        cancelled: '#ef4444'
+    }]
 
-    // Construct URL with new values to persist "state" back to homepage
-    const query = `?loggedin=true&fullname=${encodeURIComponent(fullname)}&email=${encodeURIComponent(email)}`;
-    window.location.href = `/pages/homepage.html${query}`;
-}
+    container.innerHTML = orders.map((order, index) => {
+        const itemPreview = order.items
+            .slice(0, 2)
+            .map((item) => item.name)
+            .filter(Boolean)
+            .join(', ');
 
-function logout() {
-    window.location.href = '/pages/homepage.html';
-}
+            // function to get color based on status of order
+        function ColorPicker() {
 
-function init() {
-    const orderList = [
-    { id: 'ORD12345', date: '2024-05-01', status: 'Delivered', itemPrice: 'Rs.401,000', itemImage: "https://images.unsplash.com/photo-1593642632823-8f785bf67e45?w=500&q=80", itemName: 'Asus TUF Gaming F15' },
-    { id: 'ORD12346', date: '2024-05-15', status: 'Processing', itemPrice: 'Rs.150,000', itemImage: "https://images.unsplash.com/photo-1618424181497-157f25b6ddd5?w=500&q=80", itemName: 'Lenovo Legion 5 Pro' },
-    { id: 'ORD12347', date: '2024-06-01', status: 'Shipped', itemPrice: 'Rs.200,000', itemImage: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80", itemName: 'Dell G15 Gaming Laptop' }
-];
-
-const orderGrid = document.getElementById('orderGrid');
-
-// Render Cards
-orderGrid.innerHTML = orderList.map(order => `
-                <div class="order-card">
-                    <img src="${order.itemImage}" alt="${order.itemName}" class="order-img">
-                    <div class="order-info">
-                        <span class="status-badge status-${order.status.toLowerCase()}">${order.status}</span>
-                        <h3 style="margin-top: 8px;">${order.itemName}</h3>
-                        <p style="color: var(--muted-color); font-size: 0.85rem;">Ordered on ${order.date}</p>
-                        <div class="order-meta">
-                            <span class="price">${order.itemPrice}</span>
-                            <p style="font-size: 0.8rem; color: var(--muted-color)">ID: ${order.id}</p>
-                        </div>
-                    </div>
-                    <button class="btn-view">View Details</button>
-                </div>
-            `).join('');
-
-// --- Scroll Reveal Logic ---
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.classList.add('reveal');
-            }, index * 150); // Staggered delay
+            let result = colorForStatus.map((statusObj) => {
+                let color = '';
+                let resultColor = order.status == 'pending' ? color = statusObj.pending : order.status == 'processing' ? color = statusObj.processing : order.status == 'shipped' ? color = statusObj.shipped : order.status == 'delivered' ? color = statusObj.delivered : order.status == 'cancelled' ? color = statusObj.cancelled : color = '#e2e8f0';
+                return color;
+            })
+            return result;
         }
+
+
+        return `
+            <div class="order-card" style="animation-delay:${index * 60}ms">
+                <img src = ${order.items[0]?.image || 'https://via.placeholder.com/150'} alt="Product Image" class="order-image" style="object-fit: cover; border-radius: 8px; width: 100%; height: 150px;">
+                <h4 class="order-id" style="background: linear-gradient(to right, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem; font-size: 1.1rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 0.5rem;">Order #${order.id}</h4>
+                <div class="order-details" style="font-size: 0.9rem; color: #475569; display: flex; flex-direction: column; gap: 6px;">
+                <p class="order-line" style=""><strong>Date:</strong> ${order.date}</p>
+                <p class="order-line"><strong>Items:</strong> ${order.itemCount}</p>
+                <p class="order-line"><strong>Total:</strong> Rs.${order.totalPrice.toLocaleString()}</p>
+                <p class="order-line"><strong>Status:</strong> <span class="status-pill" style="background: ${ColorPicker() || '#e2e8f0'}; color: ${colorForStatus[0][order.status] ? '#ffffff' : '#475569'};">${capitalize(order.status)}</span></p>
+                <p class="order-products" style="margin: 0;color: #475569;background: #f8fafc; padding: 0.5rem; border-radius: 6px;"><strong>Products:</strong> ${itemPreview || 'View order for details'}</p>
+               </div>
+                </div>
+        `;
+
+    }).join('');
+
+
+
+
+
+    requestAnimationFrame(() => {
+        document.querySelectorAll('.order-card').forEach((card) => {
+            card.classList.add('reveal');
+        });
     });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.order-card').forEach(card => observer.observe(card));
-
-// --- Profile Logic ---
-const profilePic = document.getElementById('profile-pic');
-profilePic.src = 'https://ui-avatars.com/api/?name=John+Doe&background=2563eb&color=fff';
-
-// --- Toggle Logic ---
-const editBtn = document.getElementById('edit-profile-btn');
-const editSection = document.getElementById('edit-section');
-const toggleEdit = () => {
-    const isActive = editSection.classList.toggle('edit-section-active');
-    if (isActive) editSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-};
-
-
-
-
 }
 
-// fetch user details from URL parameters and populate the profile page
-// const params = new URLSearchParams(window.location.search);
-// const fullname = params.get("fullname");
-// const email = params.get("email");
-// const phone = params.get("phone");
-
-
-// document.getElementById('display-name').textContent = fullname || "John Doe";
-// document.getElementById('display-email').innerHTML = `<i class="fa-solid fa-envelope"></i> ${email || "No email provided"}`;
-// document.getElementById('display-phone').innerHTML = `<i class="fa-solid fa-phone"></i> ${phone || "No phone number provided"}`;
-
-
-window.onload = init;
-
-editBtn.addEventListener('click', toggleEdit);
-document.getElementById('cancel-edit').addEventListener('click', toggleEdit);
-
-document.getElementById('edit-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    document.getElementById('display-name').textContent = document.getElementById('name').value;
-    document.getElementById('display-email').innerHTML = `<i class="fa-solid fa-envelope"></i> ${document.getElementById('email').value}`;
-    toggleEdit();
-});
+function capitalize(value) {
+    const text = String(value || 'pending');
+    return text.charAt(0).toUpperCase() + text.slice(1);
+}

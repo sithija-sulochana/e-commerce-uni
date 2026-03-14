@@ -149,6 +149,83 @@
             border-radius: 16px;
         }
 
+        /* Container Grid */
+#orderGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem 0;
+}
+
+/* The Order Card */
+.order-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    opacity: 0; /* Hidden by default for the 'reveal' animation */
+    transform: translateY(20px);
+}
+
+.order-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Animation Class triggered by JS */
+.order-card.reveal {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Typography */
+.order-id {
+    color: #1e293b;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 0.5rem;
+}
+
+.order-line {
+    font-size: 0.95rem;
+    color: #475569;
+    margin: 0.5rem 0;
+}
+
+.order-products {
+    font-size: 0.85rem;
+    color: #64748b;
+    font-style: italic;
+    margin-top: 1rem;
+    background: #f8fafc;
+    padding: 0.5rem;
+    border-radius: 6px;
+}
+
+/* Status Pill */
+.status-pill {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    background: #e2e8f0; /* Default background */
+    color: #475569;
+}
+
+/* Empty State Styling */
+.order-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem;
+    background: #f8fafc;
+    border: 2px dashed #cbd5e1;
+}
      
         .edit-section-active .form-group {
 

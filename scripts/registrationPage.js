@@ -1,32 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-   // Set user credentials to the console (for testing purposes)
- 
-  
-   // id="logoutBtn" class="btn btn-logout"
-    
-    // --- Change the authentication buttons once finished the registration ---
-    const urlParams = new URLSearchParams(window.location.search);
-    const userState = urlParams.get('loggedin');
+   // Check login state from localStorage
+    const user = JSON.parse(localStorage.getItem('user'));
 
-    if (userState === 'true') {
+    if (user && user.isLoggedIn) {
         const authButtons = document.querySelector('.btn-auth');
         if (authButtons) {
             authButtons.innerHTML = `
-                <a href="/pages/profile.html" 
-   class="profile-btn" 
-   style="display: inline-flex; align-items: center; gap: 6px; margin-right: 15px; font-weight: 600; color: #333; text-decoration: none; padding: 8px 14px; border-radius: 10px; ">
-    <i class="fas fa-user"></i>
-    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXVzZXItcm91bmQtaWNvbiBsdWNpZGUtdXNlci1yb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSI4IiByPSI1Ii8+PHBhdGggZD0iTTIwIDIxYTggOCAwIDAgMC0xNiAwIi8+PC9zdmc+"/>
-</a>
-
-
-<a href="/pages/homepage.html" 
-   id="logoutLink" 
-   style="display: inline-flex; align-items: center; gap: 6px; background-color: #e74c3c; color: white; padding: 8px 16px; border-radius: 10px; text-decoration: none; font-weight: 600;">
-    <i class="fas fa-sign-out-alt"></i>
-    Logout
-</a>
+                <a href="/pages/ViewCartPage.html" class="btn-login">🛒 Cart</a>
+        <a href="/pages/profile.html" class="btn-login">Profile</a>
+        <a href="#" class="btn-register" onclick="localStorage.removeItem('user'); window.location.href='/pages/homepage.html';">Logout</a>
             `;
         }
     }
@@ -82,11 +65,24 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             if (isValid) {
+                // Store user data in localStorage
+                localStorage.setItem('user', JSON.stringify({
+                    isLoggedIn: true,
+                    fullname: fullname.value,
+                    email: email.value,
+                    password: password.value,
+                    phone: phone.value
+                }));
+                
                 alert('Account created successfully!');
-                // Redirect to homepage with the login flag
-
-                window.location.href = `/pages/homepage.html?loggedin=true&fullname=${encodeURIComponent(fullname.value)}&email=${encodeURIComponent(email.value)}&phone=${encodeURIComponent(phone.value)}`;
-               // window.location.href = `/pages/profile.html?loggedin=true&fullname=${encodeURIComponent(fullname.value)}&email=${encodeURIComponent(email.value)}`;
+                window.location.href = '/pages/homepage.html';
+                
+                localStorage.setItem('currentUser', JSON.stringify({
+                    isLoggedIn: false,
+                    fullname: fullname.value,
+                    password: password.value,
+                    email: email.value,
+                }));
 
               
               
@@ -122,17 +118,11 @@ function clearErrors() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+    const user = JSON.parse(localStorage.getItem('user'));
 
-    const params = new URLSearchParams(window.location.search);
-
-    const fullname = params.get("fullname");
-    const email = params.get("email");
-
-    if (fullname && email) {
-       console.log("User Full Name:", fullname);
-       console.log("User Email:", email);
-    } else {
-
+    if (user && user.fullname && user.email) {
+       console.log("User Full Name:", user.fullname);
+       console.log("User Email:", user.email);
     }
 });
 

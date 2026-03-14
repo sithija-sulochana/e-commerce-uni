@@ -96,13 +96,13 @@
             renderProducts();
 
             // Add smooth scroll for buttons
-            // document.querySelectorAll('.cta-btn, .btn-add-to-cart').forEach(btn => {
-            //     btn.addEventListener('click', function() {
-            //         if (this.classList.contains('cta-btn')) {
-            //             document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
-            //         }
-            //     });
-            // });
+            document.querySelectorAll('.cta-btn, .btn-add-to-cart').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (this.classList.contains('cta-btn')) {
+                        document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
 
             // Add dropdown toggle for mobile
             document.querySelectorAll('.dropdown').forEach(dropdown => {

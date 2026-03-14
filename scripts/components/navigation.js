@@ -53,7 +53,7 @@ const navbarTemplate = `
                    
                 </div>
                 <a href="/pages/AboutPage.html">About</a>
-                <a href="/pages/contactPage.html">Contact</a>
+                <a href="/pages/ContactPage.html">Contact</a>
             </nav>
             <div class="btn-auth">
                 <a href="/pages/loginPage.html" class="btn-login">Login</a>
@@ -69,6 +69,19 @@ const navbarTemplate = `
 
 // Inject into the top of the body
 document.body.insertAdjacentHTML('afterbegin', navbarTemplate);
+
+// Check login state and update auth buttons
+const user = JSON.parse(localStorage.getItem('user'));
+const authButtons = document.querySelector('.btn-auth');
+
+if (user && user.isLoggedIn && authButtons) {
+    authButtons.innerHTML = `
+        <a href="/pages/ViewCartPage.html" class="btn-login">🛒 Cart</a>
+        <a href="/pages/profile.html" class="btn-login">Profile</a>
+        <a href="#" class="btn-register" onclick="localStorage.removeItem('user'); window.location.href='/pages/homepage.html';">Logout</a>
+    `;
+}
+
 
 // Mobile Menu Logic
 const menuToggle = document.getElementById('menuToggle');

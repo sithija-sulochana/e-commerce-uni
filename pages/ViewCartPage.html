@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechHub | Shopping Cart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="/scripts/ViewCardPage.js"></script>
+    <link rel="stylesheet" href="/styles/ViewCardPage.css">
+</head>
+<body>
+    <script src="/scripts/components/navigation.js"></script>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Shopping <span>Cart</span></h1>
+        </div>
+
+        <div class="cart-layout">
+            <!-- Cart Items (Dynamic) -->
+            <div class="cart-items" id="cart-items-container">
+                <!-- Cart items will be loaded dynamically from localStorage -->
+            </div>
+
+            <!-- Cart Summary -->
+            <div class="cart-summary" id="cart-summary-container">
+                <h2>Order Summary</h2>
+                <div class="summary-row">
+                    <span id="item-count">Subtotal (0 items)</span>
+                    <span id="cart-subtotal">Rs.0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span>Free</span>
+                </div>
+                <div class="summary-row">
+                    <span>Total</span>
+                    <span id="cart-total">Rs.0</span>
+                </div>
+                <button class="checkout-btn" id="checkout-btn" onclick="setItems()">Proceed to Checkout</button>
+                <a href="/pages/productList.html" class="continue-shopping">← Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/scripts/components/footer.js"></script>
+</body>
+</html>

@@ -192,7 +192,7 @@ function renderProducts() {
 
     productsGridEl.innerHTML = filteredProducts.map((product) => `
 
-    <a href="/pages/productDetailPage.html?productId=${product.id}" class="product-card" style="text-decoration:none;color:inherit;">
+   
             <article class="product-card">
             
                 <div class="product-image-wrapper">
@@ -208,15 +208,43 @@ function renderProducts() {
                         ${product.specs.map((spec) => `<span class="spec-item">${spec}</span>`).join('')}
                     </div>
 
+                    
                     <div class="product-footer">
                         <span class="product-price">Rs.${product.price.toLocaleString()}</span>
-                        <button class="btn-add" type="button" data-product-name="${product.name}">Add to Cart</button>
+                        <button class="btn-add" type="button" data-product-id="${product.id}" onclick="addToCart(${product.id}, '${product.name}', '${product.image}', ${product.price}, '${product.category}')">Add to Cart</button>
                     </div>
                 </div>
             </article>
-    </a>
+   
         `).join('');
 }
+
+
+
+
+productsGridEl.addEventListener('click', function (e) {
+
+    // If Add to Cart button clicked
+    if (e.target.classList.contains('btn-add')) {
+
+        e.stopPropagation(); // prevent card click
+
+        const productId = Number(e.target.dataset.id);
+        const product = products.find(p => p.id === productId);
+
+        addToCart(product);
+
+        window.location.href = '/pages/ViewCartPage.html';
+        return;
+    }
+
+    // If Card Surface clicked
+    const card = e.target.closest('.product-card');
+    if (card) {
+        const productId = card.dataset.id;
+        window.location.href = `/pages/productDetailPage.html?productId=${productId}`;
+    }
+});
 
 function clearAllFilters() {
     document.querySelectorAll('#categoryFilters input:checked, #priceFilters input:checked').forEach((input) => {
@@ -249,8 +277,8 @@ function attachEvents() {
         const button = event.target.closest('.btn-add');
         if (!button) return;
 
-        const { productName } = button.dataset;
-        alert(`${productName} added to cart`);
+        const { productName, productImage, productPrice } = button.dataset;
+        addToCart(productName, productImage, productPrice);
     });
 }
 
@@ -263,23 +291,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // When clicking on a particular product, show the related filters and sorting options, and hide them when navigating away from the product list page. This can be achieved by checking the current URL and conditionally rendering the filters and sorting elements based on whether the user is on the product list page or not.
 
-document.addEventListener("DOMContentLoaded", function () {
+// document.addEventListener("DOMContentLoaded", function () {
 
-    categoryFiltersEl.addEventListener('click', function (e) {
-        const productContainer = document.getElementById('product-container');
-        const filterSidebar = document.getElementById('filterSidebar');
-        if (e.target.tagName === 'Laptop'.toLocaleLowerCase()) {
-            // If the user clicks on the "Laptop" category, show the filters and sorting options
-            filterSidebar.innerHTML = `
-            <div class="filter-section">
-				<h4>Category</h4>
-				<div id="categoryFilters" class="filter-group"></div>
-			</div>
-            `;
+//     categoryFiltersEl.addEventListener('click', function (e) {
+//         const productContainer = document.getElementById('product-container');
+//         const filterSidebar = document.getElementById('filterSidebar');
+//         if (e.target.tagName === 'Laptop'.toLocaleLowerCase()) {
+//             // If the user clicks on the "Laptop" category, show the filters and sorting options
+//             filterSidebar.innerHTML = `
+//             <div class="filter-section">
+// 				<h4>Category</h4>
+// 				<div id="categoryFilters" class="filter-group"></div>
+// 			</div>
+//             `;
            
 
-        }
-});
+//         }
+// // });
 
 
-});
+// });
+
+
+// When click add to card button send the product name , image, price to the ViewCardPage and show the added product in the cart page. This can be done by storing the product details in localStorage when the "Add to Cart" button is clicked, and then retrieving and displaying those details on the ViewCartPage.
+
+function addToCart(id, name, image, price, category = 'Product') {
+
+    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        if (!id || !name || !price) {
+        console.error("Invalid product data:", { id, name, image, price });
+        return; // STOP execution
+    }
+
+    console.log(cartItems, { id, name, image, price, category });
+    // Check if product already exists
+    const existingItem = cartItems.find(item => item.id === id);
+
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cartItems.push({
+            id: id,
+            name: name,
+            image: image,
+            price: price,
+            category: category,
+            quantity: 1,
+            discount: 15,
+        });
+    }
+
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+    // Redirect to cart page
+    window.location.href = '/pages/ViewCartPage.html';
+}
