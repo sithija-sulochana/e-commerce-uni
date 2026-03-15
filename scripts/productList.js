@@ -59,7 +59,7 @@ const products = [
         specs: ['16GB RAM', '512GB SSD'],
         image: 'https://images.unsplash.com/photo-1593640495253-23196b27a87f?w=900'
     },
-  
+
 ];
 
 const priceRanges = [
@@ -75,8 +75,10 @@ const brandImages = [
     { brand: 'ASUS', image: '/assets/brandsLogos/laptopsComputer/asus.png' },
     { brand: 'Samsung', image: '/assets/brandsLogos/phones/samsung.png' },
     { brand: 'HP', image: '/assets/brandsLogos/laptopsComputer/hp.png' },
-    
+
 ];
+
+//set - remove duplicates and get unique brands from products data
 const brands = [...new Set(products.map((product) => product.brand))];
 
 
@@ -92,10 +94,10 @@ const resultsCountEl = document.getElementById('resultsCount');
 const brandFiltersEl = byId('brandFilters');
 
 function getBrandImage(brand) {
-   console.log(brand, brandImages.find((item) => item.brand === brand)?.image || '');
-   return brandImages.find((item) => item.brand === brand)?.image || '';
-    
-    
+    console.log(brand, brandImages.find((item) => item.brand === brand)?.image || '');
+    return brandImages.find((item) => item.brand === brand)?.image || '';
+
+
 }
 
 function initFilters() {
@@ -108,7 +110,7 @@ function initFilters() {
             </label>
         `).join('');
 
-    
+
 
     priceFiltersEl.innerHTML = priceRanges.map((range, index) => `
             <label class="filter-item">
@@ -119,12 +121,12 @@ function initFilters() {
 
     brandFiltersEl.innerHTML = brands.map((brand) => {
         const src = getBrandImage(brand);
-       
+
         return `
             <button class="brand-logo" type="button" data-brand="${brand}" aria-label="${brand}">
                 ${src
-                    ? `<img src="${src}" alt="${brand}" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">`
-                    : ''}
+                ? `<img src="${src}" alt="${brand}" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">`
+                : ''}
                 <span class="brand-fallback" style="display:${src ? 'none' : 'grid'}">${brand.slice(0, 2).toUpperCase()}</span>
             </button>
         `;
@@ -143,15 +145,15 @@ function applyFilters() {
     const selectedPriceRanges = selectedPriceIndexes.map((index) => priceRanges[index]);
 
     const selectedBrands = [...document.querySelectorAll('#brandFilters .brand-logo.active')]
-    .map(button => button.dataset.brand);
+        .map(button => button.dataset.brand);
 
     filteredProducts = products.filter((product) => {
         const categoryMatch = !selectedCategories.length || selectedCategories.includes(product.category);
         const priceMatch =
             !selectedPriceRanges.length ||
             selectedPriceRanges.some((range) => product.price >= range.min && product.price < range.max);
-           
-            const brandMatch = !selectedBrands.length || selectedBrands.includes(product.brand);
+
+        const brandMatch = !selectedBrands.length || selectedBrands.includes(product.brand);
 
 
         return categoryMatch && priceMatch && brandMatch;
@@ -190,15 +192,21 @@ function renderProducts() {
         return;
     }
 
+    const IsPremium = filteredProducts.filter(product =>product.price > 400000);
+
+    
+
     productsGridEl.innerHTML = filteredProducts.map((product) => `
 
    
             <article class="product-card">
-            
+
+                
                 <div class="product-image-wrapper">
                     <img src="${product.image}" alt="${product.name}">
                 </div>
-
+                ${IsPremium? `<div id="premiumIcon" style="color: #ff6b35; font-size: 24px; position: absolute; top: 5px; right: 10px; padding: 4px; background-color: #fff; border-radius: 10px;display:flex; justify-content: center; align-items: center;">🔥<span style="margin-left: 5px; font-size: 14px;">Premium</span></div>` : ''}
+                
                 <div class="product-content">
                     <p class="product-category">${product.category}</p>
                     <h3 class="product-title">${product.name}</h3>
@@ -207,12 +215,18 @@ function renderProducts() {
                     <div class="specs">
                         ${product.specs.map((spec) => `<span class="spec-item">${spec}</span>`).join('')}
                     </div>
+                 
 
                     
-                    <div class="product-footer">
+                    <div class="product-footer" id="productFooter">
                         <span class="product-price">Rs.${product.price.toLocaleString()}</span>
-                        <button class="btn-add" type="button" data-product-id="${product.id}" onclick="addToCart(${product.id}, '${product.name}', '${product.image}', ${product.price}, '${product.category}')">Add to Cart</button>
+                       <button type="button" onclick="addToWishlist(${product.id})" class="btn-wishlist" data-product-id="${product.id}" aria-label="Add to wishlist" title="Add to wishlist">
+                           <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWhlYXJ0LWljb24gbHVjaWRlLWhlYXJ0Ij48cGF0aCBkPSJNMiA5LjVhNS41IDUuNSAwIDAgMSA5LjU5MS0zLjY3Ni41Ni41NiAwIDAgMCAuODE4IDBBNS40OSA1LjQ5IDAgMCAxIDIyIDkuNWMwIDIuMjktMS41IDQtMyA1LjVsLTUuNDkyIDUuMzEzYTIgMiAwIDAgMS0zIC4wMTlMNSAxNWMtMS41LTEuNS0zLTMuMi0zLTUuNSIvPjwvc3ZnPg==" class="wishlist-icon" alt="Wishlist icon">
+                       </button>
+                        
                     </div>
+                    <button class="btn-add" type="button" data-product-id="${product.id}" onclick="addToCart(${product.id}, '${product.name}', '${product.image}', ${product.price}, '${product.category}')" style="margin-top: 10px;">Add to Cart</button>
+                        
                 </div>
             </article>
    
@@ -221,27 +235,27 @@ function renderProducts() {
 
 
 
-
 productsGridEl.addEventListener('click', function (e) {
+    const addToCartBtn = e.target.closest('.btn-add');
+    const wishlistBtn = e.target.closest('.btn-wishlist');
+    const card = e.target.closest('.product-card');
 
-    // If Add to Cart button clicked
-    if (e.target.classList.contains('btn-add')) {
-
-        e.stopPropagation(); // prevent card click
-
-        const productId = Number(e.target.dataset.id);
+    if (addToCartBtn) {
+        e.stopPropagation();
+        const productId = Number(addToCartBtn.dataset.productId);
         const product = products.find(p => p.id === productId);
-
-        addToCart(product);
-
-        window.location.href = '/pages/ViewCartPage.html';
+        addToCart(product.id, product.name, product.image, product.price, product.category);
         return;
     }
 
-    // If Card Surface clicked
-    const card = e.target.closest('.product-card');
+    if (wishlistBtn) {
+        e.stopPropagation();
+        e.preventDefault();
+        return;
+    }
+
     if (card) {
-        const productId = card.dataset.id;
+        const productId = card.dataset.id || card.querySelector('.btn-add').dataset.productId;
         window.location.href = `/pages/productDetailPage.html?productId=${productId}`;
     }
 });
@@ -304,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // 				<div id="categoryFilters" class="filter-group"></div>
 // 			</div>
 //             `;
-           
+
 
 //         }
 // // });
@@ -318,7 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function addToCart(id, name, image, price, category = 'Product') {
 
     let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-        if (!id || !name || !price) {
+    if (!id || !name || !price) {
         console.error("Invalid product data:", { id, name, image, price });
         return; // STOP execution
     }
@@ -362,11 +376,80 @@ function searchProducts() {
 
     filteredProducts = products.filter(product => {
         return product.name.toLowerCase().includes(input) ||
-               product.category.toLowerCase().includes(input) ||
-               product.brand.toLowerCase().includes(input);
+            product.category.toLowerCase().includes(input) ||
+            product.brand.toLowerCase().includes(input);
     });
 
     renderProducts();
 }
 
 document.getElementById('searchInput').addEventListener('input', searchProducts);
+
+
+// Check whether there is a search query in the URL and filter products accordingly
+
+function checkSearchQuery() {
+    const params = new URLSearchParams(window.location.search);
+    const searchQuery = params.get('search');
+    if (searchQuery) {
+        console.log('Search query found in URL:', searchQuery);
+        document.getElementById('searchInput').value = searchQuery;
+        searchProducts();
+    }
+}
+
+checkSearchQuery();
+
+
+//function for Wishlist
+
+const WISHLIST_OUTLINE_ICON = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWhlYXJ0LWljb24gbHVjaWRlLWhlYXJ0Ij48cGF0aCBkPSJNMiA5LjVhNS41IDUuNSAwIDAgMSA5LjU5MS0zLjY3Ni41Ni41NiAwIDAgMCAuODE4IDBBNS40OSA1LjQ5IDAgMCAxIDIyIDkuNWMwIDIuMjktMS41IDQtMyA1LjVsLTUuNDkyIDUuMzEzYTIgMiAwIDAgMS0zIC4wMTlMNSAxNWMtMS41LTEuNS0zLTMuMi0zLTUuNSIvPjwvc3ZnPg==';
+const WISHLIST_FILLED_ICON = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJyZWQiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWhlYXJ0LWljb24gbHVjaWRlLWhlYXJ0Ij48cGF0aCBkPSJNMiA5LjVhNS41IDUuNSAwIDAgMSA5LjU5MS0zLjY3Ni41Ni41NiAwIDAgMCAuODE4IDBBNS40OSA1LjQ5IDAgMCAxIDIyIDkuNWMwIDIuMjktMS41IDQtMyA1LjVsLTUuNDkyIDUuMzEzYTIgMiAwIDAgMS0zIC4wMTlMNSAxNWMtMS41LTEuNS0zLTMuMi0zLTUuNSIvPjwvc3ZnPg==';
+
+function addToWishlist(productId) {
+
+
+    
+    const product = products.find(p => p.id === productId);
+    const wishListBtn = document.querySelector(`.btn-wishlist[data-product-id="${productId}"]`);
+    const wishListIcon = wishListBtn ? wishListBtn.querySelector('.wishlist-icon') : null;
+    console.log("Product to add to wishlist:", wishListIcon);
+    console.log("Adding to wishlist:", product);
+
+    if (!product) {
+        console.error("Product not found for wishlist:", productId);
+        return;
+    }
+
+    if (!wishListBtn || !wishListIcon) {
+        return;
+    }
+
+    if (wishListBtn.classList.contains('active')) {
+        removeFromWishlist(productId);
+        return;
+    }
+
+    if (product && wishListIcon) {
+        // change the wishlist icon to filled heart in red
+        wishListIcon.src = WISHLIST_FILLED_ICON;
+        wishListBtn.classList.add('active');
+    }
+
+
+}
+
+
+function removeFromWishlist(productId) {
+    const wishListBtn = document.querySelector(`.btn-wishlist[data-product-id="${productId}"]`);
+    if (wishListBtn) {
+        const wishListIcon = wishListBtn.querySelector('.wishlist-icon');
+        if (wishListIcon) {
+            wishListIcon.src = WISHLIST_OUTLINE_ICON;
+            wishListBtn.classList.remove('active');
+        }
+    }
+}
+
+
+

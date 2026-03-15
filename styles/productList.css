@@ -282,6 +282,36 @@ body {
     font-weight: 700;
 }
 
+.btn-wishlist {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-wishlist:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(102, 126, 234, 0.15);
+}
+
+.btn-wishlist.active {
+    border-color: #ef4444;
+    background: #fff5f5;
+}
+
+.wishlist-icon {
+    width: 22px;
+    height: 22px;
+    display: block;
+}
+
 .btn-add {
     border: 0;
     border-radius: 10px;

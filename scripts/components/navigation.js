@@ -30,6 +30,9 @@ const navbarTemplate = `
     .btn-login { border: 1.5px solid var(--primary); background: transparent; color: var(--primary); }
     .btn-login:hover { background: var(--primary); color: white; }
     .btn-register { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border: none; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3); }
+    .icon-link { width: 40px; height: 40px; border: 1.5px solid var(--primary); border-radius: var(--radius-sm); display: inline-flex; align-items: center; justify-content: center; color: var(--primary); transition: var(--transition); text-decoration: none; }
+    .icon-link svg { width: 20px; height: 20px; }
+    .icon-link:hover { background: var(--primary); color: #fff; }
     .menu-toggle { display: none; font-size: 24px; cursor: pointer; background: none; border: none; }
 
     @media (max-width: 768px) {
@@ -44,7 +47,7 @@ const navbarTemplate = `
 
 <header class="navbar">
     <div class="nav-container">
-        <div class="logo" onclick="window.location.href='/'">🚀 TechHub</div>
+        <div class="logo" onclick="window.location.href='#'">🚀 TechHub</div>
         <div class="nav-center" id="navCenter">
             <nav class="nav-links">
                 <a href="/pages/homepage.html">Home</a>
@@ -76,8 +79,12 @@ const authButtons = document.querySelector('.btn-auth');
 
 if (user && user.isLoggedIn && authButtons) {
     authButtons.innerHTML = `
-        <a href="/pages/ViewCartPage.html" class="btn-login">🛒 Cart</a>
-        <a href="/pages/profile.html" class="btn-login">Profile</a>
+        <a href="/pages/ViewCartPage.html" class="icon-link" aria-label="Cart" title="Cart">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart-icon lucide-shopping-cart"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+        </a>
+        <a href="/pages/profile.html" class="icon-link" aria-label="Profile" title="Profile">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </a>
         <a href="#" class="btn-register" onclick="localStorage.removeItem('user'); window.location.href='/pages/homepage.html';">Logout</a>
     `;
 }

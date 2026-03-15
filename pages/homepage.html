@@ -6,12 +6,11 @@
     <title>TechHub - Premium Technology Products</title>
     <link rel="stylesheet" href="/styles/homepage.css">
     <script src="/scripts/homepage.js"></script>
+    <script src="/scripts/productList.js"></script>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <script src="/scripts/registrationPage.js"></script>
-    <style>
-   
-    </style>
+    
 </head>
 
 <body>
@@ -31,8 +30,8 @@
             <p>Discover cutting-edge gadgets crafted for modern innovators</p>
 
             <div class="search-container">
-                <input type="text" placeholder="Search laptops, phones, desktops...">
-                <button class="search-btn">Search</button>
+                <input type="text" placeholder="Search laptops, phones, desktops..." id="product-search">
+                <button class="search-btn" onclick="searchProducts()">Search</button>
             </div>
 
             

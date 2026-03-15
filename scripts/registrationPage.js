@@ -1,19 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-   // Check login state from localStorage
-    const user = JSON.parse(localStorage.getItem('user'));
-
-    if (user && user.isLoggedIn) {
-        const authButtons = document.querySelector('.btn-auth');
-        if (authButtons) {
-            authButtons.innerHTML = `
-                <a href="/pages/ViewCartPage.html" class="btn-login">🛒 Cart</a>
-        <a href="/pages/profile.html" class="btn-login">Profile</a>
-        <a href="#" class="btn-register" onclick="localStorage.removeItem('user'); window.location.href='/pages/homepage.html';">Logout</a>
-            `;
-        }
-    }
-
     // --- Validation Logic for Registration Form ---
     const registrationForm = document.getElementById('registerForm');
     

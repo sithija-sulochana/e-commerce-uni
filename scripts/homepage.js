@@ -125,3 +125,18 @@
                 navbar.style.boxShadow = 'var(--shadow-sm)';
             }
         });
+
+
+        // Search query and set the value for the search input of the product details page
+
+        function searchProducts(){
+            const searchInput = document.getElementById('product-search');
+            const query = searchInput.value.trim();
+            if(query){
+                window.location.href = `/pages/productList.html?search=${encodeURIComponent(query)}`;
+                
+            }
+        }
+
+
+        
