@@ -225,7 +225,8 @@ function renderProducts() {
                        </button>
                         
                     </div>
-                    <button class="btn-add" type="button" data-product-id="${product.id}" onclick="addToCart(${product.id}, '${product.name}', '${product.image}', ${product.price}, '${product.category}')" style="margin-top: 10px;">Add to Cart</button>
+                    
+                    <button class="btn-add" type="button" data-product-id="${product.id}" onclick="addToCart(${product.id}, '${product.name}', '${product.image}', ${product.price}, '${product.category}')" style="margin-top: 10px; display:flex; justify-content: center; align-items: center; gap: 10px;">Add to Cart <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXNob3BwaW5nLWNhcnQtaWNvbiBsdWNpZGUtc2hvcHBpbmctY2FydCI+PGNpcmNsZSBjeD0iOCIgY3k9IjIxIiByPSIxIi8+PGNpcmNsZSBjeD0iMTkiIGN5PSIyMSIgcj0iMSIvPjxwYXRoIGQ9Ik0yLjA1IDIuMDVoMmwyLjY2IDEyLjQyYTIgMiAwIDAgMCAyIDEuNThoOS43OGEyIDIgMCAwIDAgMS45NS0xLjU3bDEuNjUtNy40M0g1LjEyIi8+PC9zdmc+" style="width: 20px; height: 20px; filter:invert(1);"></button>
                         
                 </div>
             </article>

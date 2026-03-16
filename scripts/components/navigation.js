@@ -16,11 +16,13 @@ const navbarTemplate = `
 
     .navbar { position: fixed; width: 100%; top: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-light); z-index: 1000; box-shadow: var(--shadow-sm); font-family: 'Poppins', sans-serif; }
     .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 0 6%; height: 70px; max-width: 1400px; margin: 0 auto; width: 100%; box-sizing: border-box; }
-    .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 24px; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-decoration: none; cursor: pointer; }
+   
     .nav-center { display: flex; gap: 40px; align-items: center; }
     .nav-links { display: flex; gap: 30px; align-items: center; list-style: none; margin: 0; padding: 0; }
     .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 14px; position: relative; transition: var(--transition); }
+    .nav-links a::after { content: ''; position: absolute; left: 0; bottom: -5px; width: 100%; height: 2px; background: var(--primary); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
     .nav-links a:hover { color: var(--primary); }
+    .nav-links a:hover::after { transform: scaleX(1); }
     .dropdown { position: relative; }
     .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background: var(--bg-lighter); border-radius: var(--radius-md); box-shadow: var(--shadow-md); margin-top: 10px; overflow: hidden; min-width: 180px; border: 1px solid var(--border-light); }
     .dropdown-content a { display: block; padding: 12px 16px; font-size: 14px; }
@@ -47,7 +49,7 @@ const navbarTemplate = `
 
 <header class="navbar">
     <div class="nav-container">
-        <div class="logo" onclick="window.location.href='#'">🚀 TechHub</div>
+        <div class="logo" onclick="window.location.href='#'" style="font-weight: 700; font-size: 30px;">Tech<span style="color:white; padding: 0 5px; background-color: #5b9bf0; margin-left: 5px;border-radius: 5px;">Hub</span></div>
         <div class="nav-center" id="navCenter">
             <nav class="nav-links">
                 <a href="/pages/homepage.html">Home</a>
@@ -86,7 +88,7 @@ if (user && user.isLoggedIn && authButtons) {
         <a href="/pages/profile.html" class="icon-link" aria-label="Profile" title="Profile">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </a>
-        <a href="#" class="btn-register" onclick="localStorage.removeItem('user'); window.location.href='/pages/homepage.html';">Logout</a>
+        <a href="#" class="btn-register" onclick="localStorage.removeItem('user'); window.location.href='/pages/homepage.html';" style="background: #ef4444; top:20px">Logout</a>
     `;
 }
 
