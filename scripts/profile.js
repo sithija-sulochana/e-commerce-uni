@@ -129,7 +129,9 @@ function getOrderHistoryFromStorage() {
         const orderId = order.id || Date.now();
         const status = order.status || 'pending';
         const items = Array.isArray(order.items) ? order.items : [];
-        const itemCount = items.reduce((count, item) => count + (item.quantity || 0), 0);
+        
+        const itemCount = items.reduce((total, item) => total + (item.quantity || 0), 0);
+        console.log("Items in order:", items);
         const totalPrice = Number(order.totalPrice || 0);
 
         return {
@@ -205,8 +207,9 @@ function renderOrders(orders, container) {
                 <p class="order-line"><strong>Total:</strong> Rs.${order.totalPrice.toLocaleString()}</p>
                 <p class="order-line"><strong>Status:</strong> <span class="status-pill" style="background: ${ColorPicker() || '#e2e8f0'}; color: ${colorForStatus[0][order.status] ? '#ffffff' : '#475569'};">${capitalize(order.status)}</span></p>
                 <p class="order-products" style="margin: 0; color: #334155; background: linear-gradient(135deg, #f8fafc, #eef2ff); padding: 0.65rem 0.75rem; border-radius: 10px; border: 1px solid #e2e8f0; border-left: 4px solid #6366f1; font-size: 0.86rem; line-height: 1.45; box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06); margin-top: 0.5rem;"><strong style="color: #1e293b; font-weight: 700;">Products:</strong><br/> ${itemPreview || 'View order for details'}</p>
-                <div>
-                  ${IsOrderPending ? `<button class="btn btn-primary" style="margin-top: 0.75rem; background: #ef4444; border-color: #ef4444;" onclick="viewOrderDetails(${order.id})" onclick='cancelOrder(${order.id})'>Cancel Order</button>` : `<button class="btn btn-secondary" style="margin-top: 0.75rem;" onclick="viewOrderDetails(${order.id})">View Details</button>`}
+                <div style="display: flex; gap: 10px; margin-top: 0.75rem; justify-content: space-between;">
+                  ${IsOrderPending ? `<button class="btn btn-primary" style="margin-top: 0.75rem; background: #ef4444; border-color: #ef4444;" onclick="viewOrderDetails(${order.id})" onclick='cancelOrder(${order.id})'>Cancel Order</button>` : ''}
+                  <button class="btn btn-secondary" style="margin-top: 0.75rem;" onclick="viewOrderDetails(${order.id})">View Details</button>
                 </div>
                </div>
                 </div>
@@ -228,4 +231,10 @@ function renderOrders(orders, container) {
 function capitalize(value) {
     const text = String(value || 'pending');
     return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+
+function viewOrderDetails(orderId) {
+    localStorage.setItem('selectedOrderId', orderId);
+    window.location.href = '/pages/OrderTrackingPage.html';
 }
