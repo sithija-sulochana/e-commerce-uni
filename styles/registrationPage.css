@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background:rgb(119, 119, 189);
+    background:rgb(198, 198, 208);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -65,6 +65,36 @@ body {
 
 .form-wrapper {
     width: 100%;
+}
+
+.brand-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.brand-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.brand-logo h1 {
+    font-size: 24px;
+    color: #1f2937;
+    line-height: 1;
+}
+
+.brand-logo h1 span {
+    color: #5b9bf0;
 }
 
 .form-wrapper h2 {
@@ -202,7 +232,7 @@ body {
     }
 
     .banner-content h1 {
-        font-size: 24px;
+        font-size: 4px;
     }
 
     .banner-content p {

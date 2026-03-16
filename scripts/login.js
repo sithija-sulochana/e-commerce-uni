@@ -37,8 +37,21 @@ function logIn(event) {
         alert("Login successful!");
         window.location.href = '/pages/homepage.html';
     } else {
-        alert("Invalid email or password.");
+       
     }
+
+    if(!email || !password) {
+        emailInput.style.borderColor = !email ? '#e74c3c' : '#ddd';
+        passwordInput.style.borderColor = !password ? '#e74c3c' : '#ddd';
+        if(!email) emailError.textContent = 'Email is required.';
+        if(!password) passwordError.textContent = 'Password is required.';
+
+
+    }if(storedUser.email !== email || storedUser.password !== password) {
+        emailInput.style.borderColor = '#e74c3c';
+        passwordInput.style.borderColor = '#e74c3c';
+        emailError.textContent = 'Invalid email or password.';
+        passwordError.textContent = 'Invalid email or password.';}
 }
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -24,14 +24,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 isValid = false;
             }
 
-            if(phone.value.trim().length<10){
-                showError(phone, 'Please enter a valid phone number');
+            if (!isValidEmail(email.value)) {
+                showError(email, 'Please enter a valid email address');
                 isValid = false;
             }
 
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email.value)) {
-                showError(email, 'Please enter a valid email address');
+            if (!isValidPhone(phone.value)) {
+                showError(phone, 'Please enter a valid phone number');
                 isValid = false;
             }
 
@@ -111,4 +110,38 @@ document.addEventListener("DOMContentLoaded", function () {
        console.log("User Email:", user.email);
     }
 });
+
+function isValidEmail(value) {
+    const emailValue = value.trim();
+    const atIndex = emailValue.indexOf('@');
+    const lastAtIndex = emailValue.lastIndexOf('@');
+
+    if (atIndex <= 0 || atIndex !== lastAtIndex) return false;
+
+    const localPart = emailValue.slice(0, atIndex);
+    const domainPart = emailValue.slice(atIndex + 1);
+    if (!localPart || !domainPart) return false;
+
+    const dotIndex = domainPart.indexOf('.');
+    const lastDotIndex = domainPart.lastIndexOf('.');
+    if (dotIndex <= 0 || lastDotIndex === domainPart.length - 1) return false;
+
+    if (emailValue.includes(' ')) return false;
+
+    return true;
+}
+
+function isValidPhone(value) {
+    const phoneValue = value.trim();
+    if (phoneValue.length < 10) return false;
+
+    for (let i = 0; i < phoneValue.length; i++) {
+        const char = phoneValue[i];
+        if (char < '0' || char > '9') {
+            return false;
+        }
+    }
+
+    return true;
+}
 
