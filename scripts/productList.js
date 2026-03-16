@@ -6,7 +6,7 @@ const products = [
         price: 599000,
         brand: 'Apple',
         description: 'Powerful M3 chip and all-day battery life.',
-        specs: ['16GB RAM', '512GB SSD'],
+        specs: ['Apple M-Series', '16GB RAM', '512GB SSD'],
         image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=900'
     },
     {
@@ -16,7 +16,7 @@ const products = [
         price: 389000,
         brand: 'Dell',
         description: 'Slim premium ultrabook for daily productivity.',
-        specs: ['8GB RAM', '256GB SSD'],
+        specs: ['Intel Core i7', '8GB RAM', '256GB SSD'],
         image: 'https://images.unsplash.com/photo-1588872657840-218e412ee914?w=900'
     },
     {
@@ -26,7 +26,7 @@ const products = [
         price: 449000,
         brand: 'ASUS',
         description: 'High performance gaming desktop with RTX graphics.',
-        specs: ['32GB RAM', '1TB SSD'],
+        specs: ['AMD Ryzen 7', '32GB RAM', '1TB SSD'],
         image: 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=900'
     },
     {
@@ -36,7 +36,7 @@ const products = [
         price: 299000,
         brand: 'Samsung',
         description: 'Flagship Android phone with pro-level camera.',
-        specs: ['120Hz', '5G'],
+        specs: ['Snapdragon 8 Gen 3', '8GB RAM', '120Hz', '5G'],
         image: 'https://images.unsplash.com/photo-1511707267537-b85faf00021e?w=900'
     },
     {
@@ -46,7 +46,7 @@ const products = [
         price: 359000,
         brand: 'Apple',
         description: 'Titanium design and lightning-fast performance.',
-        specs: ['A17 Pro', '256GB'],
+        specs: ['Apple A17 Pro', '8GB RAM', '256GB'],
         image: 'https://images.unsplash.com/photo-1695639470555-57f4f7be0086?w=900'
     },
     {
@@ -56,7 +56,7 @@ const products = [
         price: 254000,
         brand: 'HP',
         description: 'Reliable home and office desktop setup.',
-        specs: ['16GB RAM', '512GB SSD'],
+        specs: ['Intel Core i5', '16GB RAM', '512GB SSD'],
         image: 'https://images.unsplash.com/photo-1593640495253-23196b27a87f?w=900'
     },
 
@@ -92,6 +92,9 @@ const sortSelectEl = document.getElementById('sortSelect');
 const clearFiltersBtnEl = document.getElementById('clearFiltersBtn');
 const resultsCountEl = document.getElementById('resultsCount');
 const brandFiltersEl = byId('brandFilters');
+const extraFilterSectionEl = byId('filter-section');
+let processorFiltersEl;
+let ramFiltersEl;
 
 function getBrandImage(brand) {
     console.log(brand, brandImages.find((item) => item.brand === brand)?.image || '');
@@ -100,8 +103,21 @@ function getBrandImage(brand) {
 
 }
 
+function getProcessorFromSpecs(specs) {
+    return specs.find((spec) => {
+        const value = spec.toLowerCase();
+        return value.includes('intel') || value.includes('amd') || value.includes('apple m') || value.includes('snapdragon') || value.includes('a17');
+    }) || '';
+}
+
+function getRamFromSpecs(specs) {
+    return specs.find((spec) => spec.toLowerCase().includes('gb ram')) || '';
+}
+
 function initFilters() {
     const categories = [...new Set(products.map((product) => product.category))];
+    const processors = [...new Set(products.map((product) => getProcessorFromSpecs(product.specs)).filter(Boolean))];
+    const ramCapacities = [...new Set(products.map((product) => getRamFromSpecs(product.specs)).filter(Boolean))];
 
     categoryFiltersEl.innerHTML = categories.map((category) => `
             <label class="filter-item">
@@ -119,11 +135,40 @@ function initFilters() {
             </label>
         `).join('');
 
+        
+    extraFilterSectionEl.innerHTML = `
+        <div class="filter-section">
+            <h4>Processor</h4>
+            <div id="processorFilters" class="filter-group"></div>
+        </div>
+        <div class="filter-section">
+            <h4>RAM Capacity</h4>
+            <div id="ramFilters" class="filter-group"></div>
+        </div>
+    `;
+
+    processorFiltersEl = byId('processorFilters');
+    ramFiltersEl = byId('ramFilters');
+
+    processorFiltersEl.innerHTML = processors.map((processor) => `
+            <label class="filter-item">
+                <input type="checkbox" value="${processor}" data-type="processor">
+                <span>${processor}</span>
+            </label>
+        `).join('');
+
+    ramFiltersEl.innerHTML = ramCapacities.map((ram) => `
+            <label class="filter-item">
+                <input type="checkbox" value="${ram}" data-type="ram">
+                <span>${ram}</span>
+            </label>
+        `).join('');
+
     brandFiltersEl.innerHTML = brands.map((brand) => {
         const src = getBrandImage(brand);
 
         return `
-            <button class="brand-logo" type="button" data-brand="${brand}" aria-label="${brand}">
+            <button class="brand-logo" type="button" data-brand="${brand}" aria-label="${brand}" style="width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; border: 1px solid #ccc; border-radius: 8px; background-color: #fff;">
                 ${src
                 ? `<img src="${src}" alt="${brand}" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">`
                 : ''}
@@ -131,6 +176,7 @@ function initFilters() {
             </button>
         `;
     }).join('');
+
 }
 
 function getSelectedValues(selector) {
@@ -142,21 +188,30 @@ function getSelectedValues(selector) {
 function applyFilters() {
     const selectedCategories = getSelectedValues('#categoryFilters input:checked');
     const selectedPriceIndexes = getSelectedValues('#priceFilters input:checked').map(Number);
+    
     const selectedPriceRanges = selectedPriceIndexes.map((index) => priceRanges[index]);
+    const selectedProcessors = getSelectedValues('#processorFilters input:checked');
+    const selectedRamCapacities = getSelectedValues('#ramFilters input:checked');
 
     const selectedBrands = [...document.querySelectorAll('#brandFilters .brand-logo.active')]
         .map(button => button.dataset.brand);
 
     filteredProducts = products.filter((product) => {
+        const processor = getProcessorFromSpecs(product.specs);
+        const ramCapacity = getRamFromSpecs(product.specs);
+
         const categoryMatch = !selectedCategories.length || selectedCategories.includes(product.category);
         const priceMatch =
             !selectedPriceRanges.length ||
             selectedPriceRanges.some((range) => product.price >= range.min && product.price < range.max);
 
+            const processorMatch = !selectedProcessors.length || selectedProcessors.includes(processor);
+        const ramMatch = !selectedRamCapacities.length || selectedRamCapacities.includes(ramCapacity);
         const brandMatch = !selectedBrands.length || selectedBrands.includes(product.brand);
+        
 
 
-        return categoryMatch && priceMatch && brandMatch;
+        return categoryMatch && priceMatch && brandMatch && processorMatch && ramMatch;
     });
 
     applySorting();
@@ -192,11 +247,14 @@ function renderProducts() {
         return;
     }
 
-    const IsPremium = filteredProducts.filter(product =>product.price > 400000);
+    // const IsPremium = products.price > 400000;
+    
 
     
 
-    productsGridEl.innerHTML = filteredProducts.map((product) => `
+    productsGridEl.innerHTML = filteredProducts.map((product) =>{
+        const IsPremium = product.price > 400000;
+        return `
 
    
             <article class="product-card">
@@ -231,7 +289,7 @@ function renderProducts() {
                 </div>
             </article>
    
-        `).join('');
+        `}).join('');
 }
 
 
@@ -262,7 +320,7 @@ productsGridEl.addEventListener('click', function (e) {
 });
 
 function clearAllFilters() {
-    document.querySelectorAll('#categoryFilters input:checked, #priceFilters input:checked').forEach((input) => {
+    document.querySelectorAll('#categoryFilters input:checked, #priceFilters input:checked, #processorFilters input:checked, #ramFilters input:checked').forEach((input) => {
         input.checked = false;
     });
     document.querySelectorAll('#brandFilters .brand-logo.active').forEach((button) => {
@@ -277,6 +335,12 @@ function clearAllFilters() {
 function attachEvents() {
     categoryFiltersEl.addEventListener('change', applyFilters);
     priceFiltersEl.addEventListener('change', applyFilters);
+    if (processorFiltersEl) {
+        processorFiltersEl.addEventListener('change', applyFilters);
+    }
+    if (ramFiltersEl) {
+        ramFiltersEl.addEventListener('change', applyFilters);
+    }
     sortSelectEl.addEventListener('change', applySorting);
     clearFiltersBtnEl.addEventListener('click', clearAllFilters);
 

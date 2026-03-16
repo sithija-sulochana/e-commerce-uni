@@ -121,6 +121,13 @@ body {
     gap: 10px;
 }
 
+#filter-section {
+    display: grid;
+    gap: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 #brandFilters {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 8px;

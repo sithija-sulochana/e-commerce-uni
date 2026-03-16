@@ -54,6 +54,3 @@ function logIn(event) {
         passwordError.textContent = 'Invalid email or password.';}
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    // No auto-redirect - let users access login page freely
-});
