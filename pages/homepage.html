@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,21 +8,24 @@
     <link rel="stylesheet" href="/styles/homepage.css">
     <script src="/scripts/homepage.js"></script>
     <script src="/scripts/productList.js"></script>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap"
+        rel="stylesheet">
     <script src="/scripts/registrationPage.js"></script>
-    
+
 </head>
 
 <body>
 
-  <script src="/scripts/components/navigation.js"></script>
+    <script src="/scripts/components/navigation.js"></script>
 
     <!--  HERO SECTION  -->
-    <section class="hero" id="home" >
-        <video autoplay muted loop playsinline class="hero-video" >
-            <source src="https://www.chamacomputers.lk/vid/vid_sample_2.mp4" type="video/mp4"  style="width: 100vh; height: 100vh; object-fit: cover;">
-             Your browser does not support the video tag.
+    <section class="hero" id="home">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="https://www.chamacomputers.lk/vid/vid_sample_2.mp4" type="video/mp4"
+                style="width: 100vh; height: 100vh; object-fit: cover;">
+            Your browser does not support the video tag.
         </video>
         <div class="hero-overlay"></div>
 
@@ -34,14 +38,17 @@
                 <button class="search-btn" onclick="searchProducts()">Search</button>
             </div>
 
-            
-          
-                 <button class="cta-btn" style="padding: 14px 36px; display: inline-flex; gap: 5px; align-items: center;"> <a href="/pages/productList.html" style="text-decoration: none; color: white; ">Shop Now</a> <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWFycm93LXJpZ2h0LWljb24gbHVjaWRlLWFycm93LXJpZ2h0Ij48cGF0aCBkPSJNNSAxMmgxNCIvPjxwYXRoIGQ9Im0xMiA1IDcgNy03IDciLz48L3N2Zz4=" alt="" style="filter: invert(3);"> </button>
-   
 
-          
-           
-           
+
+            <button class="cta-btn" style="padding: 14px 36px; display: inline-flex; gap: 5px; align-items: center;"> <a
+                    href="/pages/productList.html" style="text-decoration: none; color: white; ">Shop Now</a> <img
+                    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWFycm93LXJpZ2h0LWljb24gbHVjaWRlLWFycm93LXJpZ2h0Ij48cGF0aCBkPSJNNSAxMmgxNCIvPjxwYXRoIGQ9Im0xMiA1IDcgNy03IDciLz48L3N2Zz4="
+                    alt="" style="filter: invert(3);"> </button>
+
+
+
+
+
         </div>
     </section>
 
@@ -49,26 +56,34 @@
     <section id="categories">
         <h2 class="section-title">Popular Categories</h2>
         <div class="categories-grid">
-            <div class="category-card">
-                <img src="https://hoanghamobile.com/tin-tuc/wp-content/uploads/2025/01/laptop-gaming-asus-1.jpg" alt="Laptops">
-                <div class="category-overlay">
-                    <h3>Laptops</h3>
+            <a href="/pages/productList.html?category=laptop">
+                <div class="category-card">
+                    <img src="https://hoanghamobile.com/tin-tuc/wp-content/uploads/2025/01/laptop-gaming-asus-1.jpg"
+                        alt="Laptops">
+                    <div class="category-overlay">
+                        <h3>Laptops</h3>
+                    </div>
                 </div>
-            </div>
+            </a>
+            <a href="/pages/productList.html?category=computer">
+                <div class="category-card">
+                    <img src="https://www.gizmochina.com/wp-content/uploads/2025/02/ASUS-India-2025-Laptops-Launch-1024x585-1.jpg"
+                        alt="computer">
+                    <div class="category-overlay">
+                        <h3>Computers & Desktops</h3>
+                    </div>
+                </div>
+            </a>
+            <a href="/pages/productList.html?category=phone">
+                <div class="category-card">
+                    <img src="https://www.apple.com/v/iphone-17-pro/d/images/overview/welcome/hero__bdntboqignj6_xlarge.jpg"
+                        alt="Phones">
+                    <div class="category-overlay">
+                        <h3>Phones</h3>
+                    </div>
+                </div>
+            </a>
 
-            <div class="category-card">
-                <img src="https://www.gizmochina.com/wp-content/uploads/2025/02/ASUS-India-2025-Laptops-Launch-1024x585-1.jpg" alt="Desktops">
-                <div class="category-overlay">
-                    <h3>Desktops</h3>
-                </div>
-            </div>
-
-            <div class="category-card">
-                <img src="https://www.apple.com/v/iphone-17-pro/d/images/overview/welcome/hero__bdntboqignj6_xlarge.jpg" alt="Phones" >
-                <div class="category-overlay">
-                    <h3>Phones</h3>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -91,7 +106,8 @@
             </div>
 
             <div class="promo-card">
-                <img src="https://www.apple.com/v/iphone-17-pro/d/images/overview/welcome/hero__bdntboqignj6_xlarge.jpg" alt="iPhone 17 Pro">
+                <img src="https://www.apple.com/v/iphone-17-pro/d/images/overview/welcome/hero__bdntboqignj6_xlarge.jpg"
+                    alt="iPhone 17 Pro">
                 <div class="promo-overlay">
                     <h3>iPhone 17 Pro</h3>
                     <p>Experience Innovation | Up to 20% Off</p>
@@ -138,8 +154,9 @@
     </footer>
 
     <script>
-       
+
     </script>
 
 </body>
+
 </html>

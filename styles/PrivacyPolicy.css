@@ -18,10 +18,20 @@ body {
 }
 
 .hero {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    position: relative;
+    overflow: hidden;
+    min-height: 360px;
     color: white;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 130px 20px 70px;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 1;
 }
 
 .hero h1 {
@@ -47,16 +57,15 @@ body {
     padding: 60px 0 20px;
 }
 
-.policy-banner {
-    padding: 28px 0 0;
-}
-
 .banner-image {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: 360px;
+    height: 100%;
     object-fit: cover;
-    border-radius: 16px;
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+    object-position: center;
+    filter: brightness(0.5);
+    z-index: 0;
 }
 
 .policy-card {

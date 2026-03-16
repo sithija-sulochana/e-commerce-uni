@@ -57,6 +57,7 @@ const navbarTemplate = `
                 </div>
                 <a href="/pages/AboutPage.html">About</a>
                 <a href="/pages/ContactPage.html">Contact</a>
+                <a href = "/pages/PrivacyPolicy.html">Privacy Policy </a>
             </nav>
             <div class="btn-auth">
                 <a href="/pages/loginPage.html" class="btn-login">Login</a>

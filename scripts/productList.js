@@ -300,6 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initFilters();
     attachEvents();
     applySorting();
+    filterByCategory();
 });
 
 
@@ -453,3 +454,24 @@ function removeFromWishlist(productId) {
 
 
 
+
+function filterByCategory(){
+  
+const urlParams = new URLSearchParams(window.location.search);
+const categoryFilter = urlParams.get('category');
+const checkboxInput = document.getElementById('checkbox-fiter');
+if(categoryFilter){
+    categoryFiltersEl.innerHTML = `
+            <label class="filter-item">
+                <input type="checkbox" value="${categoryFilter}" data-type="category" checked>
+                <span>${categoryFilter}</span>
+            </label>
+        `;
+
+    filteredProducts = products.filter((product) => product.category.toLowerCase() === categoryFilter.toLowerCase());
+    renderProducts();
+}
+
+}
+
+filterByCategory();

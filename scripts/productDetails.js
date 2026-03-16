@@ -33,6 +33,8 @@ document.addEventListener("DOMContentLoaded",()=>{
          productDetails.innerHTML=`
 
           <div>
+          <div class="laptop-type" style = "position: relative; top: 20px; left: 10px;">
+          <span style="background: var(--primary); color: white; padding: 4px 8px; border-radius: 20px; position: relative;margin-top: 20px;">${productsItems.category}</span></div>
         <img 
           id="productImage"
           class="product-image" 
@@ -40,6 +42,8 @@ document.addEventListener("DOMContentLoaded",()=>{
           alt="${productsItems.name}"
           loading="lazy"
         />
+
+        
       </div>
       
       <div class="product-info">
@@ -152,3 +156,5 @@ document.addEventListener('DOMContentLoaded',()=>{console.log("[v0] Product Deta
 // Add details specification table by using the mapped objects
 
 
+
+// Filter procuct categories
