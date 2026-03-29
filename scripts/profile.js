@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function initializeProfile() {
     const user = JSON.parse(localStorage.getItem('user')) || {};
     const fullname = user.fullname || 'John Doe';
-    const email = user.email || 'john.doe@example.com';
+    const email = user.email || ' ';
 
     const displayName = document.getElementById('display-name');
     const displayEmail = document.getElementById('display-email');

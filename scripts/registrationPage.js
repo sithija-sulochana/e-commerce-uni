@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.location.href = '/pages/homepage.html';
                 
                 localStorage.setItem('currentUser', JSON.stringify({
-                    isLoggedIn: false,
+                    isLoggedIn: true,
                     fullname: fullname.value,
                     password: password.value,
                     email: email.value,
@@ -112,18 +112,19 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function isValidEmail(value) {
-    const emailValue = value.trim();
-    const atIndex = emailValue.indexOf('@');
-    const lastAtIndex = emailValue.lastIndexOf('@');
+    const emailValue = value.trim();  //sithijahiripitiya16@gmail.com
+    const atIndex = emailValue.indexOf('@'); // 20
+    const lastAtIndex = emailValue.lastIndexOf('@');//19
 
-    if (atIndex <= 0 || atIndex !== lastAtIndex) return false;
+    if (atIndex <= 0 || atIndex !== lastAtIndex) return false; 
 
-    const localPart = emailValue.slice(0, atIndex);
-    const domainPart = emailValue.slice(atIndex + 1);
+    const localPart = emailValue.slice(0, atIndex); //sithijahiripitiya16 
+    const domainPart = emailValue.slice(atIndex + 1); //gmail.com
     if (!localPart || !domainPart) return false;
 
     const dotIndex = domainPart.indexOf('.');
     const lastDotIndex = domainPart.lastIndexOf('.');
+    if(domainPart != "gmail.com") showError(email,"Ensure that your are login through only google");
     if (dotIndex <= 0 || lastDotIndex === domainPart.length - 1) return false;
 
     if (emailValue.includes(' ')) return false;
@@ -141,7 +142,9 @@ function isValidPhone(value) {
             return false;
         }
     }
+    
 
-    return true;
+    return true; 
+    
 }
 

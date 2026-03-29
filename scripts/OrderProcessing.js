@@ -74,5 +74,7 @@ function printBill() {
         nav.style.display = 'none';
     }
 
+    nav.style.display = 'none';
+
     window.print();
 }

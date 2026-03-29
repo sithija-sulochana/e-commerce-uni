@@ -10,6 +10,7 @@ function loadCart() {
     const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     console.log("Loaded cart items:", cartItems);
     const cartContainer = document.getElementById('cart-items-container');
+    
     const summaryContainer = document.getElementById('cart-summary-container');
     
     // const discount = item.discount;
@@ -130,6 +131,7 @@ function setItems() {
         },0)
 
         console.log("Total price calculated for checkout:", totalPrice);
+        // 
         const cardSummery ={
             id: Date.now(),
             totalPrice: totalPrice,

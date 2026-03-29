@@ -70,7 +70,7 @@
 
      .hero-content {
          position: relative;
-         z-index: 2;
+         z-index: 1;
          max-width: 800px;
          padding: 20px;
          color: white;
@@ -154,6 +154,8 @@
          transform: translateY(-3px);
          box-shadow: 0 12px 28px rgba(102, 126, 234, 0.5);
      }
+
+     
 
      /* SECTIONS  */
 
@@ -556,7 +558,7 @@
          }
 
          .search-container {
-             flex-direction: column;
+             flex-direction: row;
              border-radius: 12px;
          }
      }
