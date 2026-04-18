@@ -372,44 +372,48 @@
 
     // When click add to card button send the product name , image, price to the ViewCardPage and show the added product in the cart page. This can be done by storing the product details in localStorage when the "Add to Cart" button is clicked, and then retrieving and displaying those details on the ViewCartPage.
 
-    function addToCart(id, name, image, price, category = 'Product') {
+   function addToCart(id, name, image, price, category = 'Product') {
+    // 1. Check Login Status (using the correct key 'user')
+    const userData = JSON.parse(localStorage.getItem('user'));
+    const isLoggedIn = userData ? userData.isLoggedIn : false;
 
-        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-        if (!id || !name || !price) {
-            console.error("Invalid product data:", { id, name, image, price });
-            return; // STOP execution
-        }
-
-        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (!currentUser || !currentUser.isLoggedIn) {
-        alert("Please Register or Log in to add products to your cart.");
-        window.location.href = '/pages/registrationPage.html';
+    if (!isLoggedIn) {
+        alert("Please log in to add products to your cart.");
+        window.location.href = '/pages/loginPage.html';
         return; 
     }
 
-        console.log(cartItems, { id, name, image, price, category });
-        // Check if product already exists
-        const existingItem = cartItems.find(item => item.id === id);
+    
+    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            cartItems.push({
-                id: id,
-                name: name,
-                image: image,
-                price: price,
-                category: category,
-                quantity: 1,
-                discount: 15,
-            });
-        }
-
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
-
-        // Redirect to cart page
-        window.location.href = '/pages/ViewCartPage.html';
+    // Validation
+    if (!id || !name || !price) {
+        console.error("Invalid product data:", { id, name, image, price });
+        return;
     }
+
+    const existingItem = cartItems.find(item => item.id === id);
+
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cartItems.push({
+            id: id,
+            name: name,
+            image: image,
+            price: price,
+            category: category,
+            quantity: 1,
+            discount: 15,
+        });
+    }
+
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    
+    // Feedback to user
+    alert(`${name} added to cart!`);
+    window.location.href = '/pages/ViewCartPage.html';
+}
 
 
 
@@ -526,17 +530,4 @@
     filterByCategory();
 
 
-    function checkLoginForAddToCart() {const isLogIn = localStorage.getItem("currentUser") ? JSON.parse(localStorage.getItem("currentUser")).isLoggedIn : false;
-    console.log(isLogIn)
-
-    if(isLogIn ){
-        document.querySelectorAll('.btn-add').forEach(button => {
-            button.addEventListener('click', function(event) {
-                event.preventDefault();
-                alert("Please log in to add products to your cart.");
-                window.location.href = '/pages/loginPage.html';
-            });
-        });
-    }}
-    checkLoginForAddToCart();
-
+ 

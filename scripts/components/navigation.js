@@ -90,6 +90,13 @@ if (user && user.isLoggedIn && authButtons) {
         </a>
         <a href="#" class="btn-register" onclick="localStorage.removeItem('user'); window.location.href='/pages/homepage.html';" style="background: #ef4444; top:20px">Logout</a>
     `;
+
+ 
+
+}else{
+    if(!user){
+        localStorage.setItem('user', JSON.stringify({ isLoggedIn: false }));}
+      
 }
 
 
