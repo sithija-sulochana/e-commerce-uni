@@ -6,7 +6,7 @@
 <title>Product Management</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+<script src="../scripts/ProductCRUD.js"></script>
 <style>
 body {
     margin: 0;
@@ -115,7 +115,7 @@ table {
     width: 100%;
     margin-top: 20px;
     border-collapse: collapse;
-    background: white;
+    background: rgb(237, 237, 237);
 }
 
 th, td {
@@ -163,26 +163,30 @@ img {
     <h2 style="display: inline-flex; gap: 4px; margin-bottom: 0; margin-top: 0; color: gray;">Add Product <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXBhY2thZ2UtcGx1cy1pY29uIGx1Y2lkZS1wYWNrYWdlLXBsdXMiPjxwYXRoIGQ9Ik0xMiAyMlYxMiIvPjxwYXRoIGQ9Ik0xNiAxN2g2Ii8+PHBhdGggZD0iTTE5IDE0djYiLz48cGF0aCBkPSJNMjEgMTAuNTM1VjhhMiAyIDAgMCAwLTEtMS43M2wtNy00YTIgMiAwIDAgMC0yIDBsLTcgNEEyIDIgMCAwIDAgMyA4djhhMiAyIDAgMCAwIDEgMS43MjlsNyA0YTIgMiAwIDAgMCAyIC4wMDFsMS42NzUtLjk1NSIvPjxwYXRoIGQ9Ik0zLjI5IDcgMTIgMTJsOC43MS01Ii8+PHBhdGggZD0ibTcuNSA0LjI3IDguOTk3IDUuMTQ4Ii8+PC9zdmc+" alt="" style="width: 30px; height: 30px; margin-left: 10px;"></h2>
 
     <p style="color: navy;">Please add the products first before adding product specifications</p>
-    <form onsubmit="addProduct(event)" style="margin-top: 5px;">
-
+<form action="../backend/products/productManagement.php" method="POST" enctype="multipart/form-data">
        
-        <input type="text" id="name" placeholder="Product Name" required>
+       <input type="text" id="name" name="name" placeholder="Product Name" required>
 
-        <select id="category">
+        <select id="category" name="category">
             <option>Laptop</option>
             <option>Phone</option>
             <option>Computer</option>
         </select>
 
-        <input type="number" id="price" placeholder="Price" required>
-        <input type="number" id="stock" placeholder="Stock" required>
-
-        <input type="file" id="image" accept="image/*">
+        <input type="number" id="price" placeholder="Price" required name="price">
+        <input type="number" id="stock" placeholder="Stock" required name="stock">
+        <textarea name="description" id="description" placeholder="Product Description" style="width: 100%; padding: 10px; margin-top: 10px; border-radius: 6px; border: 1px solid #ccc;"></textarea>
+        <input type="number" id="discountPrice" placeholder="Enter discount percentage" name="discountPrice" min="0" max="100">
+        <input name="image" type="file" id="image" accept="image/*">
 
          <button type="submit">Add Product</button>
+         <button type="reset" style="background-color: gray;">Reset</button>
         <!-- ATTRIBUTES -->
         <h3 style="color: gray;">Attributes</h3>
         <div id="kvContainer">
+
+            <input type="text" placeholder="Enter user ID" name="userId">
+
             <div class="kv-row">
                 <input type="text" placeholder="Key" name="spec_key[]">
                 <input type="text" placeholder="Value" name="spec_value[]">
@@ -191,22 +195,35 @@ img {
         </div>
 
         <button type="submit">Add Specifications</button>
+         <button type="reset" style="background-color: gray;">Reset</button>
+
     </form>
 </div>
 
 <!-- DELETE -->
+ <form action="../backend/products/DeleteProductById.php" method="get"  style="flex: 1 1 400px; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
 <div class="card">
     <h2 style="display: flex; color: gray;">Delete Product <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXRyYXNoLWljb24gbHVjaWRlLXRyYXNoIj48cGF0aCBkPSJNMTkgNnYxNGEyIDIgMCAwIDEtMiAySDdhMiAyIDAgMCAxLTItMlY2Ii8+PHBhdGggZD0iTTMgNmgxOCIvPjxwYXRoIGQ9Ik04IDZWNGEyIDIgMCAwIDEgMi0yaDRhMiAyIDAgMCAxIDIgMnYyIi8+PC9zdmc+" alt="" style="width: 30px; height: 30px; margin-left: 10px;"></h2>
-    <input type="text" id="deleteId" placeholder="Enter ID">
+    <input type="text"  placeholder="Enter ID" name="deleteId" id="deleteID">
     <button onclick="deleteProduct()">Delete</button>
 
-    <div style="background-color: white;">
-    <h2 style="color: gray; display: flex;">Update Stock <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXJlZnJlc2gtY2N3LWljb24gbHVjaWRlLXJlZnJlc2gtY2N3Ij48cGF0aCBkPSJNMjEgMTJhOSA5IDAgMCAwLTktOSA5Ljc1IDkuNzUgMCAwIDAtNi43NCAyLjc0TDMgOCIvPjxwYXRoIGQ9Ik0zIDN2NWg1Ii8+PHBhdGggZD0iTTMgMTJhOSA5IDAgMCAwIDkgOSA5Ljc1IDkuNzUgMCAwIDAgNi43NC0yLjc0TDIxIDE2Ii8+PHBhdGggZD0iTTE2IDE2aDV2NSIvPjwvc3ZnPg==" alt="" style="width: 30px; height: 30px; margin-left: 10px;"></h2>
-    <input type="text" id="updateId" placeholder="Enter ID">
-    <input type="number" id="updateStock" placeholder="Enter new stock">
-    <button onclick="updateStock()">Update</button>
-</div>
     
+ </form> 
+
+ 
+ 
+ <form action="../backend/products/updatingProductById.php" method="POST" style="margin-top: 20px;">
+
+    <div style="background-color: white;">
+    <h2 style="color: gray; display: flex;">Update Product <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXJlZnJlc2gtY2N3LWljb24gbHVjaWRlLXJlZnJlc2gtY2N3Ij48cGF0aCBkPSJNMjEgMTJhOSA5IDAgMCAwLTktOSA5Ljc1IDkuNzUgMCAwIDAtNi43NCAyLjc0TDMgOCIvPjxwYXRoIGQ9Ik0zIDN2NWg1Ii8+PHBhdGggZD0iTTMgMTJhOSA5IDAgMCAwIDkgOSA5Ljc1IDkuNzUgMCAwIDAgNi43NC0yLjc0TDIxIDE2Ii8+PHBhdGggZD0iTTE2IDE2aDV2NSIvPjwvc3ZnPg==" alt="" style="width: 30px; height: 30px; margin-left: 10px;"></h2>
+    <input type="text" id="updateId" placeholder="Enter ID" name="updateId">
+    <input type="number" id="updateStock" placeholder="Enter new stock" name="newqty">
+    <input type="number" id="updatePrice" placeholder="Enter new price" name="newPrice">
+    <input type="text" id="updateDiscount" placeholder="Enter new discount percentage" name="newDiscount">
+    <button onclick="updateStock()">Update</button>
+    <button type="reset" style="background-color: gray;">Reset  </button>
+</div>
+</form>
 </div>
 
 
@@ -238,20 +255,7 @@ img {
 
 
 <script>
-    function addRow() {
-    const container = document.getElementById("kvContainer");
 
-    const div = document.createElement("div");
-    div.className = "kv-row";
-
-    div.innerHTML = `
-        <input type="text" placeholder="Key" name = "spec_key[]">
-        <input type="text" placeholder="Value" name = "spec_value[]">
-        <button type="button" class="remove" onclick="this.parentElement.remove()">X</button>
-    `;
-
-    container.appendChild(div);
-}
 </script>
 
 
