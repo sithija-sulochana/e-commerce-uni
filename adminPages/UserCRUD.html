@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page | User Management</title>
+    <style>
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f6f9;
+}
+.navbar {
+    background: #001f3f;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar h1 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.nav-links a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+    </style>
+</head>
+<body>
+     <div class="navbar">
+    <div class="logo" onclick="window.location.href='../adminPages/adminHome.html'" style="font-weight: 700; font-size: 30px;">Tech<span style="color:white; padding: 0 5px; background-color: #5b9bf0; margin-left: 5px;border-radius: 5px;">Hub</span> </div>
+    <div class="nav-links">
+        <a href="../adminPages/adminHome.html">Home</a>
+        <a href="./productCRUD.html">Products</a>
+        <a href="../adminPages/userManagement.html">Users</a>
+        <a href="../adminPages/orderManagement.html">Orders</a>
+        <a href="../adminPages/faqManagement.html">FAQ</a>
+    </div>
+
+    <!-- assign admin or customer accounts for defaut account -->
+   
+</div>
+<div class="header" style="margin-top: 5px;">
+    <h1><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXVzZXItaWNvbiBsdWNpZGUtdXNlciI+PHBhdGggZD0iTTE5IDIxdi0yYTQgNCAwIDAgMC00LTRIOWE0IDQgMCAwIDAtNCA0djIiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjciIHI9IjQiLz48L3N2Zz4=" alt=""> User Management<span style="color:white; padding: 0 5px; background-color: #5b9bf0; margin-left: 5px;border-radius: 5px;">Hub</span></h1>
+</div>
+
+ <div>
+        <form action="">
+            <input type="text" placeholder="Enter customer Email" id="customerEmail" style="padding: 5px; border-radius: 5px; border: 1px solid #ccc;">
+        </form>
+
+    </div>
+</body>
+</html>

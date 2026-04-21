@@ -51,6 +51,7 @@ document.getElementById("productForm").reset();
 
 
 
+    //TODO : Add session for admin and only allow access to this page if admin is logged in. Also add a logout button to end the session.
 function deleteProduct(){
     let productId = document.getElementById("deleteID");
     productId = productId.value.trim();
@@ -60,7 +61,7 @@ function deleteProduct(){
     }else{
         console.log(`Attempting to delete product with ID: ${productId}`);
         if(confirm(`Are you sure you want to delete product with ID ${productId}?`)){
-            fetch(`../backend/products/DeleteProductById.php?deketeId=${productId}`, {
+            fetch(`../backend/products/DeleteProductById.php?deleteId=${productId}`, {
                 method: "DELETE"
             })
             .then(response => {
@@ -111,4 +112,42 @@ function deleteProduct(){
         console.error('Error:', error);
         alert("An error occurred while updating.");
     });
+}
+
+
+// Insert product specifications
+
+function submitData() {
+
+   
+   const rows = document.querySelectorAll("#kvContainer .kv-row");
+   const specs = [];
+
+ const idInput = document.getElementById("product_id") || document.querySelector('input[name="product_id"]');
+
+   if(!id){
+    alert("Please enter a product ID");
+    return;
+   }
+
+   rows.forEach(row=>{
+    const key = row.querySelector('.specKey').value.trim();
+    const value = row.querySelector('.specValue').value.trim();
+
+    if(key && value){
+        specs.push({ key, value});
+    }
+   });
+
+   console.log("Submitting specs for product ID:", id);
+   console.log("Specs:", specs);
+
+   fetch('../backend/productSpec/addProductSepec.php', {
+        method: 'POST',
+        headers:{ 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId: id, specifications: specs})
+    })
+    .then(res => res.text())
+    .then(data => alert(data))
+    .catch(err => console.error(err));
 }

@@ -140,18 +140,18 @@ img {
 <body>
 
     <div class="navbar">
-    <div class="logo" onclick="window.location.href='#'" style="font-weight: 700; font-size: 30px;">Tech<span style="color:white; padding: 0 5px; background-color: #5b9bf0; margin-left: 5px;border-radius: 5px;">Hub</span> </div>
+    <div class="logo" onclick="window.location.href='../adminPages/adminHome.html'" style="font-weight: 700; font-size: 30px;">Tech<span style="color:white; padding: 0 5px; background-color: #5b9bf0; margin-left: 5px;border-radius: 5px;">Hub</span> </div>
     <div class="nav-links">
-        <a href="#">Home</a>
-        <a href="#">Products</a>
-        <a href="#">Users</a>
-        <a href="#">Orders</a>
-        <a href="#">FAQ</a>
+        <a href="../adminPages/adminHome.html">Home</a>
+        <a href="./productCRUD.html">Products</a>
+        <a href="../adminPages/userManagement.html">Users</a>
+        <a href="../adminPages/orderManagement.html">Orders</a>
+        <a href="../adminPages/faqManagement.html">FAQ</a>
     </div>
 </div>
 
 <div class="header" style="margin-top: 5px;">
-    <h1><i class="fas fa-box"></i> Product Management</h1>
+    <h1><i class="fas fa-box"></i> Product Management <span style="color:white; padding: 0 5px; background-color: #5b9bf0; margin-left: 5px;border-radius: 5px;">Hub</span></h1>
 </div>
 
 <div class="container">
@@ -182,22 +182,25 @@ img {
          <button type="submit">Add Product</button>
          <button type="reset" style="background-color: gray;">Reset</button>
         <!-- ATTRIBUTES -->
+       
+    </form>
+
+      <form action="../backend/productSpec/addProductSepec.php" method="POST" >
         <h3 style="color: gray;">Attributes</h3>
         <div id="kvContainer">
 
-            <input type="text" placeholder="Enter user ID" name="userId">
-
+<input type="text" placeholder="Enter product ID" name="product_id" required id="product_id">
             <div class="kv-row">
-                <input type="text" placeholder="Key" name="spec_key[]">
+                <input type="text" placeholder="Key" name="spec_key[]" >
                 <input type="text" placeholder="Value" name="spec_value[]">
                 <button type="button" onclick="addRow()">+</button>
             </div>
         </div>
 
-        <button type="submit">Add Specifications</button>
+        <button type="submit" onclick="submitData(event)" >Add Specifications</button>
          <button type="reset" style="background-color: gray;">Reset</button>
 
-    </form>
+         </form>
 </div>
 
 <!-- DELETE -->
