@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f6f9; }
+        .header { background: #001f3f; color: white; padding: 20px 30px; }
+        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+        .card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: 600; margin-bottom: 5px; color: #333; }
+        input, textarea, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; }
+        select { cursor: pointer; }
+        textarea { resize: vertical; min-height: 80px; }
+        .btn { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: 600; }
+        .btn-primary { background: #007bff; color: white; }
+        .btn-primary:hover { background: #0056b3; }
+        .btn-danger { background: #dc3545; color: white; }
+        .btn-danger:hover { background: #c82333; }
+        .btn-warning { background: #ffc107; color: #333; }
+        .btn-warning:hover { background: #e0a800; }
+        .faq-list { margin-top: 30px; }
+        .faq-item { background: #f8f9fa; padding: 15px; border-left: 4px solid #007bff; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: start; }
+        .faq-category { display: inline-block; background: #007bff; color: white; padding: 4px 10px; border-radius: 3px; font-size: 12px; margin-bottom: 8px; font-weight: 600; }
+        .faq-content { flex: 1; }
+        .faq-question { font-weight: 600; color: #001f3f; margin-bottom: 5px; }
+        .faq-answer { color: #666; font-size: 14px; }
+        .faq-actions { display: flex; gap: 10px; }
+        .faq-actions button { padding: 8px 12px; font-size: 12px; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; }
+        .modal.active { display: flex; justify-content: center; align-items: center; }
+        .modal-content { background: white; padding: 30px; border-radius: 10px; width: 90%; max-width: 500px; }
+        .modal-header { font-size: 20px; font-weight: bold; margin-bottom: 20px; }
+        .close-btn { float: right; cursor: pointer; font-size: 24px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📋 FAQ Management</h1>
+    </div>
+
+    <div class="container">
+        <!-- Add FAQ Form -->
+        <div class="card">
+            <h2>Add New FAQ</h2>
+            <form id="faqForm">
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <select id="category" required>
+                        <option value="">Select Category</option>
+                        <option value="Account & Login">Account & Login</option>
+                        <option value="Products & Orders">Products & Orders</option>
+                        <option value="Returns & Refunds">Returns & Refunds</option>
+                        <option value="Technical & Product Information">Technical & Product Information</option>
+                        <option value="Shipping & Delivery">Shipping & Delivery</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="question">Question:</label>
+                    <input type="text" id="question" required placeholder="Enter FAQ question">
+                </div>
+                <div class="form-group">
+                    <label for="answer">Answer:</label>
+                    <textarea id="answer" required placeholder="Enter FAQ answer"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Add FAQ</button>
+            </form>
+        </div>
+
+        <!-- FAQ List -->
+        <div class="card faq-list">
+            <h2>FAQ List</h2>
+            <div id="faqContainer"></div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="modal-header">Edit FAQ</div>
+            <form id="editForm">
+                <div class="form-group">
+                    <label for="editCategory">Category:</label>
+                    <select id="editCategory" required>
+                        <option value="Account & Login">Account & Login</option>
+                        <option value="Products & Orders">Products & Orders</option>
+                        <option value="Returns & Refunds">Returns & Refunds</option>
+                        <option value="Technical & Product Information">Technical & Product Information</option>
+                        <option value="Shipping & Delivery">Shipping & Delivery</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editQuestion">Question:</label>
+                    <input type="text" id="editQuestion" required>
+                </div>
+                <div class="form-group">
+                    <label for="editAnswer">Answer:</label>
+                    <textarea id="editAnswer" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = '../backend/products/faq.php';
+        let currentEditId = null;
+        const modal = document.getElementById('editModal');
+        const closeBtn = document.querySelector('.close-btn');
+
+        document.addEventListener('DOMContentLoaded', loadFAQs);
+
+        document.getElementById('faqForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const category = document.getElementById('category').value;
+            const question = document.getElementById('question').value;
+            const answer = document.getElementById('answer').value;
+            
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ category, question, answer })
+                });
+                if (response.ok) {
+                    document.getElementById('faqForm').reset();
+                    loadFAQs();
+                }
+            } catch (error) {
+                console.error('Error adding FAQ:', error);
+            }
+        });
+
+        async function loadFAQs() {
+            try {
+                const response = await fetch(API_URL);
+                const grouped = await response.json();
+                const container = document.getElementById('faqContainer');
+                let html = '';
+                for (const [category, faqs] of Object.entries(grouped)) {
+                    html += `<div style="margin-bottom: 30px;"><h3 style="color: #001f3f; margin-bottom: 15px; border-bottom: 2px solid #007bff; padding-bottom: 10px;">${category}</h3>`;
+                    html += faqs.map(faq => `
+                        <div class="faq-item">
+                            <div class="faq-content">
+                                <div class="faq-category">${faq.category}</div>
+                                <div class="faq-question">Q: ${faq.question}</div>
+                                <div class="faq-answer">A: ${faq.answer}</div>
+                            </div>
+                            <div class="faq-actions">
+                                <button class="btn btn-warning" onclick="editFAQ(${faq.id}, '${faq.category.replace(/'/g, "\\'")}', '${faq.question.replace(/'/g, "\\'")}', '${faq.answer.replace(/'/g, "\\'")}')" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger" onclick="deleteFAQ(${faq.id})" title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `).join('');
+                    html += '</div>';
+                }
+                container.innerHTML = html || '<p>No FAQs found</p>';
+            } catch (error) {
+                console.error('Error loading FAQs:', error);
+            }
+        }
+
+        function editFAQ(id, category, question, answer) {
+            currentEditId = id;
+            document.getElementById('editCategory').value = category;
+            document.getElementById('editQuestion').value = question;
+            document.getElementById('editAnswer').value = answer;
+            modal.classList.add('active');
+        }
+
+        document.getElementById('editForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const category = document.getElementById('editCategory').value;
+            const question = document.getElementById('editQuestion').value;
+            const answer = document.getElementById('editAnswer').value;
+            
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id: currentEditId, category, question, answer })
+                });
+                if (response.ok) {
+                    modal.classList.remove('active');
+                    loadFAQs();
+                }
+            } catch (error) {
+                console.error('Error updating FAQ:', error);
+            }
+        });
+
+        async function deleteFAQ(id) {
+            if (!confirm('Are you sure?')) return;
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id })
+                });
+                if (response.ok) loadFAQs();
+            } catch (error) {
+                console.error('Error deleting FAQ:', error);
+            }
+        }
+
+        closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('active');
+        });
+    </script>
+</body>
+</html>

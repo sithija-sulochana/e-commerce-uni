@@ -9,6 +9,60 @@
     <link rel="stylesheet" href="../styles/faq.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     
+    <script defer>
+        // Load FAQs dynamically
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                const response = await fetch('../backend/products/faq.php');
+                const grouped = await response.json();
+                const wrapper = document.querySelector('.faq-wrapper');
+                wrapper.innerHTML = '';
+                
+                for (const [category, faqs] of Object.entries(grouped)) {
+                    const section = document.createElement('section');
+                    section.className = 'faq-section';
+                    section.innerHTML = `<h2 class="section-title">${category}</h2>`;
+                    
+                    faqs.forEach(faq => {
+                        const item = document.createElement('div');
+                        item.className = 'faq-item';
+                        item.innerHTML = `
+                            <button class="faq-question">
+                                <span>${faq.question}</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>${faq.answer}</p>
+                            </div>
+                        `;
+                        section.appendChild(item);
+                    });
+                    
+                    wrapper.appendChild(section);
+                }
+                
+                // Re-attach event listeners after loading
+                attachFaqListeners();
+            } catch (error) {
+                console.error('Error loading FAQs:', error);
+            }
+        });
+
+        function attachFaqListeners() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(button => {
+                button.addEventListener('click', function() {
+                    const faqItem = this.parentElement;
+                    faqItem.classList.toggle('active');
+                    faqQuestions.forEach(otherButton => {
+                        if (otherButton !== button) {
+                            otherButton.parentElement.classList.remove('active');
+                        }
+                    });
+                });
+            });
+        }
+    </script>
     <script src="../scripts/faq.js" defer></script>
 </head>
 
@@ -26,265 +80,7 @@
     <!-- FAQ CONTAINER -->
     <main class="faq-container">
         <div class="faq-wrapper">
-            <!-- ACCOUNT & LOGIN -->
-            <section class="faq-section">
-                <h2 class="section-title">Account & Login</h2>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>How do I create an account?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>To create an account, click on the "Sign Up" button in the top right corner of our website. Fill in your email address, create a strong password, and provide your basic information. You'll receive a confirmation email to verify your account. Once verified, you can start shopping!</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>I forgot my password. How can I reset it?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Click on the "Forgot Password?" link on the login page. Enter your registered email address, and we'll send you a password reset link. Click the link in the email and follow the instructions to create a new password.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>Can I update my profile information?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Yes! Log in to your account and navigate to "My Profile" or "Account Settings". Here you can update your personal information, email address, phone number, and billing/shipping addresses. Changes are saved immediately.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- PRODUCTS & ORDERS -->
-            <section class="faq-section">
-                <h2 class="section-title">Products & Orders</h2>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>How can I track my order?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>After your order is shipped, you'll receive an email with a tracking number. You can use this number to track your package on our "Order Tracking" page. Simply enter your tracking number to see real-time updates on your delivery status.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>What payment methods do you accept?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We accept all major credit and debit cards (Visa, Mastercard, American Express), digital wallets (PayPal, Apple Pay, Google Pay), and bank transfers. All transactions are encrypted and secure.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>How long does shipping take?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Standard shipping typically takes 5-7 business days. Express shipping is available for 2-3 business days. Overnight delivery is also an option for most locations. Shipping times are calculated from the date your order is confirmed and processed.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>Do you ship internationally?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We currently ship to most countries worldwide. International shipping rates and delivery times vary by location. During checkout, you can select your country and see the exact shipping cost and estimated delivery date before completing your purchase.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>What is your warranty policy?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Most of our products come with a manufacturer's warranty. Laptops typically have 1-2 years, and smartphones have 1 year. Check the product details page for specific warranty information. We also offer extended warranty options at checkout.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- RETURNS & REFUNDS -->
-            <section class="faq-section">
-                <h2 class="section-title">Returns & Refunds</h2>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>What is your return policy?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We offer a 30-day money-back guarantee on most items. If you're not completely satisfied with your purchase, you can return it within 30 days for a full refund. Items must be unused, in original packaging, with all accessories included.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>How do I initiate a return?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Log in to your account and go to "My Orders". Find the item you wish to return and click "Return Item". Fill out the return form and print the prepaid shipping label we provide. Pack your item and drop it off at any shipping location.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>How long does it take to process a refund?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Once we receive your returned item and inspect it, we'll process your refund within 5-7 business days. The refund will be credited back to your original payment method. Depending on your bank, it may take an additional 3-5 business days to appear in your account.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>What if my product arrives damaged?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>If your product arrives damaged, please contact our customer support immediately with photos of the damage. We'll arrange a replacement or refund without requiring you to ship the damaged item back. Take photos of the damaged packaging and product for our records.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- TECHNICAL & PRODUCT INFO -->
-            <section class="faq-section">
-                <h2 class="section-title">Technical & Product Information</h2>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>Where can I find detailed product specifications?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Each product has a dedicated detail page with complete specifications. You'll find information about processor, RAM, storage, display, battery life, camera specs, and more. Scroll down on the product page or click the "Specifications" tab to view all technical details.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>Do you sell refurbished products?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We primarily sell new products from authorized manufacturers. All items go through quality checks before shipping. Products are clearly labeled if they're open-box or refurbished. These discounted items still come with the same return policy and customer support.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>Can I compare products?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Yes! On product listing pages, you can select multiple items using the checkboxes and click "Compare" to view their specifications side-by-side. This makes it easy to choose between similar products.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>Do you offer bulk or corporate discounts?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Yes, we offer special pricing for bulk orders and corporate purchases. Contact our corporate sales team at corporate@techhub.com or call our sales department for a custom quote based on your requirements.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECURITY & PRIVACY -->
-            <section class="faq-section">
-                <h2 class="section-title">Security & Privacy</h2>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>Is my personal information secure?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Yes, we use industry-standard SSL encryption to protect all your personal and payment information. Our website is regularly audited for security vulnerabilities. We never share your information with third parties without your consent.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>How is my payment information protected?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>All payment transactions are processed through secure, encrypted connections. We comply with PCI DSS standards and never store complete credit card information on our servers. Payment data is handled by trusted third-party processors.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>How do I opt out of marketing emails?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>You can unsubscribe from marketing emails by clicking the "Unsubscribe" link at the bottom of any marketing email. You can also manage your email preferences in your account settings under "Communication Preferences". You'll continue to receive order and account notifications.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>What is your privacy policy?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>For detailed information about how we collect, use, and protect your data, please visit our <a href="PrivacyPolicy.html">Privacy Policy</a> page. We are committed to protecting your privacy and complying with all applicable data protection regulations.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CUSTOMER SUPPORT -->
-            <section class="faq-section">
-                <h2 class="section-title">Customer Support</h2>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>How can I contact customer support?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>You can reach our customer support team through multiple channels: Email us at support@techhub.com, call our hotline at 1-800-TECHHUB, use the live chat on our website, or visit our <a href="ContactPage.html">Contact Page</a>. We're available 24/7 to help you.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>What are your customer support hours?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Our customer support team is available 24 hours a day, 7 days a week. Email inquiries are typically responded to within 2-4 hours. Live chat and phone support are available with wait times varying by volume.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>Do you offer technical support for products?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Yes! Our technical support team can help with setup, troubleshooting, and general product questions. For specific technical issues with brand products, we can also direct you to the manufacturer's support resources or arrange warranty service.</p>
-                    </div>
-                </div>
-            </section>
+            <!-- FAQs will be loaded dynamically here -->
         </div>
     </main>
 
@@ -293,7 +89,7 @@
         <div class="cta-content">
             <h2>Didn't find your answer?</h2>
             <p>Our customer support team is here to help</p>
-            <a href="ContactPage.html" class="cta-btn">Contact Us</a>
+            <a href="../pages/ContactPage.html" class="cta-btn">Contact Us</a>
         </div>
     </section>
 
