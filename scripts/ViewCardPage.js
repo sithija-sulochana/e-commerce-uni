@@ -1,43 +1,32 @@
 
-
-// Cart Page - Fetch and display products from localStorage
+// Load cart items from localStorage
 document.addEventListener("DOMContentLoaded", function () {
     loadCart();
 });
 
-// Load cart items from localStorage
 function loadCart() {
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    console.log("Loaded cart items:", cartItems);
-    const cartContainer = document.getElementById('cart-items-container');
-    
-    const summaryContainer = document.getElementById('cart-summary-container');
-    
-    // const discount = item.discount;
+    fetch('/backend/orderManagement/cart/getCart.php')
+        .then(res => res.json())
+        .then(cartItems => {
 
-    // const totalItemPrice = (item.price * item.quantity) 
+            const cartContainer = document.getElementById('cart-items-container');
+            const summaryContainer = document.getElementById('cart-summary-container');
 
+            if (!cartContainer) return;
 
-    if (!cartContainer) return;
+            if (cartItems.length === 0) {
+                cartContainer.innerHTML = `
+                    <div class="empty-cart">
+                        <h2>Your cart is empty</h2>
+                        <p>Add some products to get started!</p>
+                    </div>
+                `;
+                if (summaryContainer) summaryContainer.style.display = 'none';
+                return;
+            }
 
-    // If cart is empty
-    if (cartItems.length === 0) {
-        cartContainer.innerHTML = `
-            <div class="empty-cart">
-                <h2>Your cart is empty</h2>
-                <p>Add some products to get started!</p>
-                <a href="/pages/productList.html" class="continue-shopping">Browse Products →</a>
-            </div>
-        `;
-        if (summaryContainer) {
-            summaryContainer.style.display = 'none';
-        }
-        return;
-    }
-;
-    // Render cart items
-    cartContainer.innerHTML = cartItems.map(item => `
-        <div class="cart-item" data-id="${item.id}">
+            cartContainer.innerHTML = cartItems.map(item => `
+              <div class="cart-item" data-id="${item.id}">
             <button class="remove-btn" title="Remove item" onclick="removeItem(${item.id})">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
@@ -54,7 +43,7 @@ function loadCart() {
                 </div>
                 <div class="item-actions">
                     <div class="qty-control">
-                        <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">−</button>
+                        <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
                         <span class="qty-value">${item.quantity}</span>
                         <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
                     </div>
@@ -62,86 +51,62 @@ function loadCart() {
                 </div>
             </div>
         </div>
-    `).join('');
+            `).join('');
 
-  
-    // Update summary
-    updateSummary(cartItems);
+            updateSummary(cartItems);
+        });
+}
+
+function addToCart(productId) {
+    fetch('/backend/orderManagement/cart/addCart.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ product_id: productId })
+    }).then(() => loadCart());
 }
 
 // Update cart summary
 function updateSummary(cartItems) {
     const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-    const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity - (item.price * item.quantity * item.discount / 100)), 0);
-    
+    const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity - (item.price * item.quantity * item.discount / 100)), 0);
 
-    const subtotalEl = document.getElementById('cart-subtotal');
-    const totalEl = document.getElementById('cart-total');
-    const itemCountEl = document.getElementById('item-count');
-
-    if (subtotalEl) subtotalEl.textContent = `Rs.${subtotal.toLocaleString()}`;
-    if (totalEl) totalEl.textContent = `Rs.${subtotal.toLocaleString()}`;
-    if (itemCountEl) itemCountEl.textContent = `Subtotal (${totalItems} item${totalItems > 1 ? 's' : ''})`;
+    document.getElementById('cart-total').textContent = `Rs.${total.toLocaleString()}`;
+    document.getElementById('item-count').textContent = `(${totalItems} items)`;
 }
 
 // Update quantity
 function updateQuantity(id, change) {
-    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    const item = cartItems.find(item => item.id === id);
-
-    if (item) {
-        item.quantity += change;
-        if (item.quantity <= 0) {
-            cartItems = cartItems.filter(item => item.id !== id);
-        }
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
-        loadCart();
-    }
+    fetch('/backend/orderManagement/cart/updateCart.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            product_id: id,
+            change: change
+        })
+    }).then(() => loadCart());
 }
 
 // Remove item from cart
 function removeItem(id) {
-    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    cartItems = cartItems.filter(item => item.id !== id);
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    loadCart();
+    fetch('/backend/orderManagement/cart/removeCart.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ product_id: id })
+    }).then(() => loadCart());
 }
 
 // Clear entire cart
 function clearCart() {
-    localStorage.removeItem('cartItems');
-    loadCart();
+    fetch('/backend/orderManagement/cart/clearCart.php', {
+        method: 'POST'
+    }).then(() => loadCart());
 }
 
-
-// save product and cart details in localstorage
-
+// Save product and cart details in localStorage
 function setItems() {
-
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-
-    if(cartItems.length === 0) {
-        alert("Your cart is empty! Please add items to proceed.");
-        return;
-    }else{
-        const totalPrice = cartItems.reduce((sum,item)=>{
-            const itemTotal = item.price * item.quantity;
-            const discountAmount = itemTotal * (item.discount / 100);
-            return sum + (itemTotal - discountAmount);
-        },0)
-
-        console.log("Total price calculated for checkout:", totalPrice);
-        // 
-        const cardSummery ={
-            id: Date.now(),
-            totalPrice: totalPrice,
-            status: 'pending',
-            items: cartItems
-        }
-        localStorage.setItem('cardSummery', JSON.stringify(cardSummery));
+    fetch('/backend/orderManagement/checkout.php', {
+        method: 'POST'
+    }).then(() => {
         window.location.href = '/pages/OrderTrackingPage.html';
-        
-    }
-
+    });
 }
-

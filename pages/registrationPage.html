@@ -32,7 +32,7 @@
                 <h2>Create Account</h2>
                 <p class="subtitle">Enter your details to get started</p>
 
-                <form id="registerForm" novalidate>
+                <form id="registerForm"  method="POST" action="../backend/auth/register.php"  novalidate>
                     <!-- Full Name -->
                     <div class="form-group">
                         <label for="fullname">Full Name</label>
@@ -67,14 +67,6 @@
                         <span class="error-msg"></span>
                     </div>
 
-                    <!-- Confirm Password -->
-                    <!-- <div class="form-group">
-                        <label for="confirm">Confirm Password</label>
-                        <input type="text" id="confirm" name="confirm" placeholder="Re-enter password" required>
-                        <span class="error-msg"></span>
-                    </div> -->
-
-                 
 
                     <!-- Checkbox -->
                     <div class="form-group checkbox">
@@ -87,7 +79,7 @@
                 </form>
 
                 <!-- Login Link -->
-                <p class="login-link">Already have an account? <a href="/pages/loginPage.html">Sign In</a></p>
+                <p class="login-link">Already have an account? <a href="/E-commerce/pages/loginPage.html">Sign In</a></p>
             </div>
         </div>
     </div>

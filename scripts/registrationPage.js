@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // --- Validation Logic for Registration Form ---
+   console.log("js is working");
     const registrationForm = document.getElementById('registerForm');
     
-    // This "if" check prevents the "Cannot read properties of null" error
+   
     if (registrationForm) {
         registrationForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const fullname = document.getElementById('fullname');
             const email = document.getElementById('email');
             const password = document.getElementById('password');
-         
+         const address = document.getElementById('address');
             const phone = document.getElementById('phone');
             const terms = document.getElementById('terms');
 
@@ -39,10 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 isValid = false;
             }
 
-            // if (password.value !== confirm.value) {
-            //     showError(confirm, 'Passwords do not match');
-            //     isValid = false;
-            // }
+          
 
             if (!terms.checked) {
                 showError(terms, 'You must agree to the terms');
@@ -50,27 +47,47 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             if (isValid) {
-                // Store user data in localStorage
-                localStorage.setItem('user', JSON.stringify({
-                    isLoggedIn: true,
+                const formData = {
                     fullname: fullname.value,
                     email: email.value,
                     password: password.value,
-                    phone: phone.value
-                }));
-                
-                alert('Account created successfully!');
-                window.location.href = '/pages/homepage.html';
-                
-                localStorage.setItem('currentUser', JSON.stringify({
-                    isLoggedIn: true,
-                    fullname: fullname.value,
-                    password: password.value,
-                    email: email.value,
-                }));
+                    phone: phone.value,
+                    address: address.value
+                };
 
-              
-              
+                console.log("Form Data:", formData);
+
+                console.log("Sending request")
+
+                fetch('http://localhost/E-commerce/backend/auth/register.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(formData)
+                })
+                .then(response => response.json())
+           
+                .then(data => {
+                    if (data.success) {
+                        alert(data.message);
+                      
+                        localStorage.setItem('user', JSON.stringify({
+                            isLoggedIn: true,
+                            fullname: fullname.value,
+                            email: email.value
+                        }));
+                        alert('Registration successful! Welcome, ' + fullname.value + '!');
+                        window.location.href = '../pages/homepage.html';
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred during registration.');
+                });
             }
 
        
@@ -94,7 +111,7 @@ function showError(input, message) {
     }
 }
 
-// Helper functions to Clear all error messages
+
 function clearErrors() {
     document.querySelectorAll('.error-msg').forEach(msg => msg.textContent = '');
     document.querySelectorAll('input').forEach(input => {

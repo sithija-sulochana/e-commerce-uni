@@ -3,54 +3,63 @@ function logIn(event) {
 
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
+
     const emailError = document.getElementById('email-error');
     const passwordError = document.getElementById('password-error');
 
     const email = emailInput.value.trim();
     const password = passwordInput.value.trim();
 
-    // Reset messages 
+    // Clear errors
     emailError.textContent = '';
     passwordError.textContent = '';
 
-    // Validation
- 
-
-    // Retrieve stored user
-    const storedUser = JSON.parse(localStorage.getItem('currentUser'));
-
-    // Check credentials
-    if (storedUser && storedUser.email === email && storedUser.password === password) {
-        // Update login state
-        storedUser.isLoggedIn = true;
-        localStorage.setItem('currentUser', JSON.stringify(storedUser));
-        
-        // Also set 'user' for navigation to show Cart, Profile, Logout buttons
-        localStorage.setItem('user', JSON.stringify({
-            isLoggedIn: true,
-            fullname: storedUser.fullname,
-            email: storedUser.email,
-            password: storedUser.password,
-            phone: storedUser.phone || ''
-        }));
-        
-        alert("Login successful!");
-        window.location.href = '/pages/homepage.html';
-    } else {
-       
+    // Basic validation
+    if (!email || !password) {
+        if (!email) {
+            emailError.textContent = 'Email is required';
+            emailInput.style.borderColor = '#e74c3c';
+        }
+        if (!password) {
+            passwordError.textContent = 'Password is required';
+            passwordInput.style.borderColor = '#e74c3c';
+        }
+        return;
     }
 
-    if(!email || !password) {
-        emailInput.style.borderColor = !email ? '#e74c3c' : '#ddd';
-        passwordInput.style.borderColor = !password ? '#e74c3c' : '#ddd';
-        if(!email) emailError.textContent = 'Email is required.';
-        if(!password) passwordError.textContent = 'Password is required.';
+    console.log("fetch is running");
+    // Send request to backend
+    fetch('http://localhost/E-commerce/backend/auth/login.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({ email, password })
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
 
+        if (data.success && data.user) {
 
-    }if(storedUser.email !== email || storedUser.password !== password) {
-        emailInput.style.borderColor = '#e74c3c';
-        passwordInput.style.borderColor = '#e74c3c';
-        emailError.textContent = 'Invalid email or password.';
-        passwordError.textContent = 'Invalid email or password.';}
+            // Store user in localStorage
+            localStorage.setItem('user', JSON.stringify({
+                isLoggedIn: true,
+                fullname: data.user.fullname,
+                email: data.user.email,
+                phone: data.user.phone
+            }));
+
+            alert('Welcome back, ' + data.user.fullname + '!');
+            window.location.href = '../pages/homepage.html';
+
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred during login.');
+    });
 }
-

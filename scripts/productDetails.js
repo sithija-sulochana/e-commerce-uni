@@ -1,160 +1,218 @@
-let cartCount = 0;
-const productsItems = {
-  id: 1,
-  name: "ASUS TUF A16 FA607M Ryzen 7 RTX 4050",
-  price: 389000,
-  reviews: 248,
-  category: "Gaming Laptop",
-  brand: "ASUS",
+let product; 
 
-  description: "Experience ultimate gaming performance with the ASUS TUF A16. Featuring an AMD Ryzen 7 processor, NVIDIA RTX 4050 graphics, and a lightning-fast 144Hz display.",
-  image: "https://laptopcare.lk/wp-content/uploads/2025/10/victus-70.jpg",
-  specs: {
-    
-    processor: "AMD Ryzen 7 5800H3",
-    gpu: "NVIDIA GeForce RTX 4050",
-    ram: "16GB DDR4",
-    storage: "512GB NVMe SSD",
-    display: "15.6\" FHD 144Hz",
-    keyboard: "RGB Backlit",
-    battery: "48Wh",
-    weight: "2.3 kg",
-    operatingSystem: "Windows 11 Home",
-    
+const brandImages = {
+        'Apple': '/E-commerce/assets/brandsLogos/phones/apple.png',
+        'Dell': '/E-commerce/assets/brandsLogos/laptopsComputer/Dell_Logo.svg-removebg-preview.png',
+        'Asus': '/E-commerce/assets/brandsLogos/laptopsComputer/asus.png',
+        'Samsung': '/E-commerce/assets/brandsLogos/phones/samsung.png',
+        'HP': '/E-commerce/assets/brandsLogos/laptopsComputer/hp.png',
+  };
+document.addEventListener("DOMContentLoaded", async () => {
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get('productId');
 
-  }
-};
-
-// mention device informations
-
-document.addEventListener("DOMContentLoaded",()=>{
-   const productDetails = document.getElementById('product-section');
-   if(productDetails){
-         productDetails.innerHTML=`
-
-          <div>
-          <div class="laptop-type" style = "position: relative; top: 20px; left: 10px;">
-          <span style="background: var(--primary); color: white; padding: 4px 8px; border-radius: 20px; position: relative;margin-top: 20px;">${productsItems.category}</span></div>
-        <img 
-          id="productImage"
-          class="product-image" 
-          ${productsItems.image ? `src="${productsItems.image}"` : ''}
-          alt="${productsItems.name}"
-          loading="lazy"
-        />
-
-        
-      </div>
-      
-      <div class="product-info">
-      ${!productsItems.image ? `<div class="image-placeholder">No Image</div>` : ''}
-        <h1 id="productName">${productsItems.name}</h1>
-        
-        <div class="product-rating">
-          <span class="stars">★★★★★</span>
-          <span>${productsItems.reviews} reviews</span>
-        </div>
-        
-        <p class="product-desc" id="productDesc">
-            ${productsItems.description}
-        </p>
-
-        <div class="price-section">
-          <span class="price" id="productPrice">Rs.${productsItems.price.toLocaleString()}</span>
-          <span class="discount">Save 15% Today</span>
-        </div>
-
-        <h3 class="features-heading">Key Features</h3>
-        <ul class="features">
-           
-            <li> ${productsItems.specs.operatingSystem} </li>
-            <li> ${productsItems.specs.processor} </li>
-            <li> ${productsItems.specs.gpu} </li>
-          
-        </ul>
-
-        <div class="buy-section">
-          <div class="qty-group">
-            <label for="qty" class="qty-label">Qty:</label>
-            <input type="number" id="qty" class="qty-input" min="1" max="10" value="1" />
-          </div>
-          <button class="btn btn-primary" id="addToCartBtn" onclick="addToCart()">Add to Cart</button>
-          <button class="btn btn-secondary" id="wishlistBtn">❤ Wishlist</button>
-        </div>
-      </div>
-         
-         
-         `;
-   }
-})
-
-
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  const detailsTable = document.getElementById('table-section');
-
-  detailsTable.innerHTML = `
-    <table class="specs-table">
-      <tr>
-        <th>Component</th>
-        <th>Specification</th>
-      </tr>
-      ${Object.entries(productsItems.specs).map(([key, value]) => `
-        <tr>
-          <td><strong>${key.charAt(0).toUpperCase() + key.slice(1)}</strong></td>
-          <td>${value}</td>
-        </tr>
-      `).join('')}
-    </table>
-  `;
-
-});
-function addToCart(){
-    const qty = parseInt(document.getElementById('qty').value);
-    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    console.log("Current cart items before adding:", cartItems);
-    
-    const existingItem = cartItems.find(item => item.id === productsItems.id);
-    
-    if (existingItem) {
-        existingItem.quantity += qty;
-        
-    } else {
-        cartItems.push({
-            id: productsItems.id,
-            name: productsItems.name,
-            image: productsItems.image,
-            price: productsItems.price,
-            category: productsItems.category,
-            quantity: qty,
-            discount: 15,
-        });
-
+    if (!productId) {
+        document.getElementById('product-section').innerHTML = '<p>No product ID specified.</p>';
+        return;
     }
 
+    try {
+        const res = await fetch(`/E-commerce/backend/products/GetProductsWithSpecs.php?productId=${productId}`);
+        if (!res.ok) {
+            throw new Error('Product not found');
+        }
+        product = await res.json();
 
+        
+      
+
+        renderProduct(product);
+        renderPaymentOptions(product);
+        renderSpecsTable(product.specs);
+        attachEventListeners();
+
+    } catch (error) {
+        console.error("Failed to fetch product details:", error);
     
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    cartCount += qty;
-
-    alert(`Added ${qty} item(s) to cart!`);
-    window.location.href = '/pages/ViewCartPage.html';
-}
-function selectPayment(method){
-    alert(`Selected payment method: ${method.replace('-',' ').toUpperCase()}`);
-}
-document.getElementById('addToCartBtn').addEventListener('click',addToCart);
-document.getElementById('cartIcon').addEventListener('click',()=>{alert(`Cart has ${cartCount} items`);});
-document.getElementById('wishlistBtn').addEventListener('click',()=>{alert('Added to wishlist!');
-    document.getElementById('wishlistBtn').style.color='var(--danger)';
-});
-document.addEventListener('DOMContentLoaded',()=>{console.log("[v0] Product Details Page Loaded",products);
-
+        document.getElementById('product-section').innerHTML = `<p>Error loading product details: ${error.message}</p>`;
+    }
 });
 
-// Add details specification table by using the mapped objects
+
+
+function renderProduct(product) {
+    const productDetails = document.getElementById('product-section');
+    const brand = product.name.split(" ")[0];
+    const brandImage = brandImages[brand] || 'https://via.placeholder.com/50';
+    if (productDetails) {
+        productDetails.innerHTML = `
+            <div>
+                <div class="laptop-type" style="position: relative; top: 20px; left: 10px;">
+                    <span style="background: var(--primary); color: white; padding: 4px 8px; border-radius: 20px;">${product.category}</span>
+                </div>
+                <img 
+                    id="productImage"
+                    class="product-image" 
+                    src="${product.image}"
+                    alt="${product.name}"
+                    loading="lazy"
+                />
+            </div>
+            <div class="product-info">
+                
+                <h1 id="productName">${product.name}</h1>
+                <p class="product-desc" id="productDesc">${product.description}</p>
+                <div class="price-section">
+                    <span class="price" id="productPrice">Rs.${Number(product.price).toLocaleString()}</span>
+                    <span class="discount">Save ${Math.round(product.discount_percentage) || 0}% Today</span>
+                </div>
+                <h3 class="features-heading">Key Features</h3>
+                <ul class="features">
+                    ${product.specs && Object.keys(product.specs).length > 0 ? Object.values(product.specs).slice(0, 3).map(spec => `<li>${spec}</li>`).join('') : '<li>No key features listed.</li>'}
+                </ul>
+                <div class="buy-section">
+                    <div class="qty-group">
+                        <label for="qty" class="qty-label">Qty:</label>
+                        <input type="number" id="qty" class="qty-input" min="1" max="10" value="1" />
+                    </div>
+                    <button class="btn btn-primary" id="addToCartBtn">Add to Cart</button>
+                    <button class="btn btn-secondary" id="wishlistBtn">❤ Wishlist</button>
+                </div>
+            </div>`;
+    }
+}
+
+function renderPaymentOptions(product){
+    const paymentSection = document.getElementById('payment-section');
+    
+    if(paymentSection){
+        paymentSection.innerHTML = `
+        <div class="payment-header">
+        <i class="fas fa-credit-card"></i>
+        <h2>Secure Payment Options</h2>
+      </div>
+      <p class="payment-subtitle">Choose your preferred payment method for fast & secure checkout</p>
+      
+      <div class="payment-methods-grid">
+        <div class="payment-card" data-method="visa">
+          <div class="payment-icon-wrapper">
+            <img src="https://laptop.lk/wp-content/uploads/visa.png" alt="Visa" />
+          </div>
+          <div class="payment-details">
+            <span class="payment-name">Visa Card</span>
+            <span class="payment-price">Rs.${product.price}</span>
+          </div>
+          <div class="payment-badge">Popular</div>
+        </div>
+        <div class="payment-card" data-method="mastercard">
+          <div class="payment-icon-wrapper">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" alt="Mastercard" />
+          </div>
+          <div class="payment-details">
+            <span class="payment-name">Mastercard</span>
+            <span class="payment-price">Rs. ${product.price - 200}.00</span>
+          </div>
+        </div>
+        <div class="payment-card" data-method="cod">
+          <div class="payment-icon-wrapper">
+            <i class="fas fa-money-bill-wave"></i>
+          </div>
+          <div class="payment-details">
+            <span class="payment-name">Cash on Delivery</span>
+            <span class="payment-price">Rs. ${product.price - 500}.00</span>
+          </div>
+        </div>
+        <div class="payment-card" data-method="installment">
+          <div class="payment-icon-wrapper">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <div class="payment-details">
+            <span class="payment-name">Installments</span>
+            <span class="payment-price">Rs. ${product.price / 12}/month</span>
+          </div>
+          <div class="payment-badge installment">0% Interest</div>
+        </div>
+      </div>
+        
+        `
+    }
+}
+
+function renderSpecsTable(specs) {
+    const detailsTable = document.getElementById('table-section');
+    if (detailsTable && specs && typeof specs === 'object') {
+        detailsTable.innerHTML = `
+            <table class="specs-table">
+                <tr>
+                    <th>Component</th>
+                    <th>Specification</th>
+                </tr>
+                ${Object.entries(specs).map(([key, value]) => `
+                    <tr>
+                        <td><strong>${key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1').trim()}</strong></td>
+                        <td>${value}</td>
+                    </tr>
+                `).join('')}
+            </table>
+        `;
+    } else if (detailsTable) {
+        detailsTable.innerHTML = '<p>No specifications available for this product.</p>';
+    }
+}
 
 
 
-// Filter procuct categories
+function addToCart() {
+    const userData = JSON.parse(localStorage.getItem('user'));
+    if (!userData || !userData.isLoggedIn) {
+        alert("Please log in to add products to your cart.");
+        window.location.href = '/E-commerce/pages/loginPage.html';
+        return;
+    }
+
+    const qty = parseInt(document.getElementById('qty').value);
+    if (!product || !product.id) {
+        alert('Could not add to cart. Product details are missing.');
+        return;
+    }
+
+    fetch('/E-commerce/backend/orderManagement/cart/addCart.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ product_id: product.id, quantity: qty })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.error) {
+            alert('Error: ' + data.error);
+        } else {
+            alert(`Added ${qty} item(s) to cart!`);
+            window.location.href = '/E-commerce/pages/ViewCartPage.html';
+        }
+    })
+    .catch(error => {
+        console.error('Error adding to cart:', error);
+        alert('Failed to add product to cart.');
+    });
+}
+
+function attachEventListeners() {
+    const addToCartBtn = document.getElementById('addToCartBtn');
+    const wishlistBtn = document.getElementById('wishlistBtn');
+
+    if (addToCartBtn) {
+        addToCartBtn.addEventListener('click', addToCart);
+    }
+
+    if (wishlistBtn) {
+        wishlistBtn.addEventListener('click', () => {
+            alert('Added to wishlist!');
+            wishlistBtn.style.color = 'var(--danger)';
+        });
+    }
+}
+
+function selectPayment(method) {
+    alert(`Selected payment method: ${method.replace('-', ' ').toUpperCase()}`);
+}
+

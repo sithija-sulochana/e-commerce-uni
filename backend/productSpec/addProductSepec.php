@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Handle form POST data (not JSON)
-$productId = $_POST['productIdspec'] ?? '';
+$productId = $_POST['product_id'] ?? '';
 $specKeys = $_POST['spec_key'] ?? [];
 $specValues = $_POST['spec_value'] ?? [];
 

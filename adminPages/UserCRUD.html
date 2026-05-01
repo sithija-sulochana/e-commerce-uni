@@ -1,65 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Page | User Management</title>
     <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f6f9;
+        }
 
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: #f4f6f9;
-}
-.navbar {
-    background: #001f3f;
-    color: white;
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        .navbar {
+            background: #001f3f;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.navbar h1 {
-    margin: 0;
-    font-size: 20px;
-}
+        .navbar h1 {
+            margin: 0;
+            font-size: 20px;
+        }
 
-.nav-links a {
-    color: white;
-    margin-left: 20px;
-    text-decoration: none;
-    font-size: 14px;
-}
+        .nav-links a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            font-size: 14px;
+        }
 
-.nav-links a:hover {
-    text-decoration: underline;
-}
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table thead {
+            background-color: #001f3f;
+            color: white;
+        }
+
+        table th,
+        table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
     </style>
 </head>
+
 <body>
-     <div class="navbar">
-    <div class="logo" onclick="window.location.href='../adminPages/adminHome.html'" style="font-weight: 700; font-size: 30px;">Tech<span style="color:white; padding: 0 5px; background-color: #5b9bf0; margin-left: 5px;border-radius: 5px;">Hub</span> </div>
-    <div class="nav-links">
-        <a href="../adminPages/adminHome.html">Home</a>
-        <a href="./productCRUD.html">Products</a>
-        <a href="../adminPages/userManagement.html">Users</a>
-        <a href="../adminPages/orderManagement.html">Orders</a>
-        <a href="../adminPages/faqManagement.html">FAQ</a>
-    </div>
+    <div class="navbar">
+        <div class="logo" onclick="window.location.href='../adminPages/adminHome.html'"
+            style="font-weight: 700; font-size: 30px;">Tech<span
+                style="color:white; padding: 0 5px; background-color: #5b9bf0; margin-left: 5px;border-radius: 5px;">Hub</span>
+        </div>
+        <div class="nav-links">
+            <a href="../adminPages/adminHome.html">Home</a>
+            <a href="./productCRUD.html">Products</a>
+            <a href="../adminPages/UserCRUD.html">Users</a>
+            <a href="../adminPages/OrderCRUD.html">Orders</a>
+            <a href="../adminPages/FaqCRUD.html">FAQ</a>
+        </div>
 
-    <!-- assign admin or customer accounts for defaut account -->
-   
-</div>
-<div class="header" style="margin-top: 5px;">
-    <h1><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXVzZXItaWNvbiBsdWNpZGUtdXNlciI+PHBhdGggZD0iTTE5IDIxdi0yYTQgNCAwIDAgMC00LTRIOWE0IDQgMCAwIDAtNCA0djIiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjciIHI9IjQiLz48L3N2Zz4=" alt=""> User Management<span style="color:white; padding: 0 5px; background-color: #5b9bf0; margin-left: 5px;border-radius: 5px;">Hub</span></h1>
-</div>
-
- <div>
-        <form action="">
-            <input type="text" placeholder="Enter customer Email" id="customerEmail" style="padding: 5px; border-radius: 5px; border: 1px solid #ccc;">
-        </form>
+        <!-- assign admin or customer accounts for defaut account -->
 
     </div>
+    <div class="header"
+        style="padding: 20px; display: flex; justify-content: space-between; align-items: center; background-color: #001f3f; margin-top: 5px;">
+        <h1 style="color: white; display: flex; align-items: center; justify-content: center; height: auto; gap: 2px;">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXVzZXItaWNvbiBsdWNpZGUtdXNlciI+PHBhdGggZD0iTTE5IDIxdi0yYTQgNCAwIDAgMC00LTRIOWE0IDQgMCAwIDAtNCA0djIiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjciIHI9IjQiLz48L3N2Zz4="
+                alt="" style="filter: invert(5); width: 30px; height: 30px;"> User Management<span
+                style="color:white; padding: 0 5px; background-color: #5b9bf0; margin-left: 5px;border-radius: 5px;">Hub</span>
+        </h1>
+    </div>
+
+    <div>
+        <div class="assign-admin"
+            style="display: flex; flex-direction: column; gap: 10px; padding: 20px; background-color: white; margin: 20px;">
+
+            <h1 style="margin-bottom: 0;">Assign Role <img
+                    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXVzZXItc3Rhci1pY29uIGx1Y2lkZS11c2VyLXN0YXIiPjxwYXRoIGQ9Ik0xNi4wNTEgMTIuNjE2YTEgMSAwIDAgMSAxLjkwOS4wMjRsLjczNyAxLjQ1MmExIDEgMCAwIDAgLjczNy41MzVsMS42MzQuMjU2YTEgMSAwIDAgMSAuNTg4IDEuODA2bC0xLjE3MiAxLjE2OGExIDEgMCAwIDAtLjI4Mi44NjZsLjI1OSAxLjYxM2ExIDEgMCAwIDEtMS41NDEgMS4xMzRsLTEuNDY1LS43NWExIDEgMCAwIDAtLjkxMiAwbC0xLjQ2NS43NWExIDEgMCAwIDEtMS41MzktMS4xMzNsLjI1OC0xLjYxM2ExIDEgMCAwIDAtLjI4Mi0uODY2bC0xLjE1Ni0xLjE1M2ExIDEgMCAwIDEgLjU3Mi0xLjgyMmwxLjYzMy0uMjU2YTEgMSAwIDAgMCAuNzM3LS41MzV6Ii8+PHBhdGggZD0iTTggMTVIN2E0IDQgMCAwIDAtNCA0djIiLz48Y2lyY2xlIGN4PSIxMCIgY3k9IjciIHI9IjQiLz48L3N2Zz4="
+                    alt=""></h1>
+            <p style="margin-top: 0; margin-bottom: 15px;">Make a user an admin or Manager</p>
+            <form action="../backend/userManagement/UpdateUserRole.php" method="POST">
+                <input type="text" placeholder="Enter customer Email" id="customerEmail" name="customerEmail"
+                    style="padding: 5px; border-radius: 5px; border: 1px solid #938e8e; width: 250px;">
+                <select id="userRole" name="userRole"
+                    style="padding: 5px; border-radius: 5px; border: 1px solid #938e8e; width: 250px;">
+                    <option value="admin">Admin</option>
+                    <option value="customer">Customer</option>
+                </select>
+                <button type="submit"
+                    style="padding: 5px 10px; background-color: #001f3f; color: white; border: none; border-radius: 5px; cursor: pointer;">Assign
+                    Role</button>
+            </form>
+        </div>
+
+
+    </div>
+
+    <div>
+
+        <!-- //TODO : make user email as a primary key of the user and then delete the user from the database using that email -->
+        <!-- //TODO : add user profile picture to database -->
+
+        <div class="assign-admin"
+            style="display: flex; flex-direction: column; gap: 10px; padding: 20px; background-color: white; margin: 20px;">
+
+            <h1>Delete User <img
+                    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXVzZXItcm91bmQteC1pY29uIGx1Y2lkZS11c2VyLXJvdW5kLXgiPjxwYXRoIGQ9Ik0yIDIxYTggOCAwIDAgMSAxMS44NzMtNyIvPjxjaXJjbGUgY3g9IjEwIiBjeT0iOCIgcj0iNSIvPjxwYXRoIGQ9Im0xNyAxNyA1IDUiLz48cGF0aCBkPSJtMjIgMTctNSA1Ii8+PC9zdmc+"
+                    alt=""></h1>
+            <form action="../backend/userManagement/DeleteUser.php" method="POST">
+                <input type="text" placeholder="Enter customer Email" id="customerEmail" name="customerID"
+                    style="padding: 5px; border-radius: 5px; border: 1px solid #938e8e; width: 250px;">
+
+                <button type="submit"
+                    style="padding: 5px 10px; background-color: #001f3f; color: white; border: none; border-radius: 5px; cursor: pointer;">Delete
+                    User</button>
+            </form>
+        </div>
+
+
+    </div>
+
+    <div>
+
+
+
+        <div class="user-table">
+
+            <input type="text" placeholder="Search users by  email" id="searchInput"
+                style="padding: 5px; border-radius: 5px; border: 1px solid #938e8e; width: 95%; margin: 20px;">
+            <table style="background-color: white; margin: 20px; border-radius: 5px; overflow: hidden;" id="userTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Address</th>
+                        <th>Role</th>
+                        
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+
+
+
+                </tbody>
+            </table>
+        </div>
+
+        <script>
+            // TODO : fetch users from database and display them in the table
+            const userTableBody = document.querySelector('#userTableBody');
+            fetch('http://localhost/E-commerce/backend/userManagement/GetAllUser.php')
+                .then(Response => Response.json())
+                .then(data => {
+                    data.forEach(user => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${user.id}</td>
+                            <td>${user.fullname}</td>
+                            <td>${user.email}</td>
+                            <td>${user.phone}</td>
+                            <td>${user.address}</td>
+                            <td>${user.role}</td>
+                        `;
+                        userTableBody.appendChild(row);
+                    });
+                })
+
+
+                //Search user by email
+
+                const searchInput = document.getElementById('searchInput');
+                searchInput.addEventListener('input',function(){
+                    const searchItem = searchInput.value.toLowerCase();
+                    const rows = userTableBody.getElementsByTagName('tr');
+                    for(let i = 0; i< rows.length; i++){
+                        const emailCell = rows[i].getElementsByTagName('td')[2];
+                        if(emailCell){
+                            const emailText = emailCell.textContent.toLowerCase();
+                            if(emailText.indexOf(searchItem) > -1){
+                                rows[i].style.display = '';
+                            }else{
+                                rows[i].style.display = 'none';
+                            }
+                        }
+
+                    }
+                })
+
+                // Update user role
+                
+
+            
+        </script>
 </body>
+
 </html>

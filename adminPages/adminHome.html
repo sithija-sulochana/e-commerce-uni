@@ -104,10 +104,24 @@ body {
 .btn:hover {
     background: #003366;
 }
+
+
 </style>
 </head>
 
+
+
 <body>
+
+    <?php
+session_start();
+
+
+if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'ADMIN') {
+    header("Location: ../pages/loginPage.html");
+    exit();
+}
+?>
 
 <!-- NAVBAR -->
 <div class="navbar">

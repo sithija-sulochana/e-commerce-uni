@@ -133,7 +133,7 @@
             const searchInput = document.getElementById('product-search');
             const query = searchInput.value.trim();
             if(query){
-                window.location.href = `/pages/productList.html?search=${encodeURIComponent(query)}`;
+                window.location.href = `/E-commerce/pages/productList.html?search=${encodeURIComponent(query)}`;
                 
             }
         }

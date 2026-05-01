@@ -1,4 +1,6 @@
 // footer.js
+const baseUrl = '/E-commerce';
+console.log("NAVBAR LOADED FROM: /E-commerce/scripts/components/navigation.js");
 const footerTemplate = `
 <style>
     :root {
@@ -116,18 +118,18 @@ const footerTemplate = `
 
         <div>
             <h3>Quick Links</h3>
-            <a href="/index.html#home">Home</a>
-            <a href="/index.html#products">Products</a>
-            <a href="/index.html#categories">Categories</a>
-            <a href="/index.html#promotions">Promotions</a>
+            <a href="${baseUrl}/pages/homepage.html">Home</a>
+            <a href="${baseUrl}/pages/productList.html">Products</a>
+            <a href="${baseUrl}/pages/homepage.html#categories">Categories</a>
+            <a href="${baseUrl}/pages/homepage.html#promotions">Promotions</a>
         </div>
 
         <div>
             <h3>Support</h3>
-            <a href="/pages/faq.html">FAQ</a>
-            <a href="/pages/ContactPage.html">Contact Us</a>
-            <a href="/pages/shipping.html">Shipping Info</a>
-            <a href="/pages/returns.html">Returns & Exchange</a>
+            <a href="${baseUrl}/pages/faq.html">FAQ</a>
+            <a href="${baseUrl}/pages/ContactPage.html">Contact Us</a>
+            <a href="${baseUrl}/pages/shipping.html">Shipping Info</a>
+            <a href="${baseUrl}/pages/returns.html">Returns & Exchange</a>
         </div>
 
         <div>
@@ -142,7 +144,7 @@ const footerTemplate = `
 
     <div class="footer-bottom">
         &copy; 2026 TechHub. All rights reserved. | 
-        <a href="/pages/PrivacyPolicy.html" style="display:inline; margin:0;">Privacy Policy</a> | 
+        <a href="${baseUrl}/pages/PrivacyPolicy.html" style="display:inline; margin:0;">Privacy Policy</a> | 
         <a href="#" style="display:inline; margin:0;">Terms of Service</a>
     </div>
 </footer>

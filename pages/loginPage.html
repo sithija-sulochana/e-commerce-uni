@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | TechHub</title>
-    <link rel="stylesheet" href="/styles/registrationPage.css">
-    <script src="/scripts/login.js"></script>
+    <link rel="stylesheet" href="../styles/registrationPage.css">
+    <script src="../scripts/login.js"></script>
 </head>
 <body>
      <div class="container">
     
         <div class="banner" style="position: relative; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; overflow: hidden;">
             
-            <div style="position: absolute; inset: 0; background-image: url('/assets/image-acc.png'); background-size: cover; background-position: center; filter: blur(3px); transform: scale(1.05); z-index: 0;"></div>
+            <div style="position: absolute; inset: 0; background-image: url('../assets/image-acc.png'); background-size: cover; background-position: center; filter: blur(3px); transform: scale(1.05); z-index: 0;"></div>
             
             <div class="banner-content" style="position: relative; z-index: 2;">
                
@@ -25,13 +25,13 @@
                 <div class="brand-logo">
                     
                      <div style="display: flex;justify-content: center; align-items: center; gap: 5px; margin-bottom: 20px; margin-left: 50px;">
-                        <img src="/assets/brandsLogos/Screenshot 2026-03-16 130045.png" alt="" style="margin-left: 50%;">
+                        <img src="../assets/brandsLogos/Screenshot 2026-03-16 130045.png" alt="" style="margin-left: 50%;">
                     </div>
                 </div>
                 <h2>Login to TechHub</h2>
                 <p class="subtitle">Enter your credentials to access your account</p>
 
-                <form id="registerForm" novalidate>
+                <form id="registerForm" action="../backend/auth/login.php" method="POST" novalidate>
                    
                     <!-- Email -->
                     <div class="form-group" id="email-formg">
@@ -56,7 +56,7 @@
                 </form>
 
                 <!-- Login Link -->
-                <p class="login-link">Don't have an account? <a href="/pages/registrationPage.html">Sign Up</a></p>
+                <p class="login-link">Don't have an account? <a href="../pages/registrationPage.html">Sign Up</a></p>
             </div>
         </div>
     </div>

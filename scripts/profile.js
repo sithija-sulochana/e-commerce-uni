@@ -236,5 +236,5 @@ function capitalize(value) {
 
 function viewOrderDetails(orderId) {
     localStorage.setItem('selectedOrderId', orderId);
-    window.location.href = '/pages/OrderTrackingPage.html';
+    window.location.href = '/E-commerce/pages/OrderTrackingPage.html';
 }
