@@ -1,80 +1,70 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const orderData = JSON.parse(localStorage.getItem('cardSummery')) || null;
-    
-    if (!orderData || !orderData.items || orderData.items.length === 0) {
-        console.log("No order data found");
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderId = urlParams.get('order_id');
+
+    if (!orderId) {
+        console.error("No order ID found in URL");
         return;
     }
 
-    console.log("Order summary retrieved from localStorage:", orderData);
 
-    // Set order ID
-    const orderIdEl = document.getElementById('order-id');
-    if (orderIdEl) {
-        orderIdEl.textContent = `#${orderData.id}`;
-    }
+    fetch(`/E-commerce/backend/orderManagement/order/getOrders.php?order_id=${orderId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (!data.success) {
+                alert("Order not found");
+                return;
+            }
 
-    // Render order items
-    const itemsContainer = document.querySelector('.items');
-    if (itemsContainer && orderData.items) {
-        itemsContainer.innerHTML = orderData.items.map(item => {
-            const itemTotal = item.price * item.quantity;
-            const discountAmount = itemTotal * (item.discount / 100);
-            const finalPrice = itemTotal - discountAmount;
-
-            return `
-                <div class="item">
-                    <img src="${item.image}" alt="${item.name}">
-                    <div class="item-details">
-                        <h4>${item.name}</h4>
-                        <p>Qty: ${item.quantity}</p>
-                    </div>
-                    <span class="item-price" style="color: #007bff;">Rs.${finalPrice.toLocaleString()}</span>
-                </div>
-                <div>
-                   
-                    
-                </div>
-                
-            `;
-        }).join('');
-    }
-
-    // Set total amount
-  const originalPriceEl = document.querySelector('.original-price');
-    const finalTotalEl = document.querySelector('.final-total');
-
-    
-    // if (originalPriceEl) {
-    //     originalPriceEl.textContent = `Rs.${calculatedOriginalTotal.toLocaleString()}`;
-    // }
-
-    if (finalTotalEl) {
-       
-        finalTotalEl.textContent = `Rs.${orderData.totalPrice.toLocaleString()}`;
-        
-    }
-
-    
+            renderOrder(data.order);
+        })
+        .catch(err => console.error("Error fetching order:", err));
 });
 
+function renderOrder(order) {
+
+    document.getElementById('order-id').textContent = `#${order.id}`;
+    
+    const itemsContainer = document.querySelector('.items');
+    if (itemsContainer) {
+        itemsContainer.innerHTML = order.items.map(item => `
+            <div class="item">
+                <img src="${item.image}" alt="${item.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
+                <div class="item-details">
+                    <h4>${item.name}</h4>
+                    <p>Qty: ${item.quantity}</p>
+                </div>
+                <span class="item-price" style="color: #007bff; font-weight: bold;">
+                    Rs.${parseFloat(item.price_at_purchase).toLocaleString()}
+                </span>
+            </div>
+        `).join('');
+    }
+
+    const finalTotalEl = document.querySelector('.final-total');
+    if (finalTotalEl) {
+        finalTotalEl.textContent = `Rs.${parseFloat(order.total_price).toLocaleString()}`;
+    }
+}
 
 function printBill() {
     const tracker = document.querySelector('.tracker');
-    const body = document.body;
-
-    // hide the navigation bar and other non-essential elements for printing
     const nav = document.querySelector('nav');
+    const printBtn = document.querySelector('button[onclick="printBill()"]');
 
-    if (tracker) {
-        tracker.style.display = 'none';
-    }
-
-    if (nav) {
-        nav.style.display = 'none';
-    }
-
-    nav.style.display = 'none';
+    if (tracker) tracker.style.display = 'none';
+    if (nav) nav.style.display = 'none';
+    if (printBtn) printBtn.style.display = 'none';
 
     window.print();
+
+    if (tracker) tracker.style.display = 'flex';
+    if (nav) nav.style.display = 'block';
+    if (printBtn) printBtn.style.display = 'flex';
 }

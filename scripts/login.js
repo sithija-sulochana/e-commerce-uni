@@ -10,11 +10,11 @@ function logIn(event) {
     const email = emailInput.value.trim();
     const password = passwordInput.value.trim();
 
-    // Clear errors
+   
     emailError.textContent = '';
     passwordError.textContent = '';
 
-    // Basic validation
+    
     if (!email || !password) {
         if (!email) {
             emailError.textContent = 'Email is required';
@@ -28,7 +28,7 @@ function logIn(event) {
     }
 
     console.log("fetch is running");
-    // Send request to backend
+  
     fetch('http://localhost/E-commerce/backend/auth/login.php', {
         method: 'POST',
         headers: {
@@ -43,7 +43,7 @@ function logIn(event) {
 
         if (data.success && data.user) {
 
-            // Store user in localStorage
+           
             localStorage.setItem('user', JSON.stringify({
                 isLoggedIn: true,
                 fullname: data.user.fullname,

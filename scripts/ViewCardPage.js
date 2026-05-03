@@ -1,17 +1,19 @@
 
-// Load cart items from localStorage
+
 document.addEventListener("DOMContentLoaded", function () {
     loadCart();
+   
 });
 
 function loadCart() {
-    fetch('/backend/orderManagement/cart/getCart.php')
+    fetch('/E-commerce/backend/orderManagement/cart/getCart.php')
         .then(res => res.json())
         .then(cartItems => {
 
             const cartContainer = document.getElementById('cart-items-container');
             const summaryContainer = document.getElementById('cart-summary-container');
 
+            
             if (!cartContainer) return;
 
             if (cartItems.length === 0) {
@@ -21,13 +23,19 @@ function loadCart() {
                         <p>Add some products to get started!</p>
                     </div>
                 `;
+                
                 if (summaryContainer) summaryContainer.style.display = 'none';
                 return;
             }
 
+            
+
+          
+
+          
             cartContainer.innerHTML = cartItems.map(item => `
-              <div class="cart-item" data-id="${item.id}">
-            <button class="remove-btn" title="Remove item" onclick="removeItem(${item.id})">
+              <div class="cart-item" data-id="${item.product_id}">
+            <button class="remove-btn" title="Remove item" onclick="removeItem(${item.product_id})">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
                 </svg>
@@ -43,9 +51,9 @@ function loadCart() {
                 </div>
                 <div class="item-actions">
                     <div class="qty-control">
-                        <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                        <button class="qty-btn" onclick="updateQuantity(${item.product_id}, -1)">-</button>
                         <span class="qty-value">${item.quantity}</span>
-                        <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                        <button class="qty-btn" onclick="updateQuantity(${item.product_id}, 1)">+</button>
                     </div>
                     <span class="item-price">Rs.${(item.price * item.quantity - (item.price * item.quantity * item.discount / 100)).toLocaleString()}</span>
                 </div>
@@ -53,9 +61,17 @@ function loadCart() {
         </div>
             `).join('');
 
+       
+
             updateSummary(cartItems);
+
+            console.log("Cart Items:", cartItems);
         });
+
+    
 }
+
+
 
 function addToCart(productId) {
     fetch('/backend/orderManagement/cart/addCart.php', {
@@ -70,23 +86,26 @@ function updateSummary(cartItems) {
     const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
     const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity - (item.price * item.quantity * item.discount / 100)), 0);
 
+    const discount = cartItems.reduce((max, item) => item.discount > max ? item.discount : max, 0);
     document.getElementById('cart-total').textContent = `Rs.${total.toLocaleString()}`;
     document.getElementById('item-count').textContent = `(${totalItems} items)`;
+    document.getElementById('cart-subtotal').textContent = `Rs.${total.toLocaleString()}`;  
+
 }
 
-// Update quantity
+
 function updateQuantity(id, change) {
-    fetch('/backend/orderManagement/cart/updateCart.php', {
+    fetch('/E-commerce/backend/orderManagement/cart/updateQty.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             product_id: id,
-            change: change
+            quantity_change: change
         })
     }).then(() => loadCart());
 }
 
-// Remove item from cart
+
 function removeItem(id) {
     fetch('/backend/orderManagement/cart/removeCart.php', {
         method: 'POST',
@@ -95,18 +114,25 @@ function removeItem(id) {
     }).then(() => loadCart());
 }
 
-// Clear entire cart
+
 function clearCart() {
     fetch('/backend/orderManagement/cart/clearCart.php', {
         method: 'POST'
     }).then(() => loadCart());
 }
 
-// Save product and cart details in localStorage
+
 function setItems() {
-    fetch('/backend/orderManagement/checkout.php', {
+    fetch('/E-commerce/backend/orderManagement/order/checkOut.php', {
         method: 'POST'
-    }).then(() => {
-        window.location.href = '/pages/OrderTrackingPage.html';
-    });
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            window.location.href = `./OrderTrackingPage.html?order_id=${data.order_id}`;
+        } else {
+            alert("Error: " + data.message);
+        }
+    })
+    .catch(err => console.error("Checkout Error:", err));
 }

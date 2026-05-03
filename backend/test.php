@@ -1,12 +1,9 @@
 <?php
-header('Content-Type: application/json');
-require_once '../db.php';
+session_start();
 
-// Test database connection
+header('Content-Type: application/json');
 echo json_encode([
-    'success' => !empty($con) && mysqli_ping($con),
-    'message' => empty($con) ? 'No connection object' : (mysqli_ping($con) ? 'Connected' : 'Connection failed'),
-    'database' => 'tech_hub',
-    'server' => 'localhost'
+    "session_data" => $_SESSION,
+    "user_id" => $_SESSION['user_id'] ?? 'NOT SET'
 ]);
 ?>
