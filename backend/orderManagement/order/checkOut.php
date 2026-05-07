@@ -3,30 +3,27 @@ include '../../db.php';
 session_start();
 header('Content-Type: application/json');
 
-// 1. Quick Guard Clauses
 $user_id = $_SESSION['user_id'] ?? null;
 $cart = $_SESSION['cart'] ?? [];
 
 if (!$user_id) exit(json_encode(["success" => false, "message" => "Please log in."]));
 if (empty($cart)) exit(json_encode(["success" => false, "message" => "Cart is empty."]));
 
-// 2. Calculate Total Price
 $totalPrice = 0;
 foreach ($cart as $item) {
     $discounted = $item['price'] * (1 - ($item['discount'] ?? 0) / 100);
     $totalPrice += $discounted * $item['quantity'];
 }
 
-// 3. Database Operations
+
+
 $con->begin_transaction();
 try {
-    // Insert Main Order
     $stmt = $con->prepare("INSERT INTO orders (user_id, order_date, total_price, status) VALUES (?, NOW(), ?, 'Processing')");
     $stmt->bind_param("id", $user_id, $totalPrice);
     $stmt->execute();
     $order_id = $con->insert_id;
 
-    // Insert All Items
     $stmtItem = $con->prepare("INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase) VALUES (?, ?, ?, ?)");
     foreach ($cart as $item) {
         $unitPrice = $item['price'] * (1 - ($item['discount'] ?? 0) / 100);

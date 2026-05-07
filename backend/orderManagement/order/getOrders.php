@@ -10,7 +10,6 @@ if (!$order_id) {
     exit;
 }
 
-// Fetch Order Header
 $stmt = $con->prepare("SELECT id, total_price, order_date, status FROM orders WHERE id = ?");
 $stmt->bind_param("i", $order_id);
 $stmt->execute();
@@ -21,7 +20,6 @@ if (!$order) {
     exit;
 }
 
-// Fetch Order Items joined with Product table to get Names and Images
 $itemStmt = $con->prepare("
     SELECT oi.*, p.name, p.image 
     FROM order_items oi 
