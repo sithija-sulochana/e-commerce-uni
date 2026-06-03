@@ -74,7 +74,7 @@ function loadCart() {
 
 
 function addToCart(productId) {
-    fetch('/backend/orderManagement/cart/addCart.php', {
+    fetch('/E-commerce/backend/orderManagement/cart/addCart.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ product_id: productId })
@@ -107,7 +107,7 @@ function updateQuantity(id, change) {
 
 
 function removeItem(id) {
-    fetch('/backend/orderManagement/cart/removeCart.php', {
+    fetch('/E-commerce/backend/orderManagement/cart/removeCart.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ product_id: id })
@@ -116,7 +116,7 @@ function removeItem(id) {
 
 
 function clearCart() {
-    fetch('/backend/orderManagement/cart/clearCart.php', {
+    fetch('/E-commerce/backend/orderManagement/cart/clearCart.php', {
         method: 'POST'
     }).then(() => loadCart());
 }

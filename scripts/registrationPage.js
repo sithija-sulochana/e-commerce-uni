@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 console.log("Sending request")
 
-                fetch('http://localhost/E-commerce/backend/auth/register.php', {
+                fetch('/E-commerce/backend/auth/register.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -141,7 +141,7 @@ function isValidEmail(value) {
 
     const dotIndex = domainPart.indexOf('.');
     const lastDotIndex = domainPart.lastIndexOf('.');
-    if(domainPart != "gmail.com") showError(email,"Ensure that your are login through only google");
+    if(domainPart != "gmail.com") return false;
     if (dotIndex <= 0 || lastDotIndex === domainPart.length - 1) return false;
 
     if (emailValue.includes(' ')) return false;

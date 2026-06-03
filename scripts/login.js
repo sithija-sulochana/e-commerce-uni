@@ -29,7 +29,7 @@ function logIn(event) {
 
     console.log("fetch is running");
   
-    fetch('http://localhost/E-commerce/backend/auth/login.php', {
+    fetch('/E-commerce/backend/auth/login.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
