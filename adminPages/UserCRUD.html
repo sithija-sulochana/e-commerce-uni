@@ -167,7 +167,7 @@
         <script>
             // TODO : fetch users from database and display them in the table
             const userTableBody = document.querySelector('#userTableBody');
-            fetch('http://localhost/E-commerce/backend/userManagement/GetAllUser.php')
+            fetch('../backend/userManagement/GetAllUser.php')
                 .then(Response => Response.json())
                 .then(data => {
                     data.forEach(user => {

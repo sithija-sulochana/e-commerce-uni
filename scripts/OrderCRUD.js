@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function fetchOrders() {
     
-    fetch('/E-commerce/backend/orderManagement/order/getAllOrders.php')
+    fetch('../backend/orderManagement/order/getAllOrders.php')
         .then(response => response.json())
         .then(data => {
             const tbody = document.querySelector('#orderTable tbody');
@@ -33,7 +33,7 @@ function fetchOrders() {
                             </span>
                         </td>
                         <td>
-                            <button onclick="viewDetails(${order.id})" style="width:auto; padding:5px 10px;">
+                            <button onclick="viewDetails(${order.order_id})" style="width:auto; padding:5px 10px;">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </td>
@@ -104,4 +104,12 @@ function filterOrders() {
         const text = row.textContent || row.innerText;
         row.style.display = text.toUpperCase().includes(input) ? "" : "none";
     });
+}
+
+function viewDetails(orderId) {
+    if (!orderId) {
+        alert('Invalid order ID.');
+        return;
+    }
+    alert('Order Details for Order #' + orderId + ' - Feature coming soon.');
 }

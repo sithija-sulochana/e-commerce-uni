@@ -272,6 +272,11 @@ function attachEvents() {
             window.location.href = `/E-commerce/pages/productDetailPage.html?productId=${card.dataset.id}`;
         }
     });
+
+    const searchInputEl = byId('searchInput');
+    if (searchInputEl) {
+        searchInputEl.addEventListener('input', searchProducts);
+    }
 }
 
 function searchProducts() {
@@ -334,4 +339,3 @@ function addToCart(productId) {
 }
 
 document.addEventListener('DOMContentLoaded', fetchProducts);
-byId('searchInput').addEventListener('input', searchProducts);

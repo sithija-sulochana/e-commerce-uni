@@ -93,7 +93,7 @@ function deleteProduct(){
     formData.append('newPrice', price);
     formData.append('newDiscount', discount);
 
-    fetch('../backend/products/updateProduct.php', {
+    fetch('../backend/products/updatingProductById.php', {
         method: 'POST',
         body: formData
     })
@@ -124,6 +124,7 @@ function submitData() {
    const specs = [];
 
  const idInput = document.getElementById("product_id") || document.querySelector('input[name="product_id"]');
+   const id = idInput.value.trim();
 
    if(!id){
     alert("Please enter a product ID");
@@ -131,8 +132,8 @@ function submitData() {
    }
 
    rows.forEach(row=>{
-    const key = row.querySelector('.specKey').value.trim();
-    const value = row.querySelector('.specValue').value.trim();
+    const key = row.querySelector('input[name="spec_key[]"]').value.trim();
+    const value = row.querySelector('input[name="spec_value[]"]').value.trim();
 
     if(key && value){
         specs.push({ key, value});
@@ -150,4 +151,19 @@ function submitData() {
     .then(res => res.text())
     .then(data => alert(data))
     .catch(err => console.error(err));
+}
+
+function searchProduct() {
+    const searchTerm = document.getElementById('search').value.toLowerCase();
+    const table = document.getElementById('productTable');
+    const rows = table.querySelectorAll('tbody tr');
+    
+    rows.forEach(row => {
+        const nameCell = row.querySelector('td:nth-child(3)');
+        if (nameCell && nameCell.textContent.toLowerCase().includes(searchTerm)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
 }
