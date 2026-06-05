@@ -10,7 +10,7 @@ if (!$order_id) {
     exit;
 }
 
-$stmt = $con->prepare("SELECT id, total_price, order_date, status FROM orders WHERE id = ?");
+$stmt = $con->prepare("SELECT id, user_id, total_price, order_date, status FROM orders WHERE id = ?");
 $stmt->bind_param("i", $order_id);
 $stmt->execute();
 $order = $stmt->get_result()->fetch_assoc();

@@ -129,7 +129,7 @@ function setItems() {
     .then(res => res.json())
     .then(data => {
         if (data.success) {
-            window.location.href = `./OrderTrackingPage.html?order_id=${data.order_id}`;
+            window.location.href = `./Ord   erTrackingPage.html?order_id=${data.order_id}`;
         } else {
             alert("Error: " + data.message);
         }

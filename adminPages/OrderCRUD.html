@@ -1,103 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Management - TechHub</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f4f6f9; }
-        .header { background: #001f3f; color: white; padding: 15px 30px; }
-        .container { padding: 30px; }
-        .grid { display: flex; flex-wrap: wrap; gap: 20px; }
-        .card { flex: 1 1 400px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .navbar { background: #001f3f; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
-        .navbar h1 { margin: 0; font-size: 20px; }
-        .nav-links a { color: white; margin-left: 20px; text-decoration: none; font-size: 14px; }
-        .navbar .logo { cursor: pointer; font-weight: 700; font-size: 30px; }
-        input, select, textarea { width: 100%; padding: 10px; margin-top: 10px; border-radius: 6px; border: 1px solid #ccc; box-sizing: border-box; }
-        button { margin-top: 15px; padding: 10px; background: #001f3f; color: white; border: none; border-radius: 6px; cursor: pointer; width: 100%; }
-        button:hover { background: #003366; }
-        table { width: 100%; margin-top: 20px; border-collapse: collapse; background: white; }
-        th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
-        th { background: #001f3f; color: white; }
-        .status-badge { padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
-        .status-pending { background: #ffeeba; color: #856404; }
-        .status-shipped { background: #b8daff; color: #004085; }
-        .status-delivered { background: #c3e6cb; color: #155724; }
-    </style>
-</head>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Order Management - TechHub</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <script src="../scripts/OrderCRUD.js"></script>
+        <style>
+            body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f4f6f9; }
+            .header { background: #001f3f; color: white; padding: 15px 30px; }
+            .container { padding: 30px; }
+            .grid { display: flex; flex-wrap: wrap; gap: 20px; }
+            .card { flex: 1 1 400px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+            .navbar { background: #001f3f; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
+            .navbar h1 { margin: 0; font-size: 20px; }
+            .nav-links a { color: white; margin-left: 20px; text-decoration: none; font-size: 14px; }
+            .navbar .logo { cursor: pointer; font-weight: 700; font-size: 30px; }
+            input, select, textarea { width: 100%; padding: 10px; margin-top: 10px; border-radius: 6px; border: 1px solid #ccc; box-sizing: border-box; }
+            button { margin-top: 15px; padding: 10px; background: #001f3f; color: white; border: none; border-radius: 6px; cursor: pointer; width: 100%; }
+            button:hover { background: #003366; }
+            table { width: 100%; margin-top: 20px; border-collapse: collapse; background: white; }
+            th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
+            th { background: #001f3f; color: white; }
+            .status-badge { padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+            .status-pending { background: #ffeeba; color: #856404; }
+            .status-shipped { background: #b8daff; color: #004085; }
+            .status-delivered { background: #c3e6cb; color: #155724; }
+        </style>
+    </head>
 
-<body>
+    <body>
 
-<div class="navbar">
-    <div class="logo" onclick="window.location.href='../adminPages/adminHome.html'">Tech<span style="color:white; padding: 0 5px; background-color: #5b9bf0; margin-left: 5px;border-radius: 5px;">Hub</span> </div>
-    <div class="nav-links">
-        <a href="../adminPages/adminHome.html">Home</a>
-        <a href="./productCRUD.html">Products</a>
-        <a href="../adminPages/UserCRUD.html">Users</a>
-        <a href="../adminPages/OrderCRUD.html">Orders</a>
-        <a href="../adminPages/FaqCRUD.html">FAQ</a>
+    <div class="navbar">
+        <div class="logo" onclick="window.location.href='../adminPages/adminHome.html'">Tech<span style="color:white; padding: 0 5px; background-color: #5b9bf0; margin-left: 5px;border-radius: 5px;">Hub</span> </div>
+        <div class="nav-links">
+            <a href="../adminPages/adminHome.html">Home</a>
+            <a href="./productCRUD.html">Products</a>
+            <a href="../adminPages/UserCRUD.html">Users</a>
+            <a href="../adminPages/OrderCRUD.html">Orders</a>
+            <a href="../adminPages/FaqCRUD.html">FAQ</a>
+        </div>
     </div>
-</div>
 
-<div class="header" style="margin-top: 5px;">
-    <h1><i class="fas fa-shopping-cart"></i> Order Management <span style="color:white; padding: 0 5px; background-color: #5b9bf0; margin-left: 5px;border-radius: 5px;">Hub</span></h1>
-</div>
+    <div class="header" style="margin-top: 5px;">
+        <h1><i class="fas fa-shopping-cart"></i> Order Management <span style="color:white; padding: 0 5px; background-color: #5b9bf0; margin-left: 5px;border-radius: 5px;">Hub</span></h1>
+    </div>
 
-<div class="container">
-    <div class="grid">
+    <div class="container">
+        <div class="grid">
 
-        <div class="card">
-            <h2 style="color: gray;"><i class="fas fa-edit"></i> Update Order Status</h2>
-            <p style="color: navy;">Change order progress or add tracking info</p>
-            <form action="../backend/orders/updateOrder.php" method="POST">
-                <input type="text" name="order_id" placeholder="Enter Order ID (e.g. #1024)" required>
+            <div class="card">
+                <h2 style="color: gray;"><i class="fas fa-edit"></i> Update Order Status</h2>
+                <p style="color: navy;">Change order progress or add tracking info</p>
+                <form action="../backend/orderManagement/order/updateOrderStatus.php" method="POST">
+                    <input type="text" name="order_id" placeholder="Enter Order ID (e.g. #1024)" required id="orderIdInput">
+                    
+                    <select name="status" id="statusSelect" required>
+                        <option value="Pending">Pending</option>
+                        <option value="completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+
+
+                    <button type="submit" onclick="updateOrder()">Update Order</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2 style="color: gray;"><i class="fas fa-search"></i> Search / Cancel</h2>
+                <form action="../backend/orderManagement/order/updateOrderStatus.php" method="POST">
+                    <input type="text"  placeholder="Enter Order ID to Cancel" name="cancel_id" id="cancelOrderIdInput" required>
+                    <button onclick="cancelOrder(event)" type="submit" style="background-color: #d9534f;">Cancel Order</button>
+                </form>
+
+                <hr style="margin-top:20px; border: 0; border-top: 1px solid #eee;">
                 
-                <select name="status">
-                    <option value="Pending">Pending</option>
-                    <option value="Processing">Processing</option>
-                    <option value="Delivered">Delivered</option>
-                    <option value="Cancelled">Cancelled</option>
-                </select>
+                <h3 style="color: gray;">Quick Search</h3>
+                <input type="text" id="orderSearch" placeholder="Search by Customer Name or Email..." onkeyup="filterOrders()">
+            </div>
 
-
-                <button type="submit">Update Order</button>
-            </form>
         </div>
 
-        <div class="card">
-            <h2 style="color: gray;"><i class="fas fa-search"></i> Search / Cancel</h2>
-            <form action="../backend/orders/cancelOrder.php" method="POST">
-                <input type="text" id="searchOrderId" placeholder="Enter Order ID to Cancel" name="cancel_id">
-                <button type="submit" style="background-color: #d9534f;">Cancel Order</button>
-            </form>
-
-            <hr style="margin-top:20px; border: 0; border-top: 1px solid #eee;">
-            
-            <h3 style="color: gray;">Quick Search</h3>
-            <input type="text" id="orderSearch" placeholder="Search by Customer Name or Email..." onkeyup="filterOrders()">
-        </div>
-
+        <table id="orderTable">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>User ID</th>
+                    <th>Date</th>
+                    <th>Total Price</th>
+                    <th>Status</th>
+                    <th>View Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
     </div>
 
-    <table id="orderTable">
-        <thead>
-            <tr>
-                <th>Order ID</th>
-                <th>User ID</th>
-                <th>Date</th>
-                <th>Total Price</th>
-                <th>Status</th>
-                <th>View Details</th>
-            </tr>
-        </thead>
-        <tbody>
-            
-        </tbody>
-    </table>
-</div>
 
-
-</body>
-</html>
+    </body>
+    </html>
