@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Page | User Management</title>
+    <!-- Session Manager -->
+    <script src="../scripts/sessionManager.js"></script>
     <style>
         body {
             margin: 0;
@@ -73,6 +75,7 @@
             <a href="../adminPages/UserCRUD.html">Users</a>
             <a href="../adminPages/OrderCRUD.html">Orders</a>
             <a href="../adminPages/FaqCRUD.html">FAQ</a>
+            <a href="#" onclick="sessionManager.logout(); return false;" style="color: #ff6b6b;">Logout</a>
         </div>
 
         <!-- assign admin or customer accounts for defaut account -->

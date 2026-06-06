@@ -1,7 +1,26 @@
 <?php
 header('Content-Type: application/json');
 session_start();
-include '../db.php';
+
+// Include database connection
+require_once '../db.php';
+
+// Include session configuration
+if (!function_exists('initializeSessionSettings')) {
+    require_once 'sessionConfig.php';
+}
+
+// Initialize session settings for timeout
+initializeSessionSettings();
+
+// Check if database connection exists
+if (!isset($con) || !$con) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Database connection failed!'
+    ]);
+    exit;
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -12,31 +31,75 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $fullname = mysqli_real_escape_string($con, $data['fullname']);
-    $email = mysqli_real_escape_string($con, $data['email']);
-    $phone = mysqli_real_escape_string($con, $data['phone']);
-    $password = password_hash($data['password'], PASSWORD_DEFAULT);
-    $address = mysqli_real_escape_string($con, $data['address']);
+    $fullname = $data['fullname'] ?? '';
+    $email = $data['email'] ?? '';
+    $phone = $data['phone'] ?? '';
+    $password = $data['password'] ?? '';
+    $address = $data['address'] ?? '';
     $role = 'CUSTOMER';
 
-    $check = mysqli_query($con, "SELECT id FROM users WHERE email = '$email'");
+    // Validate input
+    if (empty($fullname) || empty($email) || empty($password)) {
+        echo json_encode(['success' => false, 'message' => 'Required fields are missing.']);
+        exit;
+    }
+
+    // Check if email already exists (using prepared statement)
+    $check_sql = "SELECT id FROM users WHERE email = ?";
+    $check_stmt = mysqli_prepare($con, $check_sql);
+    if (!$check_stmt) {
+        echo json_encode(['success' => false, 'message' => 'Database error: ' . mysqli_error($con)]);
+        exit;
+    }
+
+    mysqli_stmt_bind_param($check_stmt, "s", $email);
+    mysqli_stmt_execute($check_stmt);
+    $check_result = mysqli_stmt_get_result($check_stmt);
     
-    if (mysqli_num_rows($check) > 0) {
+    if (mysqli_num_rows($check_result) > 0) {
         echo json_encode(['success' => false, 'message' => 'Email already exists!']);
-    } else {
-        $sql = "INSERT INTO users (fullname, email, phone, password, address, role) VALUES ('$fullname', '$email', '$phone', '$password', '$address', '$role')";
+        mysqli_stmt_close($check_stmt);
+        exit;
+    }
+    mysqli_stmt_close($check_stmt);
+
+    // Hash password
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+    // Insert user with prepared statement
+    $insert_sql = "INSERT INTO users (fullname, email, phone, password, address, role) VALUES (?, ?, ?, ?, ?, ?)";
+    $insert_stmt = mysqli_prepare($con, $insert_sql);
+    
+    if (!$insert_stmt) {
+        echo json_encode(['success' => false, 'message' => 'Database error: ' . mysqli_error($con)]);
+        exit;
+    }
+
+    mysqli_stmt_bind_param($insert_stmt, "ssssss", $fullname, $email, $phone, $hashed_password, $address, $role);
+    
+    if (mysqli_stmt_execute($insert_stmt)) {
+        $user_id = mysqli_insert_id($con);
+        $_SESSION['user_id'] = $user_id;
+        $_SESSION['user_name'] = $fullname;
+        $_SESSION['role'] = $role;
+        $_SESSION['last_activity'] = time();
+        $_SESSION['login_time'] = time();
         
-        if (mysqli_query($con, $sql)) {
-            $_SESSION['user_id'] = mysqli_insert_id($con);
-            $_SESSION['user_name'] = $fullname;
-            echo json_encode(['success' => true, 'message' => 'Registration successful!']);
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Database error: ' . mysqli_error($con)]);
-        }
+        echo json_encode([
+            'success' => true,
+            'message' => 'Registration successful!',
+            'user' => [
+                'id' => $user_id,
+                'fullname' => $fullname,
+                'email' => $email,
+                'role' => $role
+            ]
+        ]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Database error: ' . mysqli_error($con)]);
     }
     
-
-    
+    mysqli_stmt_close($insert_stmt);
 }
 
 ?>

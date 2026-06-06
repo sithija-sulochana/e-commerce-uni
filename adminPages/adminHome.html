@@ -8,6 +8,9 @@
 <!-- Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<!-- Session Manager -->
+<script src="../scripts/sessionManager.js"></script>
+
 <style>
 body {
     margin: 0;
@@ -132,6 +135,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'ADMIN') {
         <a href="#">Users</a>
         <a href="#">Orders</a>
         <a href="#">FAQ</a>
+        <a href="#" onclick="sessionManager.logout(); return false;" style="color: #ff6b6b;">Logout</a>
     </div>
 </div>
 

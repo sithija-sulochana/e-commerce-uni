@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAQ Management</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Session Manager -->
+    <script src="../scripts/sessionManager.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', sans-serif; background: #f4f6f9; }
@@ -40,7 +42,19 @@
 </head>
 <body>
     <div class="header">
-        <h1>📋 FAQ Management</h1>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h1>📋 FAQ Management</h1>
+            </div>
+            <div style="display: flex; gap: 20px;">
+                <a href="../adminPages/adminHome.html" style="color: white; text-decoration: none;">Home</a>
+                <a href="./productCRUD.html" style="color: white; text-decoration: none;">Products</a>
+                <a href="../adminPages/UserCRUD.html" style="color: white; text-decoration: none;">Users</a>
+                <a href="../adminPages/OrderCRUD.html" style="color: white; text-decoration: none;">Orders</a>
+                <a href="../adminPages/FaqCRUD.html" style="color: white; text-decoration: none;">FAQ</a>
+                <a href="#" onclick="sessionManager.logout(); return false;" style="color: #ff6b6b; text-decoration: none;">Logout</a>
+            </div>
+        </div>
     </div>
 
     <div class="container">

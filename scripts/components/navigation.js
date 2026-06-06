@@ -79,8 +79,9 @@ const navbarTemplate = `
 
 document.body.insertAdjacentHTML('afterbegin', navbarTemplate);
 
-
-const user = JSON.parse(localStorage.getItem('user'));
+// Check localStorage for user info
+const userString = localStorage.getItem('user');
+const user = userString ? JSON.parse(userString) : null;
 const authButtons = document.querySelector('.btn-auth');
 
 if (user && user.isLoggedIn && authButtons) {
@@ -91,11 +92,13 @@ if (user && user.isLoggedIn && authButtons) {
         <a href="${baseUrl}/pages/profile.html" class="icon-link" aria-label="Profile" title="Profile">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </a>
-        <a href="#" class="btn-register"  window.location.href='${baseUrl}/pages/homepage.html';" style="background: #ef4444; top:20px" onclick="logout()">Logout</a>
+        <a href="javascript:void(0);" class="btn-register" style="background: #ef4444;" onclick="logout()">Logout</a>
     `;
-
-} else if (!user) {
-    localStorage.setItem('user', JSON.stringify({ isLoggedIn: false }));
+} else {
+    // Ensure user is marked as not logged in for guest users
+    if (!user) {
+        localStorage.setItem('user', JSON.stringify({ isLoggedIn: false }));
+    }
 }
 
 // Mobile Menu Logic
@@ -111,20 +114,20 @@ if(menuToggle) {
 
 
 function logout() {
-    fetch('http://localhost/E-commerce/backend/auth/logout.php', {
+    fetch(`${baseUrl}/backend/auth/logout.php`, {
         method: 'POST',
         credentials: 'include'
     })
     .then(response => response.json())
     .then(data => {
-        if (data.success) {
-            localStorage.setItem('user', JSON.stringify({ isLoggedIn: false }));
-            alert('You have been logged out successfully.');
-            window.location.href = `${baseUrl}/pages/homepage.html`;
-        }
+        localStorage.setItem('user', JSON.stringify({ isLoggedIn: false }));
+        localStorage.removeItem('user');
+        window.location.href = `${baseUrl}/pages/homepage.html`;
     })
     .catch(error => {
         console.error('Error during logout:', error);
-        alert('An error occurred while logging out. Please try again.');
+        localStorage.setItem('user', JSON.stringify({ isLoggedIn: false }));
+        localStorage.removeItem('user');
+        window.location.href = `${baseUrl}/pages/homepage.html`;
     });
 }

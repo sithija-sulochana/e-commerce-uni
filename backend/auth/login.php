@@ -1,9 +1,28 @@
 <?php
 
 session_start();
-include '../db.php';
+
+// Include database connection
+require_once '../db.php';
+
+// Include session configuration
+if (!function_exists('initializeSessionSettings')) {
+    require_once 'sessionConfig.php';
+}
+
+// Initialize session settings for timeout
+initializeSessionSettings();
 
 header('Content-Type: application/json');
+
+// Check if database connection exists
+if (!isset($con) || !$con) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Database connection failed!'
+    ]);
+    exit;
+}
 
 $data = json_decode(file_get_contents('php://input'), true);
 
@@ -28,8 +47,16 @@ if (empty($email) || empty($password)) {
 }
 
 // Get user from DB
-$sql = "SELECT id, fullname, email, phone, password FROM users WHERE email = ?";
+$sql = "SELECT id, fullname, email, phone, password, role FROM users WHERE email = ?";
 $stmt = mysqli_prepare($con, $sql);
+if (!$stmt) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Database error: ' . mysqli_error($con)
+    ]);
+    exit;
+}
+
 mysqli_stmt_bind_param($stmt, "s", $email);
 mysqli_stmt_execute($stmt);
 
@@ -43,6 +70,8 @@ if ($user && password_verify($password, $user['password'])) {
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['user_name'] = $user['fullname'];
     $_SESSION['role'] = $user['role'] ?? 'CUSTOMER';
+    $_SESSION['last_activity'] = time(); // Set last activity time
+    $_SESSION['login_time'] = time(); // Set login time
 
     // Send response
     echo json_encode([
