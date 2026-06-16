@@ -130,7 +130,12 @@ async function setupOrderHistory() {
 async function getOrderHistoryFromBackend() {
     try {
         
-        const response = await fetch('/E-commerce/backend/orderManagement/order/getAllOrders.php');
+        const response = await fetch('/E-commerce/backend/orderManagement/order/getAllOrdersByuserId.php?user_id=' + encodeURIComponent(user.id), {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
         if (!response.ok) throw new Error('Network response error.');
         
         const rawRows = await response.json();

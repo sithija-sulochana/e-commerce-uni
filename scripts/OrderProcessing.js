@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    fetch(`/E-commerce/backend/orderManagement/order/getOrders.php?order_id=${orderId}`, {
+    fetch(`/E-commerce/backend/orderManagement/order/getOrdersByOrderId.php?order_id=${orderId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
