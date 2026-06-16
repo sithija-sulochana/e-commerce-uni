@@ -108,13 +108,6 @@ function filterOrders() {
     });
 }
 
-function viewDetails(orderId) {
-    if (!orderId) {
-        alert('Invalid order ID.');
-        return;
-    }
-    alert('Order Details for Order #' + orderId + ' - Feature coming soon.');
-}
 
 function viewDetails(orderId) {
     const dialog = document.getElementById('detailsDialog');
@@ -167,14 +160,7 @@ function viewDetails(orderId) {
 
 }
 
-function openDialog(itemTitle, itemDetails) {
 
-
-
-
-
-    
-}
 
 
 

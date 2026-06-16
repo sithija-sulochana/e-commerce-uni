@@ -16,6 +16,9 @@ async function initializeProfile() {
         if (!data.success) throw new Error(data.message || 'Error fetching user data');
         
         const user = data.user || {};
+        checkRole(user.role);
+        displayAdminPageNavigationButton(user.role);
+        console.log(user.role)
 
 
         if (document.getElementById('name')) document.getElementById('name').value = user.fullname || '';
@@ -25,7 +28,7 @@ async function initializeProfile() {
         const displayName = document.getElementById('display-name');
         const displayEmail = document.getElementById('display-email');
         if (displayEmail) displayEmail.textContent = user.email || 'No email provided';
-        if (displayName) displayName.textContent = user.fullname || 'Guest';
+        if (displayName) displayName.textContent = user.fullname , checkRole(user.role) || 'Guest';
 
        
         if (profilePic) {
@@ -284,3 +287,28 @@ function cancelOrder(orderId){
     })
 }
 }
+function checkRole(userRole){
+    if(userRole && userRole === 'Admin'){
+        const displayName = document.getElementById('display-name');
+        if(displayName) {
+            displayName.innerHTML += `<img src="../assets/Icons/6711626-removebg-preview.png" width="24" height="24" />`;
+        }
+    }
+}
+function displayAdminPageNavigationButton(userRole){
+    const navBtn = document.getElementById('adminPage-btn');
+    if(userRole && userRole === 'Admin'){
+        
+        if(navBtn){
+            navBtn.style.display = 'inline-block';
+
+        }
+    }
+
+    document.getElementById('adminPage-btn').addEventListener('click', () => {
+        window.location.href = '../adminPages/adminHome.html';
+    });
+
+}
+
+console.log(checkRole(user.role))

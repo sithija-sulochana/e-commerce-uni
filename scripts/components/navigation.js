@@ -71,6 +71,7 @@ const navbarTemplate = `
                 <a href="${baseUrl}/pages/registrationPage.html" class="btn-register">Register</a>
             </div>
         </div>
+        
 
         <button class="menu-toggle" id="menuToggle">☰</button>
     </div>
@@ -92,9 +93,13 @@ if (user && user.isLoggedIn && authButtons) {
         <a href="${baseUrl}/pages/profile.html" class="icon-link" aria-label="Profile" title="Profile">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </a>
+      
         <a href="javascript:void(0);" class="btn-register" style="background: #ef4444;" onclick="logout()">Logout</a>
+          
     `;
-} else {
+}
+
+else {
     // Ensure user is marked as not logged in for guest users
     if (!user) {
         localStorage.setItem('user', JSON.stringify({ isLoggedIn: false }));
@@ -131,3 +136,4 @@ function logout() {
         window.location.href = `${baseUrl}/pages/homepage.html`;
     });
 }
+
