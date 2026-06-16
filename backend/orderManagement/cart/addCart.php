@@ -21,9 +21,17 @@ foreach ($_SESSION['cart'] as &$item) {
 }
 
 
-$product = mysqli_fetch_assoc(
-    mysqli_query($con, "SELECT name, price, image, discount_percentage FROM products WHERE id=$productId")
-);
+// $product = mysqli_fetch_assoc(
+//     mysqli_query($con, "SELECT name, price, image, discount_percentage FROM products WHERE id=$productId")
+// )
+
+$result = mysqli_query($con, "SELECT name, price, image, discount_percentage FROM products WHERE id=$productId");
+if(!$result || mysqli_num_rows($result) == 0) {
+    http_response_code(404);
+    echo json_encode(["error" => "Product not found"]);
+    exit;
+}
+$product = mysqli_fetch_assoc($result);
 
 
 $_SESSION['cart'][] = [

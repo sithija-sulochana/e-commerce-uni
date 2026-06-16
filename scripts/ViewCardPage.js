@@ -32,7 +32,7 @@ function loadCart() {
 
           
 
-          
+          console.log("Cart Items:", cartItems);
             cartContainer.innerHTML = cartItems.map(item => `
               <div class="cart-item" data-id="${item.product_id}">
             <button class="remove-btn" title="Remove item" onclick="removeItem(${item.product_id})">
@@ -77,8 +77,10 @@ function addToCart(productId) {
     fetch('/E-commerce/backend/orderManagement/cart/addCart.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ product_id: productId })
+        body: JSON.stringify({ product_id: productId, qty: 1 })
     }).then(() => loadCart());
+
+    
 }
 
 // Update cart summary
@@ -129,7 +131,7 @@ function setItems() {
     .then(res => res.json())
     .then(data => {
         if (data.success) {
-            window.location.href = `./Ord   erTrackingPage.html?order_id=${data.order_id}`;
+            window.location.href = `./OrderTrackingPage.html?order_id=${data.order_id}`;
         } else {
             alert("Error: " + data.message);
         }

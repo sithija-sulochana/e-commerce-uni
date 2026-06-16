@@ -252,6 +252,35 @@ function capitalize(value) {
 
 
 function viewOrderDetails(orderId) {
-    localStorage.setItem('selectedOrderId', orderId);
-    window.location.href = '/E-commerce/pages/OrderTrackingPage.html';
+    
+    window.location.href = `/E-commerce/pages/OrderTrackingPage.html?order_id=${orderId}`;
+}
+
+function cancelOrder(orderId){
+    
+    const status = "CANCELED";
+    const userConfirmed = confirm("Are you sure you want to cancel this order? This action cannot be undone.");
+    if(!userConfirmed) {
+        return;
+    }else{
+        const orderData = {
+            order_id: orderId,
+            status: status
+        }
+
+    
+    $.ajax({
+        url: 'http://localhost/E-commerce/backend/orderManagement/order/updateOrderStatus.php',
+        method:'POST',
+        
+        
+        data: `order_id=${encodeURIComponent(orderId)}&status=${encodeURIComponent('Cancelled')}`,
+        success: function(response){
+            console.log("Order cancellation response:", response);
+        },
+        error : function(xhr, status, error){
+            console.error("Error cancelling order:", error);
+        }
+    })
+}
 }

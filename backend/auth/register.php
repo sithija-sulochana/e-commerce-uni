@@ -5,15 +5,14 @@ session_start();
 // Include database connection
 require_once '../db.php';
 
-// Include session configuration
+
 if (!function_exists('initializeSessionSettings')) {
     require_once 'sessionConfig.php';
 }
 
-// Initialize session settings for timeout
+
 initializeSessionSettings();
 
-// Check if database connection exists
 if (!isset($con) || !$con) {
     echo json_encode([
         'success' => false,

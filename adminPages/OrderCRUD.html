@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Order Management - TechHub</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="../scripts/OrderCRUD.js"></script>
         <!-- Session Manager -->
         <script src="../scripts/sessionManager.js"></script>
@@ -89,6 +90,7 @@
                 <tr>
                     <th>Order ID</th>
                     <th>User ID</th>
+                    <th>User Email</th>
                     <th>Date</th>
                     <th>Total Price</th>
                     <th>Status</th>
@@ -100,6 +102,13 @@
             </tbody>
         </table>
     </div>
+<dialog id="detailsDialog">
+  <h2 id="dialogTitle">Product List</h2>
+  <p id="dialogContent"></p>
+  <button id="closeBtn">Close</button>
+</dialog>
+
+
 
 
     </body>

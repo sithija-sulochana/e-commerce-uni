@@ -3,11 +3,12 @@ include '../../db.php';
 header('Content-Type: application/json');
 
 $sql = "SELECT 
-            o.id AS order_id, o.user_id, o.order_date, o.status,o.total_price,
+            o.id AS order_id, o.user_id,u.email AS user_email, o.order_date, o.status,o.total_price,
             oi.quantity, oi.price_at_purchase,
             p.name AS product_name
         FROM orders o
         JOIN order_items oi ON o.id = oi.order_id
+        JOIN users u ON o.user_id = u.id
         JOIN products p ON oi.product_id = p.id";
 
 
