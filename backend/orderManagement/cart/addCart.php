@@ -4,7 +4,8 @@ include '../../db.php';
 header('Content-Type: application/json');
 
 $data = json_decode(file_get_contents("php://input"), true);
-$productId = $data['product_id'];
+
+$productId = intval($data['product_id']);
 $qty = $data['quantity'] ?? 1;
 
 if (!isset($_SESSION['cart'])) {
@@ -21,9 +22,7 @@ foreach ($_SESSION['cart'] as &$item) {
 }
 
 
-// $product = mysqli_fetch_assoc(
-//     mysqli_query($con, "SELECT name, price, image, discount_percentage FROM products WHERE id=$productId")
-// )
+
 
 $result = mysqli_query($con, "SELECT name, price, image, discount_percentage FROM products WHERE id=$productId");
 if(!$result || mysqli_num_rows($result) == 0) {

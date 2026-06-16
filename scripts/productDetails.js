@@ -176,7 +176,7 @@ function addToCart() {
         return;
     }
 
-    fetch('E-commerce/backend/orderManagement/cart/addCart.php', {
+    fetch('/E-commerce/backend/orderManagement/cart/addCart.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ product_id: product.id, quantity: qty })
